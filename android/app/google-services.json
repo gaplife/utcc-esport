@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "515147010628",
+    "project_id": "utcc-esport",
+    "storage_bucket": "utcc-esport.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515147010628:android:087bc3f3bfed49c9aa2211",
+        "android_client_info": {
+          "package_name": "com.utcc.esport.utcc_esport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "515147010628-inlmi2ga1m0bhpus31ju6tjd4uakpg7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpCIff_pUeoBjZQezeXsJ4OfR_WLyMpkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "515147010628-inlmi2ga1m0bhpus31ju6tjd4uakpg7d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
