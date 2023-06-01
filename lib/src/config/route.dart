@@ -16,8 +16,8 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/register': (context) => const Register(),
   '/forgetpass': (context) => const ForgetPass(),
   '/home': (context) => const HomePage(),
-  // '/news': (context) => const News(),
-  // '/competition': (context) => const Competition(),
-  // '/profile': (context) => const Profile(),
+  '/news': (context) => const News(),
+  '/competition': (context) => const Competition(),
+  '/profile': (context) => const Profiles(),
   '/launcher': (context) => const Launcher(),
 };

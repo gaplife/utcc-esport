@@ -4,7 +4,3 @@ import 'package:utcc_esport/src/app.dart';
 void main() {
   runApp(const App());
 }
-
-
-
-

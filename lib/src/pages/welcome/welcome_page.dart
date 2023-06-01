@@ -71,10 +71,10 @@ class _WelcomeState extends State<Welcome> {
   }
 
   Widget _textWelcome() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 130),
+    return const Padding(
+      padding: EdgeInsets.only(top: 180),
       child: Column(
-        children: const <Widget>[
+        children: <Widget>[
           Text(
             "ยินดีต้อนรับ",
             style: TextStyle(
@@ -85,15 +85,18 @@ class _WelcomeState extends State<Welcome> {
           ),
           Text(
             "แหล่งรวบรวมข่าวสารและ",
-            style: TextStyle(fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
+            style: TextStyle(
+                fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
           ),
           Text(
             "บริหารจัดการแข่งขันกีฬา E-SPORT",
-            style: TextStyle(fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
+            style: TextStyle(
+                fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
           ),
           Text(
             "ครบจบในที่เดียว",
-            style: TextStyle(fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
+            style: TextStyle(
+                fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
           ),
         ],
       ),
@@ -197,11 +200,10 @@ class _WelcomeState extends State<Welcome> {
           label: const Text(
             "สำหรับผู้จัดการแข่งขัน",
             style: TextStyle(
-              fontSize: 22,
-              fontFamily: 'Kanit',
-              fontWeight: FontWeight.bold,
-              color: Colors.white
-            ),
+                fontSize: 22,
+                fontFamily: 'Kanit',
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
           ),
         ),
       ),
