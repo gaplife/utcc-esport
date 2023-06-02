@@ -8,7 +8,7 @@ import 'package:utcc_esport/src/config/theme.dart' as custom_theme;
 import 'package:utcc_esport/src/pages/pages.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
@@ -16,11 +16,8 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
-
   Profile profile = Profile();
-
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -88,11 +85,11 @@ class _LoginState extends State<Login> {
   }
 
   Widget _welcome() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 40, left: 20),
+    return const Padding(
+      padding: EdgeInsets.only(top: 40, left: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const <Widget>[
+        children: <Widget>[
           Text(
             "ยินดีต้อนรับ",
             style: TextStyle(
@@ -212,7 +209,7 @@ class _LoginState extends State<Login> {
                     (route) => false,
                   );
                 });
-              } on FirebaseAuthException catch (e) {
+              } on FirebaseAuthException {
                 Fluttertoast.showToast(
                   msg: 'อีเมล หรือ รหัสผ่านไม่ถูกต้อง',
                   gravity: ToastGravity.SNACKBAR,

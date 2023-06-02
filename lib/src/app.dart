@@ -3,7 +3,7 @@ import 'package:utcc_esport/src/config/route.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
-
+  //final loginStatus = LoginStatus();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

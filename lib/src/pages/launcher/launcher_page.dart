@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:utcc_esport/src/pages/competition/competition_page.dart';
 import 'package:utcc_esport/src/pages/home/home_page.dart';
+import 'package:utcc_esport/src/pages/news/news_page.dart';
+import 'package:utcc_esport/src/pages/profiles/profile_page.dart';
 
 class Launcher extends StatefulWidget {
   const Launcher({super.key});
@@ -12,9 +15,9 @@ class _LauncherState extends State<Launcher> {
   int _selectedIndex = 0;
   final List<Widget> _pageWidget = <Widget>[
     const HomePage(),
-    //const News(),
-    //const Competition(),
-    //const Profile(),
+    const News(),
+    const Competition(),
+    const Profiles(),
   ];
 
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[
@@ -60,7 +63,7 @@ class _LauncherState extends State<Launcher> {
         backgroundColor: const Color(0xFF0C1629),
         items: _menuBar,
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFFA31E21),
+        selectedItemColor: const Color(0xFFA31E21),
         unselectedItemColor: Colors.white,
         onTap: _onItemTapped,
       ),
