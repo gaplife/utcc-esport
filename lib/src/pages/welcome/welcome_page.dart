@@ -53,50 +53,61 @@ class _WelcomeState extends State<Welcome> {
 
   Widget _logo() {
     return Padding(
-        padding: const EdgeInsets.only(top: 50),
-        child: Column(children: [
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.04),
+      child: Column(
+        children: [
           Image.asset(
             Asset.LOGO_IMAGE,
-            scale: 2.5,
+            scale: MediaQuery.of(context).size.width * 0.006,
           ),
-          const Text("E-SPORT",
+          Text("E-SPORT",
               style: TextStyle(
-                fontSize: 34,
-                color: Color(0xFFA31E21),
+                fontSize: MediaQuery.of(context).size.width * 0.083,
+                color: const Color(0xFFA31E21),
                 fontFamily: 'Barlow',
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w800,
-              ))
-        ]));
+              )),
+        ],
+      ),
+    );
   }
 
   Widget _textWelcome() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 180),
+    return Padding(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.225),
       child: Column(
         children: <Widget>[
           Text(
             "ยินดีต้อนรับ",
             style: TextStyle(
-                fontSize: 20, fontFamily: 'Mitr', color: Colors.white),
+                fontSize: MediaQuery.of(context).size.width * 0.05,
+                fontFamily: 'Mitr',
+                color: Colors.white),
           ),
           SizedBox(
-            height: 5,
+            height: MediaQuery.of(context).size.height * 0.005,
           ),
           Text(
             "แหล่งรวบรวมข่าวสารและ",
             style: TextStyle(
-                fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontFamily: 'Mitr',
+                color: Colors.white),
           ),
           Text(
             "บริหารจัดการแข่งขันกีฬา E-SPORT",
             style: TextStyle(
-                fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontFamily: 'Mitr',
+                color: Colors.white),
           ),
           Text(
             "ครบจบในที่เดียว",
             style: TextStyle(
-                fontSize: 16, fontFamily: 'Mitr', color: Colors.white),
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+                fontFamily: 'Mitr',
+                color: Colors.white),
           ),
         ],
       ),
@@ -105,10 +116,11 @@ class _WelcomeState extends State<Welcome> {
 
   Widget _buttonlogin() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.023, left: 20, right: 20),
       child: SizedBox(
-        width: 500,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
@@ -125,10 +137,10 @@ class _WelcomeState extends State<Welcome> {
             size: 0,
             color: Color(0xFFA31E21),
           ),
-          label: const Text(
+          label: Text(
             "เข้าสู่ระบบ",
             style: TextStyle(
-              fontSize: 22,
+              fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
               fontWeight: FontWeight.bold,
               color: Color(0xFFA31E21),
@@ -141,10 +153,11 @@ class _WelcomeState extends State<Welcome> {
 
   Widget _buttonregis() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.02, left: 20, right: 20),
       child: SizedBox(
-        width: 500,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFA31E21),
@@ -161,10 +174,10 @@ class _WelcomeState extends State<Welcome> {
             size: 0,
             color: Color(0xFFA31E21),
           ),
-          label: const Text(
+          label: Text(
             "ลงทะเบียน",
             style: TextStyle(
-              fontSize: 22,
+              fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
               fontWeight: FontWeight.bold,
               color: Color.fromARGB(255, 255, 255, 255),
@@ -177,10 +190,14 @@ class _WelcomeState extends State<Welcome> {
 
   Widget _buttonorganizer() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.02,
+          left: 20,
+          right: 20,
+          bottom: 20),
       child: SizedBox(
-        width: 500,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
@@ -197,10 +214,10 @@ class _WelcomeState extends State<Welcome> {
             size: 0,
             color: Color(0xFFA31E21),
           ),
-          label: const Text(
+          label: Text(
             "สำหรับผู้จัดการแข่งขัน",
             style: TextStyle(
-                fontSize: 22,
+                fontSize: MediaQuery.of(context).size.width * 0.055,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.bold,
                 color: Colors.white),

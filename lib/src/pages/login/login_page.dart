@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/models/profile.dart';
 import 'package:utcc_esport/src/config/theme.dart' as custom_theme;
 import 'package:utcc_esport/src/pages/pages.dart';
@@ -40,10 +41,12 @@ class _LoginState extends State<Login> {
                 icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              title: const Text(
+              title: Text(
                 "เข้าสู่ระบบ",
                 style: TextStyle(
-                    color: Colors.black, fontSize: 22, fontFamily: 'Mitr'),
+                    color: Colors.black,
+                    fontSize: MediaQuery.of(context).size.width * 0.053,
+                    fontFamily: 'Mitr'),
               ),
               centerTitle: true,
               backgroundColor: const Color.fromARGB(255, 249, 249, 249),
@@ -60,7 +63,7 @@ class _LoginState extends State<Login> {
                         children: [
                           _welcome(),
                           _boxemail(),
-                          _boxepass(),
+                          _boxpass(),
                           _buttonconfirm(),
                           _text(),
                           _buttonloginfacebook(),
@@ -85,23 +88,28 @@ class _LoginState extends State<Login> {
   }
 
   Widget _welcome() {
-    return const Padding(
-      padding: EdgeInsets.only(top: 40, left: 20),
+    return Padding(
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.048, left: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             "ยินดีต้อนรับ",
             style: TextStyle(
-                fontSize: 20, fontFamily: 'Mitr', color: Colors.black),
+                fontSize: MediaQuery.of(context).size.width * 0.05,
+                fontFamily: 'Mitr',
+                color: Colors.black),
           ),
           SizedBox(
-            height: 10,
+            height: MediaQuery.of(context).size.height * 0.002,
           ),
           Text(
             "กรุณากรอกอีเมลและรหัสผ่านเพื่อเข้าสู่ระบบ",
             style: TextStyle(
-                fontSize: 18, color: Colors.black54, fontFamily: 'Kanit'),
+                fontSize: MediaQuery.of(context).size.width * 0.04,
+                color: Colors.black54,
+                fontFamily: 'Kanit'),
           ),
         ],
       ),
@@ -110,15 +118,17 @@ class _LoginState extends State<Login> {
 
   Widget _boxemail() {
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.012, left: 20, right: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: "อีเมล",
-              contentPadding: EdgeInsets.all(18),
-              border: OutlineInputBorder(),
+              contentPadding:
+                  EdgeInsets.all(MediaQuery.of(context).size.width * 0.045),
+              border: const OutlineInputBorder(),
             ),
             validator: MultiValidator([
               RequiredValidator(errorText: "กรุณากรอกอีเมล"),
@@ -135,18 +145,20 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget _boxepass() {
+  Widget _boxpass() {
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.012, left: 20, right: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
             obscureText: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: "รหัสผ่าน",
-              contentPadding: EdgeInsets.all(18),
-              border: OutlineInputBorder(),
+              contentPadding:
+                  EdgeInsets.all(MediaQuery.of(context).size.width * 0.045),
+              border: const OutlineInputBorder(),
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
@@ -156,7 +168,8 @@ class _LoginState extends State<Login> {
             validator: RequiredValidator(errorText: "กรุณากรอกรหัสผ่าน"),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 0, left: 240),
+            margin: EdgeInsets.only(
+                top: 0, left: MediaQuery.of(context).size.width * 0.62),
             child: TextButton(
               style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(Colors.transparent)),
@@ -165,11 +178,11 @@ class _LoginState extends State<Login> {
                   return const ForgetPass();
                 }));
               },
-              child: const Text(
+              child: Text(
                 "ลืมรหัสผ่าน ?",
                 style: TextStyle(
                     color: Colors.black54,
-                    fontSize: 16,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -181,10 +194,11 @@ class _LoginState extends State<Login> {
 
   Widget _buttonconfirm() {
     return Padding(
-      padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.095, left: 20, right: 20),
       child: SizedBox(
-        width: 500,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
@@ -222,10 +236,10 @@ class _LoginState extends State<Login> {
             size: 0,
             color: Colors.white,
           ),
-          label: const Text(
+          label: Text(
             "เข้าสู่ระบบ",
             style: TextStyle(
-              fontSize: 22,
+              fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -237,13 +251,18 @@ class _LoginState extends State<Login> {
   }
 
   Widget _text() {
-    return const Center(
+    return Center(
       child: Padding(
-        padding: EdgeInsets.only(top: 20, left: 25, right: 25),
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.022,
+            left: 25,
+            right: 25),
         child: Text(
-          "- - - -  หรือเชื่อมต่อกับบัญชีอื่นของคุณ - - - -",
+          "- - - - - -  หรือเชื่อมต่อกับบัญชีอื่นของคุณ - - - - - -",
           style: TextStyle(
-              fontSize: 16, fontFamily: 'Kanit', color: Colors.black54),
+              fontSize: MediaQuery.of(context).size.width * 0.04,
+              fontFamily: 'Kanit',
+              color: Colors.black54),
         ),
       ),
     );
@@ -251,25 +270,26 @@ class _LoginState extends State<Login> {
 
   Widget _buttonloginfacebook() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.02, left: 20, right: 22),
       child: SizedBox(
-        width: 500,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5)),
               backgroundColor: const Color(0xFF325BA9)),
           onPressed: () {},
-          icon: const Icon(
+          icon: Icon(
             Icons.facebook,
-            size: 25,
+            size: MediaQuery.of(context).size.width * 0.06,
             color: Colors.white,
           ),
-          label: const Text(
+          label: Text(
             "เชื่อมต่อกับ Facebook",
             style: TextStyle(
-              fontSize: 22,
+              fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -282,10 +302,11 @@ class _LoginState extends State<Login> {
 
   Widget _buttonlogingoogle() {
     return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.02, left: 20, right: 20),
       child: SizedBox(
-        width: 500,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
@@ -294,14 +315,14 @@ class _LoginState extends State<Login> {
               backgroundColor: const Color.fromARGB(255, 255, 255, 255)),
           onPressed: () {},
           icon: Image.asset(
-            'assets/images/ggo.png',
-            height: 22,
-            width: 22,
+            Asset.GOOGLE_IMAGE,
+            height: MediaQuery.of(context).size.height * 0.025,
+            width: MediaQuery.of(context).size.width * 0.055,
           ),
-          label: const Text(
+          label: Text(
             "เชื่อมต่อกับ Google",
             style: TextStyle(
-                fontSize: 22,
+                fontSize: MediaQuery.of(context).size.width * 0.055,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.bold,
                 color: Colors.black54),

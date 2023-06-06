@@ -20,77 +20,76 @@ class _ForgetPassState extends State<ForgetPass> {
         ),
         title: Text(
           "ลืมรหัสผ่าน",
-          style:
-          TextStyle(color: Colors.black, fontSize: 25, fontFamily: 'Mitr'),
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: MediaQuery.of(context).size.width * 0.061,
+              fontFamily: 'Mitr'),
         ),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 249, 249, 249),
         elevation: 0,
       ),
-      body: ListView(
-        children: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            _top(),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             _boxmail(),
-            _buttonconfirm(),
-          ]),
-        ],
-      ),
-    );
-  }
-
-  Widget _top() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 40, left: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "กรุณากรอกอีเมลเพื่อรีเซ็ทรหัสผ่าน",
-            style: TextStyle(
-                fontSize: 19, color: Colors.black87, fontFamily: 'Kanit'),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _boxmail() {
-    final TextField _txtMail = TextField(
-      decoration: InputDecoration(
-        hintText: "อีเมล",
-        contentPadding: EdgeInsets.all(19),
-        border: InputBorder.none,
-      ),
-      keyboardType: TextInputType.emailAddress,
-      autocorrect: false,
-    );
-
-    return Padding(
-        padding: const EdgeInsets.only(top: 12, left: 20, right: 20),
-        child: Column(children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
-              border: Border.all(width: 1, color: Colors.black54),
-              borderRadius: const BorderRadius.all(Radius.circular(5)),
-            ),
-            child: _txtMail,
+    return Container(
+      margin: EdgeInsets.fromLTRB(
+          20, MediaQuery.of(context).size.height * 0.035, 20, 20),
+      height: MediaQuery.of(context).size.height * 0.78,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "กรุณากรอกอีเมลเพื่อรีเซ็ทรหัสผ่าน",
+            style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.046,
+                color: Colors.black87,
+                fontFamily: 'Kanit'),
           ),
-        ]));
+          SizedBox(
+            height: 5,
+          ),
+          TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "อีเมล",
+              contentPadding:
+                  EdgeInsets.all(MediaQuery.of(context).size.width * 0.045),
+              border: const OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.emailAddress,
+            autocorrect: false,
+          ),
+          SizedBox(
+              height: MediaQuery.of(context).size.height *
+                  0.59), // เพิ่มช่องว่างระหว่าง TextFormField กับปุ่มยืนยัน
+          _buttonconfirm()
+        ],
+      ),
+    );
   }
 
   Widget _buttonconfirm() {
     return Padding(
-      padding: const EdgeInsets.only(top: 523, left: 20, right: 20),
+      padding: const EdgeInsets.only(top: 0, left: 0, right: 0),
       child: SizedBox(
-        width: 500,
-        height: 60,
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.07,
         child: ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)),
-              primary: Color.fromARGB(255, 255, 17, 0)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            primary: const Color(0xFFA31E21),
+          ),
           onPressed: () {},
           icon: Icon(
             Icons.login,
