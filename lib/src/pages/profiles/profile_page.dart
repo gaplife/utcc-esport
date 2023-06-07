@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:utcc_esport/src/constants/asset.dart';
 
 class Profiles extends StatefulWidget {
   const Profiles({super.key});
@@ -76,7 +77,7 @@ class _ProfilesState extends State<Profiles> {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       width: MediaQuery.of(context).size.width * 1,
-      height: MediaQuery.of(context).size.height * 0.16,
+      height: MediaQuery.of(context).size.height * 0.17,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -112,7 +113,7 @@ class _ProfilesState extends State<Profiles> {
                           'Assawin Namkort',
                           style: TextStyle(
                             fontSize: MediaQuery.of(context).size.width * 0.05,
-                            fontFamily: 'Barlow',
+                            fontFamily: 'Kanit',
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -125,7 +126,7 @@ class _ProfilesState extends State<Profiles> {
                           style: TextStyle(
                             fontSize:
                                 MediaQuery.of(context).size.height * 0.021,
-                            fontFamily: 'Barlow',
+                            fontFamily: 'Kanit',
                             fontWeight: FontWeight.w600,
                             height: 1,
                           ),
@@ -137,14 +138,17 @@ class _ProfilesState extends State<Profiles> {
                         child: Row(
                           children: [
                             Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 3),
-                              // width: 10,
-                              // height: 20,
-                              child: Icon(
-                                Icons
-                                    .monetization_on_outlined, // เลือกไอคอนรูปถ้วยรางวัล
-                                size: MediaQuery.of(context).size.height * 0.03,
-                                color: const Color(0xffa31e21),
+                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              width: MediaQuery.of(context).size.width * 0.07,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.035,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xffffffff),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: AssetImage(Asset.COIN_IMAGE),
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -159,7 +163,7 @@ class _ProfilesState extends State<Profiles> {
                                     fontSize:
                                         MediaQuery.of(context).size.height *
                                             0.021,
-                                    fontFamily: 'Barlow',
+                                    fontFamily: 'Kanit',
                                     fontWeight: FontWeight.w600,
                                     height: 1,
                                   ),
@@ -188,7 +192,7 @@ class _ProfilesState extends State<Profiles> {
                                     fontSize:
                                         MediaQuery.of(context).size.height *
                                             0.018,
-                                    fontFamily: 'Barlow',
+                                    fontFamily: 'Kanit',
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -232,7 +236,7 @@ class _ProfilesState extends State<Profiles> {
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Barlow',
+                    fontFamily: 'Kanit',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -265,7 +269,7 @@ class _ProfilesState extends State<Profiles> {
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Barlow',
+                    fontFamily: 'Kanit',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -298,7 +302,7 @@ class _ProfilesState extends State<Profiles> {
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Barlow',
+                    fontFamily: 'Kanit',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -331,7 +335,7 @@ class _ProfilesState extends State<Profiles> {
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Barlow',
+                    fontFamily: 'Kanit',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -366,7 +370,7 @@ class _ProfilesState extends State<Profiles> {
                       style: TextStyle(
                         color: const Color.fromARGB(255, 0, 0, 0),
                         fontSize: MediaQuery.of(context).size.height * 0.025,
-                        fontFamily: 'Barlow',
+                        fontFamily: 'Kanit',
                         fontWeight: FontWeight.w600,
                       ),
                     ),

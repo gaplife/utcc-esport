@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:utcc_esport/src/pages/competition/competition_page.dart';
+import 'package:utcc_esport/src/pages/competition/allcompetition_page.dart';
 import 'package:utcc_esport/src/pages/home/home_page.dart';
 import 'package:utcc_esport/src/pages/news/news_page.dart';
 import 'package:utcc_esport/src/pages/profiles/profile_page.dart';
@@ -16,7 +16,7 @@ class _LauncherState extends State<Launcher> {
   final List<Widget> _pageWidget = <Widget>[
     const HomePage(),
     const News(),
-    const Competition(),
+    const Allcompetition(),
     const Profiles(),
   ];
 
