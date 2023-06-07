@@ -218,7 +218,7 @@ class _WelcomeState extends State<Welcome> {
               )),
           onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const Login();
+              return const OganizerLogin();
             }));
           },
           icon: const Icon(

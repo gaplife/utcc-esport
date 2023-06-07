@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         Center(
           child: Column(
             children: <Widget>[
-              _boxsearch(),
+              //_boxsearch(),
               _news(),
               _competition(context),
               _competition1(context),

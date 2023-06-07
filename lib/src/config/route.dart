@@ -20,6 +20,8 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/allcompetition': (context) => const Allcompetition(),
   '/profile': (context) => const Profiles(),
   '/launcher': (context) => const Launcher(),
+  '/organizer_login': (context) => const OganizerLogin(),
+  '/organizer_register': (context) => const OrganizerRegister(),
   '/contentnews': (context) => const Contentnews(),
   '/competition': (context) => const Competition(),
 };

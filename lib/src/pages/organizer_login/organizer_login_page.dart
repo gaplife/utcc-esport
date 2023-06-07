@@ -8,14 +8,14 @@ import 'package:utcc_esport/src/models/profile.dart';
 import 'package:utcc_esport/src/config/theme.dart' as custom_theme;
 import 'package:utcc_esport/src/pages/pages.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class OganizerLogin extends StatefulWidget {
+  const OganizerLogin({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<OganizerLogin> createState() => _OganizerLoginState();
 }
 
-class _LoginState extends State<Login> {
+class _OganizerLoginState extends State<OganizerLogin> {
   final formKey = GlobalKey<FormState>();
   Profile profile = Profile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
@@ -43,9 +43,9 @@ class _LoginState extends State<Login> {
                 onPressed: () => Navigator.of(context).pop(),
               ),
               title: Text(
-                "เข้าสู่ระบบ",
+                "เข้าสู่ระบบผู้จัดแข่ง",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: (custom_theme.Theme.baseColor),
                     fontSize: MediaQuery.of(context).size.width * 0.053,
                     fontFamily: 'Kanit',
                     fontWeight: FontWeight.w800),
@@ -67,6 +67,7 @@ class _LoginState extends State<Login> {
                           _boxemail(),
                           _boxpass(),
                           _buttonconfirm(),
+                          _buttonregis(),
                           _text(),
                           _buttonloginfacebook(),
                           _buttonlogingoogle(),
@@ -140,7 +141,6 @@ class _LoginState extends State<Login> {
             autocorrect: false,
             onSaved: (String? email) {
               profile.email = email;
-
             },
           ),
         ],
@@ -198,7 +198,7 @@ class _LoginState extends State<Login> {
   Widget _buttonconfirm() {
     return Padding(
       padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.095, left: 20, right: 20),
+          top: MediaQuery.of(context).size.height * 0.06, left: 20, right: 20),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.07,
@@ -215,7 +215,6 @@ class _LoginState extends State<Login> {
                     .signInWithEmailAndPassword(
                   email: profile.email!,
                   password: profile.password!,
-
                 )
                     .then((value) {
                   formKey.currentState!.reset();
@@ -247,6 +246,43 @@ class _LoginState extends State<Login> {
               fontFamily: 'Kanit',
               fontWeight: FontWeight.bold,
               color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buttonregis() {
+    return Padding(
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.02, left: 20, right: 20),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.07,
+        child: ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFA31E21),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              )),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const OrganizerRegister();
+            }));
+          },
+          icon: const Icon(
+            Icons.login,
+            size: 0,
+            color: Color(0xFFA31E21),
+          ),
+          label: Text(
+            "ลงทะเบียน",
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width * 0.055,
+              fontFamily: 'Kanit',
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
           ),
         ),

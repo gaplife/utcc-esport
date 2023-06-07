@@ -12,6 +12,7 @@ class Profiles extends StatefulWidget {
 
 class _ProfilesState extends State<Profiles> {
   final auth = FirebaseAuth.instance;
+  final profilefont = 'Kanit';
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +20,19 @@ class _ProfilesState extends State<Profiles> {
       appBar: AppBar(
         toolbarHeight: 75,
         automaticallyImplyLeading: false,
-        title: const Padding(
+        title: Padding(
           padding: EdgeInsets.only(left: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              IconButton(
+              const IconButton(
                   onPressed: null,
                   icon: Icon(
                     Icons.person,
                     size: 35,
                     color: Color.fromARGB(255, 255, 255, 255),
                   )),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(
@@ -39,18 +40,19 @@ class _ProfilesState extends State<Profiles> {
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 24,
-                  fontFamily: 'Barlow',
+                  fontFamily: profilefont,
                   fontWeight: FontWeight.w800,
                 ),
               ),
             ],
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 1, 5, 36),
+        backgroundColor: const Color(0xff0c1629),
       ),
       body: SizedBox(
         child: Form(
           child: ListView(
+            shrinkWrap: true,
             children: [
               SingleChildScrollView(
                 child: Column(
@@ -77,145 +79,144 @@ class _ProfilesState extends State<Profiles> {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       width: MediaQuery.of(context).size.width * 1,
-      height: MediaQuery.of(context).size.height * 0.17,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(1, 0, 0, 0),
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xff0c1629)),
-                    image: const DecorationImage(
-                      fit: BoxFit.contain,
-                      image: NetworkImage(
-                          'https://scontent.fbkk22-7.fna.fbcdn.net/v/t1.18169-9/22449595_1515710551829373_1094037456389629918_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGQ1w1Na8tq52BliYudPx4TyC9jHWEQNNvIL2MdYRA028vwwrJQkRH5K9NUtVYsC-YG8LLdoh5lJVJcqi0Cp2q1&_nc_ohc=xyW49OH-h20AX_AeC_b&_nc_ht=scontent.fbkk22-7.fna&oh=00_AfBvLMW4xZmZstp0Zc7gF5NhXbrh_20_0FpY41EmNVHsYA&oe=649D70FC'),
+      height: MediaQuery.of(context).size.height * 0.16,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.fromLTRB(1, 0, 0, 0),
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: const Color(0xff0c1629)),
+                      image: const DecorationImage(
+                        fit: BoxFit.contain,
+                        image: NetworkImage(
+                            'https://scontent.fbkk22-7.fna.fbcdn.net/v/t1.18169-9/22449595_1515710551829373_1094037456389629918_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGQ1w1Na8tq52BliYudPx4TyC9jHWEQNNvIL2MdYRA028vwwrJQkRH5K9NUtVYsC-YG8LLdoh5lJVJcqi0Cp2q1&_nc_ohc=xyW49OH-h20AX_AeC_b&_nc_ht=scontent.fbkk22-7.fna&oh=00_AfBvLMW4xZmZstp0Zc7gF5NhXbrh_20_0FpY41EmNVHsYA&oe=649D70FC'),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  width: MediaQuery.of(context).size.width * 0.64,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Text(
-                          'Assawin Namkort',
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.05,
-                            fontFamily: 'Kanit',
-                            fontWeight: FontWeight.w600,
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    width: MediaQuery.of(context).size.width * 0.64,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: Text(
+                            'Assawin Namkort',
+                            style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05,
+                              fontFamily: profilefont,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: Text(
-                          'เหรียญที่มี',
-                          style: TextStyle(
-                            fontSize:
-                                MediaQuery.of(context).size.height * 0.021,
-                            fontFamily: 'Kanit',
-                            fontWeight: FontWeight.w600,
-                            height: 1,
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Text(
+                            'เหรียญที่มี',
+                            style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.height * 0.02,
+                              fontFamily: profilefont,
+                              fontWeight: FontWeight.w600,
+                              height: 1,
+                            ),
                           ),
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.fromLTRB(0, 2, 0, 0),
-                        width: MediaQuery.of(context).size.height * 0.5,
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              width: MediaQuery.of(context).size.width * 0.07,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.035,
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xffffffff),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(Asset.COIN_IMAGE),
+                        Container(
+                          margin: const EdgeInsets.fromLTRB(0, 2, 0, 0),
+                          width: MediaQuery.of(context).size.height * 0.5,
+                          child: Row(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                // width: 10,
+                                // height: 20,
+                                child: Image.asset(
+                                  Asset.COIN_IMAGE,
+                                  scale:
+                                      MediaQuery.of(context).size.width * 0.1,
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '999,999',
-                                  style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.021,
-                                    fontFamily: 'Kanit',
-                                    fontWeight: FontWeight.w600,
-                                    height: 1,
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '999,999',
+                                    style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.02,
+                                      fontFamily: profilefont,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(10, 0, 0,
-                                  0), // ปรับระยะห่างด้านซ้ายของปุ่ม "เติมเงิน"
-                              width: MediaQuery.of(context).size.width * 0.2,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.035,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: const Color(0xffa31e21),
-                              ),
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  padding: EdgeInsets.zero,
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(10, 0, 0,
+                                    0), // ปรับระยะห่างด้านซ้ายของปุ่ม "เติมเงิน"
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.035,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: const Color(0xffa31e21),
                                 ),
-                                onPressed: () {},
-                                child: Text(
-                                  'เติมเงิน',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize:
-                                        MediaQuery.of(context).size.height *
-                                            0.018,
-                                    fontFamily: 'Kanit',
-                                    fontWeight: FontWeight.w600,
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                  onPressed: () {},
+                                  child: Text(
+                                    'เติมเงิน',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.height *
+                                              0.018,
+                                      fontFamily: profilefont,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ) //รูปโปรไฟล์
-              ],
+                      ],
+                    ),
+                  ) //รูปโปรไฟล์
+                ],
+              ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(5, 20, 5, 0),
-            width: MediaQuery.of(context).size.width * 0.9,
-            height: 2,
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(153, 0, 0, 0),
+            Container(
+              margin: const EdgeInsets.fromLTRB(5, 18, 5, 0),
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: 2,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(153, 0, 0, 0),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -236,7 +237,7 @@ class _ProfilesState extends State<Profiles> {
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Kanit',
+                    fontFamily: profilefont,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -269,7 +270,7 @@ class _ProfilesState extends State<Profiles> {
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Kanit',
+                    fontFamily: profilefont,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -302,7 +303,7 @@ class _ProfilesState extends State<Profiles> {
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Kanit',
+                    fontFamily: profilefont,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -335,7 +336,7 @@ class _ProfilesState extends State<Profiles> {
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Kanit',
+                    fontFamily: profilefont,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -370,7 +371,7 @@ class _ProfilesState extends State<Profiles> {
                       style: TextStyle(
                         color: const Color.fromARGB(255, 0, 0, 0),
                         fontSize: MediaQuery.of(context).size.height * 0.025,
-                        fontFamily: 'Kanit',
+                        fontFamily: profilefont,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -387,7 +388,7 @@ class _ProfilesState extends State<Profiles> {
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(25, 70, 25, 10),
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 1,
           height: 2,
           decoration: const BoxDecoration(
             color: Color.fromARGB(153, 0, 0, 0),
@@ -425,7 +426,7 @@ class _ProfilesState extends State<Profiles> {
             "ออกจากระบบ",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.height * 0.03,
-              fontFamily: 'Kanit',
+              fontFamily: profilefont,
               color: const Color.fromARGB(255, 255, 255, 255),
             ),
           ),

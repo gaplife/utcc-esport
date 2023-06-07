@@ -7,5 +7,7 @@ export 'launchers/launcher_page.dart';
 export 'news/news_page.dart';
 export 'competition/allcompetition_page.dart';
 export 'profiles/profile_page.dart';
+export 'organizer_login/organizer_login_page.dart';
+export 'organizer_register/organizer_register_page.dart';
 export 'news/listnews/contentnews_page.dart';
 export 'competition/competitionpage/competition_page.dart';

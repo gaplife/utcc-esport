@@ -3,6 +3,7 @@ class Profile {
   String? password;
   String? confirmpassword;
   String? username;
+  String? userType;
   //String? lastname;
   //String? birthday;
 
