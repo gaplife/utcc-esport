@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
   Profile profile = Profile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -46,7 +47,8 @@ class _LoginState extends State<Login> {
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: MediaQuery.of(context).size.width * 0.053,
-                    fontFamily: 'Mitr'),
+                    fontFamily: 'Kanit',
+                    fontWeight: FontWeight.w800),
               ),
               centerTitle: true,
               backgroundColor: const Color.fromARGB(255, 249, 249, 249),
@@ -138,6 +140,7 @@ class _LoginState extends State<Login> {
             autocorrect: false,
             onSaved: (String? email) {
               profile.email = email;
+
             },
           ),
         ],
@@ -212,6 +215,7 @@ class _LoginState extends State<Login> {
                     .signInWithEmailAndPassword(
                   email: profile.email!,
                   password: profile.password!,
+
                 )
                     .then((value) {
                   formKey.currentState!.reset();
