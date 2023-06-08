@@ -11,3 +11,5 @@ export 'organizer_login/organizer_login_page.dart';
 export 'organizer_register/organizer_register_page.dart';
 export 'news/listnews/contentnews_page.dart';
 export 'competition/competitionpage/competition_page.dart';
+export 'profiles/contactme_page.dart';
+export 'profiles/setuppayment_page.dart';

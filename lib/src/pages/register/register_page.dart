@@ -23,7 +23,7 @@ class _RegisterState extends State<Register> {
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   CollectionReference userCollection =
-  FirebaseFirestore.instance.collection("User Table");
+      FirebaseFirestore.instance.collection("User Table");
 
   final _passwordController = TextEditingController();
   //final _date = TextEditingController();
@@ -364,23 +364,16 @@ class _RegisterState extends State<Register> {
                   )
                       .then((value) {
                     formKey.currentState!.reset();
-                    Fluttertoast.showToast(
-                        msg: "สมัครสมาชิกสำเร็จ",
-                        gravity: ToastGravity.SNACKBAR);
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      '/welcome',
-                          (route) => false,
-                    );
+                    _registersuccess();
                   });
                 } on FirebaseAuthException catch (e) {
                   String? messageemailerror;
                   if (e.code == 'email-already-in-use') {
                     messageemailerror =
-                    "มีอีเมลนี้ในระบบแล้ว โปรดใช้อีเมลอื่นแทน";
+                        "มีอีเมลนี้ในระบบแล้ว โปรดใช้อีเมลอื่นแทน";
                   } else if (e.code == 'weak-password') {
                     messageemailerror =
-                    "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
+                        "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
                   } else {
                     messageemailerror = e.message;
                   }
@@ -501,6 +494,104 @@ class _RegisterState extends State<Register> {
           ],
         ),
       ),
+    );
+  }
+
+  void _registersuccess() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          insetPadding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width * 0.05,
+              0,
+              MediaQuery.of(context).size.width * 0.05,
+              0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Container(
+            margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.27,
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: MediaQuery.of(context).size.width * 0.15,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ลงทะเบียนสำเร็จ !',
+                      style: TextStyle(
+                        //color: Color.fromARGB(0, 0, 0, 0),
+                        fontSize: MediaQuery.of(context).size.width * 0.052,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'กรุณาตรวจสอบอีเมลเพื่อยืนยัน',
+                      style: TextStyle(
+                        //color: Color.fromARGB(0, 0, 0, 0),
+                        fontSize: MediaQuery.of(context).size.width * 0.052,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 15),
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xffa31e21),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        '/welcome',
+                        (route) => false,
+                      );
+                    },
+                    child: Text(
+                      'ปิด',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: MediaQuery.of(context).size.width * 0.046,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
