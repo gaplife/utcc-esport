@@ -40,14 +40,26 @@ class _WelcomeState extends State<Welcome> {
   }
 
   Widget _buildForm() => Center(
-        child: Column(
-          children: <Widget>[
-            _logo(),
-            _textWelcome(),
-            _buttonlogin(),
-            _buttonregis(),
-            _buttonorganizer(),
-          ],
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          height: MediaQuery.of(context).size.height * 0.925,
+          child: Column(
+            children: <Widget>[
+              _logo(),
+              const Expanded(
+                child: Spacer(),
+              ),
+              Column(
+                //mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  _textWelcome(),
+                  _buttonlogin(),
+                  _buttonregis(),
+                  _buttonorganizer(),
+                ],
+              ),
+            ],
+          ),
         ),
       );
 
@@ -74,8 +86,8 @@ class _WelcomeState extends State<Welcome> {
   }
 
   Widget _textWelcome() {
-    return Padding(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.225),
+    return Container(
+      margin: const EdgeInsets.only(top: 0),
       child: Column(
         children: <Widget>[
           Text(
@@ -143,7 +155,7 @@ class _WelcomeState extends State<Welcome> {
               fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
               fontWeight: FontWeight.bold,
-              color: Color(0xFFA31E21),
+              color: const Color(0xFFA31E21),
             ),
           ),
         ),
@@ -180,7 +192,7 @@ class _WelcomeState extends State<Welcome> {
               fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
           ),
         ),
@@ -194,7 +206,7 @@ class _WelcomeState extends State<Welcome> {
           top: MediaQuery.of(context).size.height * 0.02,
           left: 20,
           right: 20,
-          bottom: 20),
+          bottom: 15),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.07,

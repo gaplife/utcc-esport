@@ -115,7 +115,8 @@ class _ProfilesState extends State<Profiles> {
                           child: Text(
                             'Assawin Namkort',
                             style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width * 0.05,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05,
                               fontFamily: profilefont,
                               fontWeight: FontWeight.w600,
                             ),
@@ -146,7 +147,8 @@ class _ProfilesState extends State<Profiles> {
                                 // height: 20,
                                 child: Image.asset(
                                   Asset.COIN_IMAGE,
-                                  scale: MediaQuery.of(context).size.width * 0.1,
+                                  scale:
+                                      MediaQuery.of(context).size.width * 0.1,
                                 ),
                               ),
                               const SizedBox(
