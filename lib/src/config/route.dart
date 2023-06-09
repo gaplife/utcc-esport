@@ -1,12 +1,3 @@
-// import 'package:e_sport/screens/competition.dart';
-// import 'package:e_sport/screens/firstpage.dart';
-// import 'package:e_sport/screens/forgetpass.dart';
-// import 'package:e_sport/screens/launcher.dart';
-// import 'package:e_sport/screens/login.dart';
-// import 'package:e_sport/screens/news.dart';
-// import 'package:e_sport/screens/pageprofile.dart';
-// import 'package:e_sport/screens/register.dart';
-// import 'package:e_sport/screens/welcome.dart';
 import 'package:flutter/widgets.dart';
 import 'package:utcc_esport/src/pages/pages.dart';
 
@@ -24,4 +15,6 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/organizer_register': (context) => const OrganizerRegister(),
   '/contentnews': (context) => const Contentnews(),
   '/competition': (context) => const Competition(),
+  '/contactme': (context) => const Contactme(),
+  '/setuppayment': (context) => const Setuppayment(),
 };

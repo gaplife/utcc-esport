@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/pages/competition/allcompetition_page.dart';
 import 'package:utcc_esport/src/pages/home/home_page.dart';
+import 'package:utcc_esport/src/pages/news/listnews/contentnews_page.dart';
 import 'package:utcc_esport/src/pages/news/news_page.dart';
 import 'package:utcc_esport/src/pages/profiles/profile_page.dart';
 
@@ -18,6 +19,7 @@ class _LauncherState extends State<Launcher> {
     const News(),
     const Allcompetition(),
     const Profiles(),
+    const Contentnews(),
   ];
 
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[

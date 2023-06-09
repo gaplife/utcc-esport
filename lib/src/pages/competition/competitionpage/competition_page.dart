@@ -10,6 +10,180 @@ class Competition extends StatefulWidget {
 
 class _CompetitionState extends State<Competition> {
   int currentIndex = 0;
+  void _registercompetition() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          insetPadding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width * 0.05,
+              0,
+              MediaQuery.of(context).size.width * 0.05,
+              0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Container(
+            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.265,
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ยืนยันการสมัครแข่ง',
+                      style: TextStyle(
+                        //color: Color.fromARGB(0, 0, 0, 0),
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'กรุณากรอกชื่อภายในเกม',
+                        style: TextStyle(
+                          //color: Color.fromARGB(0, 0, 0, 0),
+                          fontSize: MediaQuery.of(context).size.width * 0.042,
+                          fontFamily: 'Kanit',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.0085),
+                      TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'ชื่อภายในเกม',
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xffa31e21),
+                    ),
+                    onPressed: () {
+                      _registersuccess();
+                      //Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'ยืนยัน',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _registersuccess() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          insetPadding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width * 0.05,
+              0,
+              MediaQuery.of(context).size.width * 0.05,
+              0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Container(
+            margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: MediaQuery.of(context).size.width * 0.15,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ลงสมัครสำเร็จ !',
+                      style: TextStyle(
+                        //color: Color.fromARGB(0, 0, 0, 0),
+                        fontSize: MediaQuery.of(context).size.width * 0.053,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xffa31e21),
+                    ),
+                    onPressed: () {
+                      Navigator.popUntil(
+                          context, ModalRoute.withName('/competition'));
+                    },
+                    child: Text(
+                      'ยืนยัน',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: MediaQuery.of(context).size.width * 0.046,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -169,7 +343,7 @@ class _CompetitionState extends State<Competition> {
             child: Text(
               'ระยะเวลารับสมัคร',
               style: TextStyle(
-                color: Color.fromARGB(255, 12, 0, 0),
+                color: const Color.fromARGB(255, 12, 0, 0),
                 fontSize: MediaQuery.of(context).size.width * 0.046,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w600,
@@ -202,7 +376,7 @@ class _CompetitionState extends State<Competition> {
                       child: Text(
                         'ระยะเวลาแข่งขัน',
                         style: TextStyle(
-                          color: Color.fromARGB(255, 12, 0, 0),
+                          color: const Color.fromARGB(255, 12, 0, 0),
                           fontSize: MediaQuery.of(context).size.width * 0.046,
                           fontFamily: 'Kanit',
                           fontWeight: FontWeight.w600,
@@ -428,7 +602,7 @@ class _CompetitionState extends State<Competition> {
 
   Widget _buttonconfirm() {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
+      padding: const EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 20),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.065,
@@ -439,7 +613,9 @@ class _CompetitionState extends State<Competition> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            _registercompetition();
+          },
           child: Text(
             "สมัครแข่งขัน",
             style: TextStyle(

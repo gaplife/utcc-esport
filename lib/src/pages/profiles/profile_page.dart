@@ -292,7 +292,9 @@ class _ProfilesState extends State<Profiles> {
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
       width: MediaQuery.of(context).size.width * 1,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/setuppayment');
+        },
         child: Row(
           children: [
             Expanded(
@@ -360,7 +362,9 @@ class _ProfilesState extends State<Profiles> {
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
           width: MediaQuery.of(context).size.width * 1,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/contactme');
+            },
             child: Row(
               children: [
                 Expanded(

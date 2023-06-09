@@ -176,7 +176,7 @@ class _AllcompetitionState extends State<Allcompetition> {
                                     fontSize:
                                         MediaQuery.of(context).size.width *
                                             0.037,
-                                    fontFamily: 'Barlow',
+                                    fontFamily: 'Kanit',
                                     fontWeight: FontWeight.w600,
                                     height: 1,
                                   ),
@@ -200,7 +200,7 @@ class _AllcompetitionState extends State<Allcompetition> {
                                     fontSize:
                                         MediaQuery.of(context).size.width *
                                             0.037,
-                                    fontFamily: 'Barlow',
+                                    fontFamily: 'Kanit',
                                     fontWeight: FontWeight.w800,
                                     height: 1,
                                     color: const Color(0xffffffff),
@@ -231,7 +231,7 @@ class _AllcompetitionState extends State<Allcompetition> {
                                 style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.width * 0.037,
-                                  fontFamily: 'Barlow',
+                                  fontFamily: 'Kanit',
                                   fontWeight: FontWeight.w600,
                                   //height: 1,
                                 ),
@@ -263,7 +263,7 @@ class _AllcompetitionState extends State<Allcompetition> {
                                 style: TextStyle(
                                   fontSize:
                                       MediaQuery.of(context).size.width * 0.037,
-                                  fontFamily: 'Barlow',
+                                  fontFamily: 'Kanit',
                                   fontWeight: FontWeight.w600,
                                   //height: 1.1,
                                 ),
@@ -291,7 +291,7 @@ class _AllcompetitionState extends State<Allcompetition> {
                                     fontSize:
                                         MediaQuery.of(context).size.width *
                                             0.037,
-                                    fontFamily: 'Barlow',
+                                    fontFamily: 'Kanit',
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -316,7 +316,7 @@ class _AllcompetitionState extends State<Allcompetition> {
                                     fontSize:
                                         MediaQuery.of(context).size.width *
                                             0.034,
-                                    fontFamily: 'Barlow',
+                                    fontFamily: 'Kanit',
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
