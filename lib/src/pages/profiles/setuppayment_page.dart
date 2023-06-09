@@ -48,6 +48,7 @@ class _SetuppaymentState extends State<Setuppayment> {
   Widget _infobank() {
     return Container(
       margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      width: MediaQuery.of(context).size.width * 0.9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -66,7 +67,7 @@ class _SetuppaymentState extends State<Setuppayment> {
           ),
           Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            height: MediaQuery.of(context).size.height * 0.19,
+            //height: MediaQuery.of(context).size.height * 0.20,
             margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
             decoration: BoxDecoration(
                 color: const Color(0xffa31e21),
@@ -75,7 +76,7 @@ class _SetuppaymentState extends State<Setuppayment> {
               children: [
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 20, 0, 20),
-                  width: MediaQuery.of(context).size.width * 0.27,
+                  width: MediaQuery.of(context).size.width * 0.26,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -176,7 +177,7 @@ class _SetuppaymentState extends State<Setuppayment> {
       padding: const EdgeInsets.only(top: 30, left: 0, right: 0, bottom: 20),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.065,
+        height: MediaQuery.of(context).size.height * 0.068,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xffa31e21),
@@ -184,7 +185,9 @@ class _SetuppaymentState extends State<Setuppayment> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/addpayment');
+          },
           child: Text(
             "เพิ่มบัญชี",
             style: TextStyle(

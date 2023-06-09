@@ -13,3 +13,5 @@ export 'news/listnews/contentnews_page.dart';
 export 'competition/competitionpage/competition_page.dart';
 export 'profiles/contactme_page.dart';
 export 'profiles/setuppayment_page.dart';
+export 'profiles/addpayment_page.dart';
+export 'profiles/registercomp_page.dart';
