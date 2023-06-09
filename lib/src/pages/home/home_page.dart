@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 
@@ -11,9 +13,28 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
   int _currentPageIndex = 0;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+      if (_currentPageIndex < 1) {
+        _currentPageIndex++;
+      } else {
+        _currentPageIndex = 0;
+      }
+      _pageController.animateToPage(
+        _currentPageIndex,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.ease,
+      );
+    });
+  }
 
   @override
   void dispose() {
+    _timer.cancel(); // อย่าลืมยกเลิกการทำงานของ Timer เมื่อไม่ได้ใช้แล้ว
     _pageController.dispose();
     super.dispose();
   }
@@ -134,7 +155,9 @@ class _HomePageState extends State<HomePage> {
         Container(
           margin: const EdgeInsets.fromLTRB(0, 5, 20, 0),
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/news');
+            },
             child: Text(
               'ดูทั้งหมด',
               style: TextStyle(
@@ -210,7 +233,9 @@ class _HomePageState extends State<HomePage> {
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/contentnews');
+                          },
                           child: Text(
                             'อ่านเพิ่มเติม',
                             style: TextStyle(
