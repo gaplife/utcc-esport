@@ -19,4 +19,5 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/setuppayment': (context) => const Setuppayment(),
   '/addpayment': (context) => const Addpayment(),
   '/registercomp': (context) => const Registercomp(),
+  '/editprofile': (context) => const Editprofile(),
 };

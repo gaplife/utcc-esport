@@ -261,7 +261,9 @@ class _ProfilesState extends State<Profiles> {
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
       width: MediaQuery.of(context).size.width * 1,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/editprofile');
+        },
         child: Row(
           children: [
             Expanded(
