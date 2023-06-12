@@ -198,7 +198,7 @@ class _CompetitionState extends State<Competition> {
             children: <Widget>[],
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 1, 5, 36),
+        backgroundColor: const Color(0xff0c1629),
         elevation: 0,
       ),
       body: SingleChildScrollView(

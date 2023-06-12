@@ -184,7 +184,9 @@ class _ProfilesState extends State<Profiles> {
                                   style: TextButton.styleFrom(
                                     padding: EdgeInsets.zero,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/topup');
+                                  },
                                   child: Text(
                                     'เติมเงิน',
                                     style: TextStyle(
@@ -331,7 +333,9 @@ class _ProfilesState extends State<Profiles> {
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
       width: MediaQuery.of(context).size.width * 1,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/editpassword');
+        },
         child: Row(
           children: [
             Expanded(

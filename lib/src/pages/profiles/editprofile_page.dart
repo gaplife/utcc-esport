@@ -36,7 +36,7 @@ class _EditprofileState extends State<Editprofile> {
             ],
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 1, 5, 36),
+        backgroundColor: const Color(0xFF0C1629),
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -58,11 +58,11 @@ class _EditprofileState extends State<Editprofile> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Align(
+              const Align(
                 alignment: Alignment.center,
                 child: Text(
                   'เลือกรูปภาพ',
@@ -72,18 +72,18 @@ class _EditprofileState extends State<Editprofile> {
                   ),
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ListTile(
-                leading: Icon(Icons.camera_alt),
-                title: Text('ถ่ายรูปจากกล้อง'),
+                leading: const Icon(Icons.camera_alt),
+                title: const Text('ถ่ายรูปจากกล้อง'),
                 onTap: () {
                   Navigator.pop(context);
                   _getImage(ImageSource.camera);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.image),
-                title: Text('เลือกรูปจากเครื่อง'),
+                leading: const Icon(Icons.image),
+                title: const Text('เลือกรูปจากเครื่อง'),
                 onTap: () {
                   Navigator.pop(context);
                   _getImage(ImageSource.gallery);
@@ -114,7 +114,7 @@ class _EditprofileState extends State<Editprofile> {
   Widget _editphoto() {
     return Center(
       child: Container(
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: InkWell(
           onTap: () {
             // เรียกฟังก์ชันเปลี่ยนรูปภาพ
@@ -157,7 +157,7 @@ class _EditprofileState extends State<Editprofile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
             "ชื่อ",
             style: TextStyle(
@@ -168,7 +168,7 @@ class _EditprofileState extends State<Editprofile> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: true,
@@ -190,7 +190,7 @@ class _EditprofileState extends State<Editprofile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
             "นามสกุล",
             style: TextStyle(
@@ -201,7 +201,7 @@ class _EditprofileState extends State<Editprofile> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: true,
@@ -223,7 +223,7 @@ class _EditprofileState extends State<Editprofile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
             "อีเมล",
             style: TextStyle(
@@ -234,7 +234,7 @@ class _EditprofileState extends State<Editprofile> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: true,
@@ -343,7 +343,7 @@ class _EditprofileState extends State<Editprofile> {
                     child: Text(
                       'ยืนยัน',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         fontSize: MediaQuery.of(context).size.width * 0.046,
                         fontFamily: 'Kanit',
                         fontWeight: FontWeight.w600,

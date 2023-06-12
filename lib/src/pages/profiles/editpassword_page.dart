@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:utcc_esport/src/pages/pages.dart';
 
-class Addpayment extends StatefulWidget {
-  const Addpayment({super.key});
+class Editpassword extends StatefulWidget {
+  const Editpassword({super.key});
 
   @override
-  State<Addpayment> createState() => _AddpaymentState();
+  State<Editpassword> createState() => _EditpasswordState();
 }
 
-class _AddpaymentState extends State<Addpayment> {
+class _EditpasswordState extends State<Editpassword> {
+  bool _passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +22,7 @@ class _AddpaymentState extends State<Addpayment> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(
-                "เพิ่มบัญชี",
+                "เปลี่ยนรหัสผ่าน",
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 24,
@@ -37,17 +39,17 @@ class _AddpaymentState extends State<Addpayment> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            _boxaddaccount(),
-            _boxaddnameaccount(),
-            _boxaddbank(),
-            _buttonaddbank(),
+            _boxoldpass(),
+            _boxnewpass(),
+            _boxconfirmpass(),
+            _buttonconfirm(),
           ],
         ),
       ),
     );
   }
 
-  Widget _boxaddaccount() {
+  Widget _boxoldpass() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -56,7 +58,7 @@ class _AddpaymentState extends State<Addpayment> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'กรุณากรอกรายละเอียดบัญชี',
+              'กรุณากรอกรหัสผ่าน',
               style: TextStyle(
                 fontSize: MediaQuery.of(context).size.width * 0.055,
                 fontFamily: 'Kanit',
@@ -68,7 +70,7 @@ class _AddpaymentState extends State<Addpayment> {
         Container(
           margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
-            "เลขบัญชี",
+            "รหัสผ่านเดิม",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.045,
               fontFamily: 'Kanit',
@@ -80,28 +82,57 @@ class _AddpaymentState extends State<Addpayment> {
           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "เลขบัญชี",
+            obscureText: !_passwordVisible,
+            decoration: InputDecoration(
+              hintText: "รหัสผ่านเดิม",
               contentPadding: EdgeInsets.all(18),
               border: OutlineInputBorder(),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible =
+                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
+                    });
+                  }),
             ),
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.text,
             autocorrect: false,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+          child: TextButton(
+            style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent)),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const ForgetPass();
+              }));
+            },
+            child: Text(
+              "ลืมรหัสผ่าน ?",
+              style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: MediaQuery.of(context).size.width * 0.04,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _boxaddnameaccount() {
+  Widget _boxnewpass() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: Text(
-            "ชื่อบัญชี",
+            "รหัสผ่านใหม่",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.045,
               fontFamily: 'Kanit',
@@ -113,11 +144,21 @@ class _AddpaymentState extends State<Addpayment> {
           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "ชื่อบัญชี",
+            obscureText: !_passwordVisible,
+            decoration: InputDecoration(
+              hintText: "รหัสผ่านใหม่",
               contentPadding: EdgeInsets.all(18),
               border: OutlineInputBorder(),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible =
+                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
+                    });
+                  }),
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
@@ -127,14 +168,14 @@ class _AddpaymentState extends State<Addpayment> {
     );
   }
 
-  Widget _boxaddbank() {
+  Widget _boxconfirmpass() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
-            "ธนาคาร",
+            "ยืนยันรหัสผ่าน",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.045,
               fontFamily: 'Kanit',
@@ -146,11 +187,21 @@ class _AddpaymentState extends State<Addpayment> {
           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "ธนาคาร",
+            obscureText: !_passwordVisible,
+            decoration: InputDecoration(
+              hintText: "ยืนยันรหัสผ่าน",
               contentPadding: EdgeInsets.all(18),
               border: OutlineInputBorder(),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible =
+                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
+                    });
+                  }),
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
@@ -160,12 +211,12 @@ class _AddpaymentState extends State<Addpayment> {
     );
   }
 
-  Widget _buttonaddbank() {
+  Widget _buttonconfirm() {
     return Container(
       padding: const EdgeInsets.only(top: 30, left: 0, right: 0, bottom: 20),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.065,
+        height: MediaQuery.of(context).size.height * 0.068,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xffa31e21),
@@ -174,10 +225,10 @@ class _AddpaymentState extends State<Addpayment> {
             ),
           ),
           onPressed: () {
-            _addpaymentsuccess();
+            _editpasswordsuccess();
           },
           child: Text(
-            "เพิ่มบัญชี",
+            "ยืนยันการเปลี่ยนรหัสผ่าน",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
@@ -189,7 +240,7 @@ class _AddpaymentState extends State<Addpayment> {
     );
   }
 
-  void _addpaymentsuccess() {
+  void _editpasswordsuccess() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -228,7 +279,7 @@ class _AddpaymentState extends State<Addpayment> {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'เพิ่มบัญชีสำเร็จ !',
+                      'เปลี่ยนแปลงรหัสผ่านสำเร็จ !',
                       style: TextStyle(
                         //color: Color.fromARGB(0, 0, 0, 0),
                         fontSize: MediaQuery.of(context).size.width * 0.053,
@@ -246,13 +297,16 @@ class _AddpaymentState extends State<Addpayment> {
                       backgroundColor: const Color(0xffa31e21),
                     ),
                     onPressed: () {
-                      Navigator.popUntil(
-                          context, ModalRoute.withName('/setuppayment'));
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        '/welcome',
+                        (route) => false,
+                      );
                     },
                     child: Text(
                       'ยืนยัน',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         fontSize: MediaQuery.of(context).size.width * 0.046,
                         fontFamily: 'Kanit',
                         fontWeight: FontWeight.w600,
