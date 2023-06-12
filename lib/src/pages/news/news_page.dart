@@ -45,7 +45,7 @@ class _NewsState extends State<News> {
           IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
         ],
         //centerTitle: const EdgeInsets.all(10),
-        backgroundColor: const Color.fromARGB(255, 1, 5, 36),
+        backgroundColor: const Color(0xFF0C1629),
         elevation: 0,
       ),
       body: Center(
