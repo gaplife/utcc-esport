@@ -15,3 +15,4 @@ export 'profiles/contactme_page.dart';
 export 'profiles/setuppayment_page.dart';
 export 'profiles/addpayment_page.dart';
 export 'profiles/registercomp_page.dart';
+export 'profiles/editprofile_page.dart';
