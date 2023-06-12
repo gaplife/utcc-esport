@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
               'ดูทั้งหมด',
               style: TextStyle(
                 color: const Color.fromARGB(255, 253, 2, 2),
-                fontSize: MediaQuery.of(context).size.height * 0.023,
+                fontSize: MediaQuery.of(context).size.height * 0.020,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w600,
               ),
@@ -361,7 +361,7 @@ Widget _competition(BuildContext context) {
                   'ดูทั้งหมด',
                   style: TextStyle(
                     color: const Color.fromARGB(255, 253, 2, 2),
-                    fontSize: MediaQuery.of(context).size.height * 0.023,
+                    fontSize: MediaQuery.of(context).size.height * 0.020,
                     fontFamily: 'Kanit',
                     fontWeight: FontWeight.w600,
                   ),
@@ -480,9 +480,9 @@ Widget _competition(BuildContext context) {
                                 'SPORT',
                                 style: TextStyle(
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.037,
+                                      MediaQuery.of(context).size.width * 0.035,
                                   fontFamily: 'Kanit',
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w600,
                                   height: 1.2,
                                   color: const Color(0xffffffff),
                                 ),
@@ -594,7 +594,7 @@ Widget _competition(BuildContext context) {
                                 style: TextStyle(
                                   color: const Color.fromARGB(255, 248, 0, 0),
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.034,
+                                      MediaQuery.of(context).size.width * 0.032,
                                   fontFamily: 'Kanit',
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -721,9 +721,9 @@ Widget _competition1(BuildContext context) {
                             'FPS',
                             style: TextStyle(
                               fontSize:
-                                  MediaQuery.of(context).size.width * 0.037,
+                                  MediaQuery.of(context).size.width * 0.035,
                               fontFamily: 'Kanit',
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                               height: 1.2,
                               color: const Color(0xffffffff),
                             ),
@@ -780,7 +780,7 @@ Widget _competition1(BuildContext context) {
                       Container(
                         margin: const EdgeInsets.fromLTRB(7, 0, 0, 0),
                         child: Text(
-                          'ทีม',
+                          'เดี่ยว',
                           style: TextStyle(
                             fontSize: MediaQuery.of(context).size.width * 0.037,
                             fontFamily: 'Kanit',
@@ -831,7 +831,7 @@ Widget _competition1(BuildContext context) {
                             style: TextStyle(
                               color: const Color.fromARGB(255, 248, 0, 0),
                               fontSize:
-                                  MediaQuery.of(context).size.width * 0.034,
+                                  MediaQuery.of(context).size.width * 0.032,
                               fontFamily: 'Kanit',
                               fontWeight: FontWeight.w600,
                             ),

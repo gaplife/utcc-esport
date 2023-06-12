@@ -31,7 +31,7 @@ class _RegistercompState extends State<Registercomp> {
             ],
           ),
         ),
-        backgroundColor: const Color(0xff0c1629),
+        backgroundColor: const Color(0xFF0C1629),
         elevation: 0,
       ),
       body: SingleChildScrollView(
