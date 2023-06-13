@@ -66,7 +66,7 @@ class _ContactmeState extends State<Contactme> {
           Text(
             "E-SPORT",
             style: TextStyle(
-              color: Color(0xFFA31E21),
+              color: const Color(0xFFA31E21),
               fontSize: MediaQuery.of(context).size.height * 0.05,
               fontFamily: 'Barlow',
               fontStyle: FontStyle.italic,
@@ -84,13 +84,13 @@ class _ContactmeState extends State<Contactme> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color(0xFF0C1629),
+          color: Color.fromARGB(255, 1, 5, 36),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             width: MediaQuery.of(context).size.width * 0.9,
             child: Icon(
               Icons.facebook,
@@ -99,14 +99,14 @@ class _ContactmeState extends State<Contactme> {
             ),
           ),
           Container(
-              margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
               width: MediaQuery.of(context).size.width * 0.9,
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
                   'E-Sport',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     fontSize: MediaQuery.of(context).size.height * 0.03,
                     fontFamily: 'Kanit',
                     fontWeight: FontWeight.w600,
@@ -124,13 +124,13 @@ class _ContactmeState extends State<Contactme> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color(0xFF0C1629),
+          color: Color.fromARGB(255, 1, 5, 36),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             width: MediaQuery.of(context).size.width * 0.9,
             child: Icon(
               Icons.mail,
@@ -139,14 +139,14 @@ class _ContactmeState extends State<Contactme> {
             ),
           ),
           Container(
-              margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
               width: MediaQuery.of(context).size.width * 0.9,
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
                   'esport_contact@gmail.com',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     fontSize: MediaQuery.of(context).size.height * 0.03,
                     fontFamily: 'Kanit',
                     fontWeight: FontWeight.w600,
@@ -164,13 +164,13 @@ class _ContactmeState extends State<Contactme> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color(0xFF0C1629),
+          color: Color.fromARGB(255, 1, 5, 36),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             width: MediaQuery.of(context).size.width * 0.9,
             child: Icon(
               Icons.phone,
@@ -179,14 +179,14 @@ class _ContactmeState extends State<Contactme> {
             ),
           ),
           Container(
-              margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
               width: MediaQuery.of(context).size.width * 0.9,
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
                   '02-345-6789',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     fontSize: MediaQuery.of(context).size.height * 0.03,
                     fontFamily: 'Kanit',
                     fontWeight: FontWeight.w600,

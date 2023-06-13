@@ -1,18 +1,15 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:utcc_esport/src/pages/pages.dart';
 
-class Editprofile extends StatefulWidget {
-  const Editprofile({super.key});
+class Editpassword extends StatefulWidget {
+  const Editpassword({super.key});
 
   @override
-  State<Editprofile> createState() => _EditprofileState();
+  State<Editpassword> createState() => _EditpasswordState();
 }
 
-class _EditprofileState extends State<Editprofile> {
-  DecorationImage? _profileImage;
+class _EditpasswordState extends State<Editpassword> {
+  bool _passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +22,7 @@ class _EditprofileState extends State<Editprofile> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Text(
-                "ตั้งค่าโปรไฟล์",
+                "เปลี่ยนรหัสผ่าน",
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 24,
@@ -42,10 +39,9 @@ class _EditprofileState extends State<Editprofile> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            _editphoto(),
-            _editname(),
-            _editlastname(),
-            _editemail(),
+            _boxoldpass(),
+            _boxnewpass(),
+            _boxconfirmpass(),
             _buttonconfirm(),
           ],
         ),
@@ -53,113 +49,28 @@ class _EditprofileState extends State<Editprofile> {
     );
   }
 
-  void _changeProfileImage() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'เลือกรูปภาพ',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16.0),
-              ListTile(
-                leading: const Icon(Icons.camera_alt),
-                title: const Text('ถ่ายรูปจากกล้อง'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _getImage(ImageSource.camera);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.image),
-                title: const Text('เลือกรูปจากเครื่อง'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _getImage(ImageSource.gallery);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  void _getImage(ImageSource source) async {
-    final ImagePicker _picker = ImagePicker();
-
-    final XFile? image = await _picker.pickImage(source: source);
-
-    if (image != null) {
-      setState(() {
-        _profileImage = DecorationImage(
-          fit: BoxFit.contain,
-          image: FileImage(File(image.path)),
-        );
-      });
-    }
-  }
-
-  Widget _editphoto() {
-    return Center(
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: InkWell(
-          onTap: () {
-            // เรียกฟังก์ชันเปลี่ยนรูปภาพ
-            _changeProfileImage();
-          },
-          child: Stack(
-            alignment: Alignment.bottomRight,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                width: MediaQuery.of(context).size.width * 0.29,
-                height: MediaQuery.of(context).size.height * 0.18,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xff0c1629)),
-                  image: const DecorationImage(
-                    fit: BoxFit.contain,
-                    image: NetworkImage(
-                        'https://scontent.fbkk22-7.fna.fbcdn.net/v/t1.18169-9/22449595_1515710551829373_1094037456389629918_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGQ1w1Na8tq52BliYudPx4TyC9jHWEQNNvIL2MdYRA028vwwrJQkRH5K9NUtVYsC-YG8LLdoh5lJVJcqi0Cp2q1&_nc_ohc=xyW49OH-h20AX_AeC_b&_nc_ht=scontent.fbkk22-7.fna&oh=00_AfBvLMW4xZmZstp0Zc7gF5NhXbrh_20_0FpY41EmNVHsYA&oe=649D70FC'),
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(5),
-                child: Icon(
-                  Icons.add_a_photo_outlined,
-                  color: Colors.black.withOpacity(1),
-                  size: MediaQuery.of(context).size.height * 0.025,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _editname() {
+  Widget _boxoldpass() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'กรุณากรอกรหัสผ่าน',
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width * 0.055,
+                fontFamily: 'Kanit',
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
-            "ชื่อ",
+            "รหัสผ่านเดิม",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.045,
               fontFamily: 'Kanit',
@@ -168,14 +79,86 @@ class _EditprofileState extends State<Editprofile> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "Assawin",
-              contentPadding: EdgeInsets.all(20),
+            obscureText: !_passwordVisible,
+            decoration: InputDecoration(
+              hintText: "รหัสผ่านเดิม",
+              contentPadding: EdgeInsets.all(18),
               border: OutlineInputBorder(),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible =
+                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
+                    });
+                  }),
+            ),
+            keyboardType: TextInputType.text,
+            autocorrect: false,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+          child: TextButton(
+            style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(Colors.transparent)),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const ForgetPass();
+              }));
+            },
+            child: Text(
+              "ลืมรหัสผ่าน ?",
+              style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: MediaQuery.of(context).size.width * 0.04,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _boxnewpass() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+          child: Text(
+            "รหัสผ่านใหม่",
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width * 0.045,
+              fontFamily: 'Kanit',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: TextFormField(
+            obscureText: !_passwordVisible,
+            decoration: InputDecoration(
+              hintText: "รหัสผ่านใหม่",
+              contentPadding: EdgeInsets.all(18),
+              border: OutlineInputBorder(),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible =
+                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
+                    });
+                  }),
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
@@ -185,14 +168,14 @@ class _EditprofileState extends State<Editprofile> {
     );
   }
 
-  Widget _editlastname() {
+  Widget _boxconfirmpass() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
-            "นามสกุล",
+            "ยืนยันรหัสผ่าน",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.045,
               fontFamily: 'Kanit',
@@ -201,47 +184,24 @@ class _EditprofileState extends State<Editprofile> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "Namkort",
-              contentPadding: EdgeInsets.all(20),
+            obscureText: !_passwordVisible,
+            decoration: InputDecoration(
+              hintText: "ยืนยันรหัสผ่าน",
+              contentPadding: EdgeInsets.all(18),
               border: OutlineInputBorder(),
-            ),
-            keyboardType: TextInputType.text,
-            autocorrect: false,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _editemail() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-          child: Text(
-            "อีเมล",
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.045,
-              fontFamily: 'Kanit',
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          width: MediaQuery.of(context).size.width * 0.9,
-          child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "mod1212@gmail.com",
-              contentPadding: EdgeInsets.all(20),
-              border: OutlineInputBorder(),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible =
+                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
+                    });
+                  }),
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
@@ -265,10 +225,10 @@ class _EditprofileState extends State<Editprofile> {
             ),
           ),
           onPressed: () {
-            _editprofilesuccess();
+            _editpasswordsuccess();
           },
           child: Text(
-            "ยืนยันการเปลี่ยนแปลง",
+            "ยืนยันการเปลี่ยนรหัสผ่าน",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
@@ -280,7 +240,7 @@ class _EditprofileState extends State<Editprofile> {
     );
   }
 
-  void _editprofilesuccess() {
+  void _editpasswordsuccess() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -319,7 +279,7 @@ class _EditprofileState extends State<Editprofile> {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'เปลี่ยนแปลงสำเร็จ !',
+                      'เปลี่ยนแปลงรหัสผ่านสำเร็จ !',
                       style: TextStyle(
                         //color: Color.fromARGB(0, 0, 0, 0),
                         fontSize: MediaQuery.of(context).size.width * 0.053,
@@ -337,8 +297,11 @@ class _EditprofileState extends State<Editprofile> {
                       backgroundColor: const Color(0xffa31e21),
                     ),
                     onPressed: () {
-                      Navigator.popUntil(
-                          context, ModalRoute.withName('/editprofile'));
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        '/welcome',
+                        (route) => false,
+                      );
                     },
                     child: Text(
                       'ยืนยัน',

@@ -22,7 +22,7 @@ class _ContentnewsState extends State<Contentnews> {
             children: <Widget>[],
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 1, 5, 36),
+        backgroundColor: const Color(0xFF0C1629),
         elevation: 0,
       ),
       body: SingleChildScrollView(

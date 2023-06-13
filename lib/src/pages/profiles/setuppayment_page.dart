@@ -47,14 +47,14 @@ class _SetuppaymentState extends State<Setuppayment> {
 
   Widget _infobank() {
     return Container(
-      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       width: MediaQuery.of(context).size.width * 0.9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Align(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            child: const Align(
               alignment: Alignment.topLeft,
               child: Text(
                 'บัญชีของฉัน',
@@ -68,24 +68,24 @@ class _SetuppaymentState extends State<Setuppayment> {
           Container(
             width: MediaQuery.of(context).size.width * 0.9,
             //height: MediaQuery.of(context).size.height * 0.20,
-            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             decoration: BoxDecoration(
                 color: const Color(0xffa31e21),
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 20, 0, 20),
+                  margin: const EdgeInsets.fromLTRB(20, 20, 0, 20),
                   width: MediaQuery.of(context).size.width * 0.26,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Text(
                           'ชื่อ   :',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'Kanit',
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.05,
@@ -93,11 +93,11 @@ class _SetuppaymentState extends State<Setuppayment> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: Text(
                           'เลขบัญชี   :',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'Kanit',
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.05,
@@ -105,11 +105,11 @@ class _SetuppaymentState extends State<Setuppayment> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: Text(
                           'ธนาคาร   :',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'Kanit',
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.05,
@@ -120,17 +120,17 @@ class _SetuppaymentState extends State<Setuppayment> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 20, 0, 20),
+                  margin: const EdgeInsets.fromLTRB(20, 20, 0, 20),
                   width: MediaQuery.of(context).size.width * 0.53,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Text(
                           'Assawin Namkort',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'Kanit',
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.05,
@@ -138,11 +138,11 @@ class _SetuppaymentState extends State<Setuppayment> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: Text(
                           '407-222-xxxx',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'Kanit',
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.05,
@@ -150,11 +150,11 @@ class _SetuppaymentState extends State<Setuppayment> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: Text(
                           'ไทยภานิชย์',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255),
+                              color: const Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'Kanit',
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.05,

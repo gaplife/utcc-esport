@@ -16,3 +16,5 @@ export 'profiles/setuppayment_page.dart';
 export 'profiles/addpayment_page.dart';
 export 'profiles/registercomp_page.dart';
 export 'profiles/editprofile_page.dart';
+export 'profiles/editpassword_page.dart';
+export 'profiles/topup_page.dart';

@@ -18,6 +18,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
   Profile profile = Profile();
+  bool _passwordVisible = false;
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   @override
@@ -140,7 +141,6 @@ class _LoginState extends State<Login> {
             autocorrect: false,
             onSaved: (String? email) {
               profile.email = email;
-
             },
           ),
         ],
@@ -156,12 +156,22 @@ class _LoginState extends State<Login> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-            obscureText: true,
+            obscureText: !_passwordVisible,
             decoration: InputDecoration(
               hintText: "รหัสผ่าน",
               contentPadding:
                   EdgeInsets.all(MediaQuery.of(context).size.width * 0.045),
               border: const OutlineInputBorder(),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible =
+                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
+                    });
+                  }),
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
@@ -215,7 +225,6 @@ class _LoginState extends State<Login> {
                     .signInWithEmailAndPassword(
                   email: profile.email!,
                   password: profile.password!,
-
                 )
                     .then((value) {
                   formKey.currentState!.reset();

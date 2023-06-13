@@ -46,7 +46,7 @@ class _RegistercompState extends State<Registercomp> {
 
   Widget _registercomp() {
     return Container(
-      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
@@ -62,7 +62,7 @@ class _RegistercompState extends State<Registercomp> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(15, 15, 0, 15),
+            margin: const EdgeInsets.fromLTRB(15, 15, 0, 15),
             width: MediaQuery.of(context).size.width * 0.25,
             height: MediaQuery.of(context).size.height * 0.15,
             decoration: BoxDecoration(
@@ -72,19 +72,19 @@ class _RegistercompState extends State<Registercomp> {
                 //     //     255, 0, 0, 0), // เปลี่ยนสีเส้นรอบกรอบที่นี่
                 //     // width: 1, // กำหนดความหนาของเส้นรอบกรอบ
                 //     ),
-                image: DecorationImage(
+                image: const DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
                         'https://mpics.mgronline.com/pics/Images/566000004575901.JPEG'))),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+            margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
             width: MediaQuery.of(context).size.width * 0.5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 5),
                   child: Text(
                     'FIFA Champion Club SS1',
                     style: TextStyle(
@@ -117,7 +117,7 @@ class _RegistercompState extends State<Registercomp> {
           ),
           //Spacer(),
           Container(
-            margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+            margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
             child: Icon(
               Icons.arrow_forward_ios,
               color: const Color.fromARGB(255, 0, 0, 0),
