@@ -1,11 +1,14 @@
 export 'home/home_page.dart';
+export 'organizer/org_home_page.dart';
 export 'login/login_page.dart';
 export 'register/register_page.dart';
 export 'welcome/welcome_page.dart';
 export 'forgetpass/forgetpass_page.dart';
 export 'launchers/launcher_page.dart';
+export 'organizer/org_luncher_page.dart';
 export 'news/news_page.dart';
 export 'competition/allcompetition_page.dart';
+export 'organizer/org_createcomp_page.dart';
 export 'profiles/profile_page.dart';
 export 'organizer_login/organizer_login_page.dart';
 export 'organizer_register/organizer_register_page.dart';

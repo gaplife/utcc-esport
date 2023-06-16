@@ -23,7 +23,7 @@ class _RegisterState extends State<Register> {
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   CollectionReference userCollection =
-      FirebaseFirestore.instance.collection("User Table");
+      FirebaseFirestore.instance.collection("Users");
 
   final _passwordController = TextEditingController();
   //final _date = TextEditingController();
@@ -75,11 +75,9 @@ class _RegisterState extends State<Register> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _boxusername(),
-                          //_boxsurname(),
                           _boxemail(),
                           _boxepass(),
                           _boxeconfirmpass(),
-                          //_boxbirthday(),
                           _buttonaccept(),
                           _buttonconfirm(),
                         ],
@@ -134,40 +132,6 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
-
-  // Widget _boxsurname() {
-  //   return Padding(
-  //     padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-  //     child: SingleChildScrollView(
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: <Widget>[
-  //           const Text(
-  //             "นามสกุล",
-  //             style: TextStyle(
-  //               fontSize: 20,
-  //               fontFamily: 'Kanit',
-  //             ),
-  //           ),
-  //           const SizedBox(height: 2),
-  //           TextFormField(
-  //             decoration: const InputDecoration(
-  //               hintText: "นามสกุล",
-  //               contentPadding: EdgeInsets.all(20),
-  //               border: OutlineInputBorder(),
-  //             ),
-  //             keyboardType: TextInputType.text,
-  //             autocorrect: false,
-  //             onSaved: (String? lastname) {
-  //               profile.lastname = lastname;
-  //             },
-  //             validator: RequiredValidator(errorText: "กรุณากรอกนามสกุล"),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _boxemail() {
     return Padding(
@@ -279,61 +243,6 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  // Widget _boxbirthday() {
-  //   return Padding(
-  //       padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
-  //       child: SingleChildScrollView(
-  //         child: Column(
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: <Widget>[
-  //             const Text(
-  //               "วันเกิด",
-  //               style: TextStyle(
-  //                 fontSize: 20,
-  //                 fontFamily: 'Kanit',
-  //               ),
-  //             ),
-  //             const SizedBox(width: 160),
-  //             TextFormField(
-  //               controller: _date,
-  //               decoration: const InputDecoration(
-  //                 prefixIcon: Icon(Icons.calendar_today_rounded),
-  //                 hintText: "วันเกิด",
-  //                 contentPadding: EdgeInsets.all(19),
-  //                 border: OutlineInputBorder(),
-  //               ),
-  //               onTap: () async {
-  //                 DateTime? pickeddate = await showDatePicker(
-  //                     context: context,
-  //                     initialDate: DateTime.now(),
-  //                     firstDate: DateTime(1900),
-  //                     lastDate: DateTime(2100));
-  //
-  //                 if (pickeddate != null) {
-  //                   final DateFormat formatter = DateFormat('dd/MM/yyyy');
-  //                   final String formatted = formatter.format(pickeddate);
-  //                   setState(
-  //                         () {
-  //                       _date.text = formatted;
-  //                     },
-  //                   );
-  //                 }
-  //               },
-  //               onSaved: (String? date) {
-  //                 profile.birthday = date;
-  //               },
-  //               validator: (value) {
-  //                 if (value == null || value.isEmpty) {
-  //                   return 'กรุณายืนเลือกวันเกิด';
-  //                 }
-  //                 return null;
-  //               },
-  //             ),
-  //           ],
-  //         ),
-  //       ));
-  // }
-
   Widget _buttonconfirm() {
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
@@ -351,10 +260,9 @@ class _RegisterState extends State<Register> {
                 formKey.currentState!.save();
                 userCollection.add({
                   "username": profile.username,
-                  //"lastname": profile.lastname,
                   "email": profile.email,
                   "password": profile.password,
-                  //"birthday": profile.birthday,
+                  "userType" : "Player",
                 });
                 try {
                   await FirebaseAuth.instance

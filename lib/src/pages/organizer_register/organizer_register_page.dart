@@ -23,7 +23,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   CollectionReference userCollection =
-  FirebaseFirestore.instance.collection("User Table");
+  FirebaseFirestore.instance.collection("Users");
 
   final _passwordController = TextEditingController();
   //final _date = TextEditingController();
@@ -279,7 +279,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                         gravity: ToastGravity.SNACKBAR);
                     Navigator.pushNamedAndRemoveUntil(
                       context,
-                      '/organizer_register',
+                      '/organizer_login',
                           (route) => false,
                     );
                   });
