@@ -21,3 +21,5 @@ export 'profiles/registercomp_page.dart';
 export 'profiles/editprofile_page.dart';
 export 'profiles/editpassword_page.dart';
 export 'profiles/topup_page.dart';
+export 'profiles/afterregis_page.dart';
+export 'profiles/tablecomp_page.dart';
