@@ -222,7 +222,7 @@ class _OganizerLoginState extends State<OganizerLogin> {
                       msg: "เข้าสู่ระบบสำเร็จ", gravity: ToastGravity.CENTER);
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    '/launcher',
+                    '/orglauncher',
                     (route) => false,
                   );
                 });
