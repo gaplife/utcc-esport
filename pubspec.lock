@@ -621,6 +621,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  touchable:
+    dependency: transitive
+    description:
+      name: touchable
+      sha256: "50040b39778bb1adc8a480625de8681253bd2134785395cf16abd66bb13d3ed0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
+  tournament_bracket:
+    dependency: "direct main"
+    description:
+      name: tournament_bracket
+      sha256: "416e1b3c7bbd23f4f8082c3a1cceaaecb381e385ccd270819f6abb6aa8174bdd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   typed_data:
     dependency: transitive
     description:

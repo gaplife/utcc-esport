@@ -23,7 +23,7 @@ class _RegisterState extends State<Register> {
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   CollectionReference userCollection =
-      FirebaseFirestore.instance.collection("User Table");
+      FirebaseFirestore.instance.collection("User");
 
   final _passwordController = TextEditingController();
   //final _date = TextEditingController();
