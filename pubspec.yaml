@@ -44,6 +44,8 @@ dependencies:
   cloud_firestore: ^4.5.0
   intl: ^0.17.0
   image_picker: ^0.8.4+4
+  tournament_bracket: ^0.0.4
+  collection: ^1.15.0
 
 flutter_icons:
   android: true

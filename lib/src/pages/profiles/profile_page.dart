@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
+import 'package:collection/collection.dart';
 
 class Profiles extends StatefulWidget {
   const Profiles({super.key});
@@ -13,6 +15,23 @@ class Profiles extends StatefulWidget {
 class _ProfilesState extends State<Profiles> {
   final auth = FirebaseAuth.instance;
   final profilefont = 'Kanit';
+  //final usename = FirebaseFirestore.instance;
+  String? userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData(); // เรียกเมธอดเพื่อดึงข้อมูลผู้ใช้งาน
+  }
+
+  Future<void> getUserData() async {
+    final user = auth.currentUser;
+    if (user != null) {
+      setState(() {
+        userEmail = user.email; // ใช้อีเมลของผู้ใช้งานเป็น userId แทน
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +40,7 @@ class _ProfilesState extends State<Profiles> {
         toolbarHeight: 75,
         automaticallyImplyLeading: false,
         title: Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -38,7 +57,7 @@ class _ProfilesState extends State<Profiles> {
               Text(
                 "โปรไฟล์",
                 style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   fontSize: 24,
                   fontFamily: profilefont,
                   fontWeight: FontWeight.w800,
@@ -105,31 +124,31 @@ class _ProfilesState extends State<Profiles> {
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                     width: MediaQuery.of(context).size.width * 0.64,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          child: Text(
-                            'Assawin Namkort',
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.05,
-                              fontFamily: profilefont,
-                              fontWeight: FontWeight.w600,
-                            ),
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection("Users")
+                                .snapshots(),
+                            builder: (context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              return _getUsername(snapshot);
+                            },
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          margin: const EdgeInsets.fromLTRB(1, 10, 0, 0),
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: Text(
                             'เหรียญที่มี',
                             style: TextStyle(
                               fontSize:
-                                  MediaQuery.of(context).size.height * 0.02,
+                                  MediaQuery.of(context).size.height * 0.022,
                               fontFamily: profilefont,
                               fontWeight: FontWeight.w600,
                               height: 1,
@@ -148,7 +167,7 @@ class _ProfilesState extends State<Profiles> {
                                 child: Image.asset(
                                   Asset.COIN_IMAGE,
                                   scale:
-                                      MediaQuery.of(context).size.width * 0.1,
+                                      MediaQuery.of(context).size.width * 0.09,
                                 ),
                               ),
                               const SizedBox(
@@ -162,7 +181,7 @@ class _ProfilesState extends State<Profiles> {
                                     style: TextStyle(
                                       fontSize:
                                           MediaQuery.of(context).size.height *
-                                              0.02,
+                                              0.022,
                                       fontFamily: profilefont,
                                       fontWeight: FontWeight.w600,
                                       height: 1,
@@ -221,6 +240,32 @@ class _ProfilesState extends State<Profiles> {
         ),
       ),
     );
+  }
+
+  Widget _getUsername(AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      final userDocument = snapshot.data!.docs.firstWhereOrNull(
+        (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+      );
+
+      if (userDocument != null) {
+        final username = userDocument["username"];
+        return Text(
+          username,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.05,
+            fontFamily: profilefont,
+            fontWeight: FontWeight.w600,
+          ),
+        );
+      } else {
+        return const Text('User not found');
+      }
+    } else if (snapshot.hasError) {
+      return Text('Error: ${snapshot.error}');
+    } else {
+      return const CircularProgressIndicator();
+    }
   }
 
   Widget _buttonregistercom() {
