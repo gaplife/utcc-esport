@@ -16,7 +16,7 @@ class _ProfilesState extends State<Profiles> {
   final auth = FirebaseAuth.instance;
   final profilefont = 'Kanit';
   //final usename = FirebaseFirestore.instance;
-  String? userEmail;
+  String? userID;
 
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _ProfilesState extends State<Profiles> {
     final user = auth.currentUser;
     if (user != null) {
       setState(() {
-        userEmail = user.email; // ใช้อีเมลของผู้ใช้งานเป็น userId แทน
+        userID = user.uid; // ใช้อีเมลของผู้ใช้งานเป็น userId แทน
       });
     }
   }
@@ -109,19 +109,14 @@ class _ProfilesState extends State<Profiles> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: const Color(0xff0c1629)),
-                      image: const DecorationImage(
-                        fit: BoxFit.contain,
-                        image: NetworkImage(
-                            'https://scontent.fbkk22-7.fna.fbcdn.net/v/t1.18169-9/22449595_1515710551829373_1094037456389629918_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGQ1w1Na8tq52BliYudPx4TyC9jHWEQNNvIL2MdYRA028vwwrJQkRH5K9NUtVYsC-YG8LLdoh5lJVJcqi0Cp2q1&_nc_ohc=xyW49OH-h20AX_AeC_b&_nc_ht=scontent.fbkk22-7.fna&oh=00_AfBvLMW4xZmZstp0Zc7gF5NhXbrh_20_0FpY41EmNVHsYA&oe=649D70FC'),
-                      ),
-                    ),
+                  StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection("Users")
+                        .snapshots(),
+                    builder: (context,
+                        AsyncSnapshot<QuerySnapshot> profileSnapshot) {
+                      return _getProfileImage(profileSnapshot);
+                    },
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
@@ -245,7 +240,7 @@ class _ProfilesState extends State<Profiles> {
   Widget _getUsername(AsyncSnapshot<QuerySnapshot> snapshot) {
     if (snapshot.hasData) {
       final userDocument = snapshot.data!.docs.firstWhereOrNull(
-        (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+        (doc) => doc["userID"] == userID, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
       );
 
       if (userDocument != null) {
@@ -263,6 +258,60 @@ class _ProfilesState extends State<Profiles> {
       }
     } else if (snapshot.hasError) {
       return Text('Error: ${snapshot.error}');
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
+
+  Widget _getProfileImage(AsyncSnapshot<QuerySnapshot> profileSnapshot) {
+    if (profileSnapshot.hasData) {
+      final userDocument = profileSnapshot.data!.docs.firstWhereOrNull(
+        (doc) => doc["userID"] == userID, // Compare with the user's email
+      );
+
+      if (userDocument != null) {
+        final profileImageUrl = userDocument["profileImageUrl"];
+
+        if (profileImageUrl != null && profileImageUrl.isNotEmpty) {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.2,
+            height: MediaQuery.of(context).size.height * 0.1,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xff0c1629)),
+              image: DecorationImage(
+                fit: BoxFit.contain,
+                image: NetworkImage(profileImageUrl),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.2,
+            height: MediaQuery.of(context).size.height * 0.1,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xff0c1629)),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(
+                  Icons.person,
+                  size: 48,
+                  color: Colors.grey,
+                ),
+              ],
+            ),
+          );
+        }
+      } else {
+        return const Text('User not found');
+      }
+    } else if (profileSnapshot.hasError) {
+      return Text('Error: ${profileSnapshot.error}');
     } else {
       return const CircularProgressIndicator();
     }

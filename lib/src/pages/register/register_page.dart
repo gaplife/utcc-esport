@@ -258,19 +258,26 @@ class _RegisterState extends State<Register> {
             if (isChecked) {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-                userCollection.add({
-                  "username": profile.username,
-                  "email": profile.email,
-                  "password": profile.password,
-                  "userType": "Player",
-                });
+
                 try {
                   await FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
                     email: profile.email!,
                     password: profile.password!,
                   )
-                      .then((value) {
+                      .then((userCredential) {
+                    final String userID =
+                        FirebaseAuth.instance.currentUser!.uid;
+
+                    userCollection.doc(userID).set({
+                      "userID": userID,
+                      "username": profile.username,
+                      "email": profile.email,
+                      "password": profile.password,
+                      "userType": "Player",
+                      "profileImageUrl": profile.profileImageUrl,
+                    });
+
                     formKey.currentState!.reset();
                     _registersuccess();
                   });

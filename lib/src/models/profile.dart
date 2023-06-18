@@ -4,15 +4,13 @@ class Profile {
   String? confirmpassword;
   String? username;
   String? userType;
-  //String? lastname;
-  //String? birthday;
+  String? profileImageUrl; // เพิ่มฟิลด์ profileImageUrl
 
   Profile({
     this.email,
     this.password,
     this.username,
     this.confirmpassword,
-    //this.lastname,
-    //this.birthday,
+    this.profileImageUrl, // เพิ่มพารามิเตอร์ profileImageUrl
   });
 }
