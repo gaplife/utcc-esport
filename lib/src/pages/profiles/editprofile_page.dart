@@ -19,7 +19,7 @@ class _EditprofileState extends State<Editprofile> {
   DecorationImage? _profileImage;
   String? userEmail;
   String? userID;
-  Profile profile = Profile();
+  String? _profileImageUrl;
   String newUserName = ""; // เพิ่มตัวแปรสำหรับเก็บชื่อใหม่ที่จะแก้ไข
 
   @override
@@ -127,18 +127,11 @@ class _EditprofileState extends State<Editprofile> {
   }
 
   void _getImage(ImageSource source) async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
 
-    final XFile? image = await _picker.pickImage(source: source);
+    final XFile? image = await picker.pickImage(source: source);
 
     if (image != null) {
-      setState(() {
-        _profileImage = DecorationImage(
-          fit: BoxFit.contain,
-          image: FileImage(File(image.path)),
-        );
-      });
-
       final storageRef = FirebaseStorage.instance
           .ref()
           .child('users_photo')
@@ -152,16 +145,9 @@ class _EditprofileState extends State<Editprofile> {
         final imageUrl = await snapshot.ref.getDownloadURL();
         print('URL : $imageUrl');
 
-        if (userID != null) {
-          await FirebaseFirestore.instance
-              .collection('Users')
-              .doc(userID)
-              .update({
-            'profileImageUrl': imageUrl,
-          });
-        } else {
-          print('ไม่สามารถอัปเดตข้อมูลได้: userID ไม่ได้ระบุ');
-        }
+        setState(() {
+          _profileImageUrl = imageUrl; // เก็บ URL รูปภาพลงในตัวแปร
+        });
       } catch (error) {
         print('Error: $error');
       }
@@ -170,7 +156,6 @@ class _EditprofileState extends State<Editprofile> {
 
   Widget _editphoto() {
     String? currentImageUrl;
-
     return Center(
       child: Container(
         margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -188,7 +173,8 @@ class _EditprofileState extends State<Editprofile> {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData && snapshot.data!.exists) {
-                return _getPhoto(snapshot, currentImageUrl);
+                return _getPhoto(snapshot,
+                    currentImageUrl); // เรียกใช้ _getPhoto และส่งพารามิเตอร์ snapshot และ currentImageUrl
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
@@ -205,36 +191,35 @@ class _EditprofileState extends State<Editprofile> {
       AsyncSnapshot<DocumentSnapshot> snapshot, String? currentImageUrl) {
     if (snapshot.hasData) {
       final userDocument = snapshot.data!.data() as Map<String, dynamic>;
-      final profileImage = userDocument['profileImage'] as String?;
-      final imageUrl = currentImageUrl ?? profileImage;
-
-      return Stack(
-        alignment: Alignment.bottomRight,
-        children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            width: MediaQuery.of(context).size.width * 0.29,
-            height: MediaQuery.of(context).size.height * 0.18,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xff0c1629)),
-              image: imageUrl != null
-                  ? DecorationImage(
-                      fit: BoxFit.contain,
-                      image: NetworkImage(profileImage!),
-                    )
-                  : null,
+      final profileImageUrl = userDocument['profileImageUrl'] as String?;
+      final imageUrl = profileImageUrl;
+      return Container(
+        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+        width: MediaQuery.of(context).size.width * 0.29,
+        height: MediaQuery.of(context).size.height * 0.18,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: const Color(0xff0c1629)),
+          image: imageUrl != null
+              ? DecorationImage(
+                  fit: BoxFit.contain,
+                  image: NetworkImage(imageUrl),
+                )
+              : null,
+        ),
+        child: Stack(
+          alignment: Alignment.bottomRight,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(5),
+              child: Icon(
+                Icons.add_a_photo_outlined,
+                color: Colors.black.withOpacity(1),
+                size: MediaQuery.of(context).size.height * 0.025,
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(5),
-            child: Icon(
-              Icons.add_a_photo_outlined,
-              color: Colors.black.withOpacity(1),
-              size: MediaQuery.of(context).size.height * 0.025,
-            ),
-          ),
-        ],
+          ],
+        ),
       );
     } else {
       return const CircularProgressIndicator();
@@ -259,19 +244,35 @@ class _EditprofileState extends State<Editprofile> {
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
-          child: TextFormField(
-            obscureText: false,
-            decoration: InputDecoration(
-              hintText: newUserName.isNotEmpty ? newUserName : 'username',
-              contentPadding: const EdgeInsets.all(20),
-              border: const OutlineInputBorder(),
-            ),
-            keyboardType: TextInputType.text,
-            autocorrect: false,
-            onChanged: (value) {
-              setState(() {
-                newUserName = value; // เก็บค่าชื่อใหม่ที่แก้ไข
-              });
+          child: StreamBuilder<DocumentSnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('Users')
+                .doc(userID)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data!.exists) {
+                final userDocument =
+                    snapshot.data!.data() as Map<String, dynamic>;
+                final username = userDocument['username'] as String?;
+                final name = username ?? 'username';
+                return TextFormField(
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    hintText: name,
+                    contentPadding: const EdgeInsets.all(20),
+                    border: const OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.text,
+                  autocorrect: false,
+                  onChanged: (value) {
+                    setState(() {
+                      newUserName = value; // เก็บค่าชื่อใหม่ที่แก้ไข
+                    });
+                  },
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
             },
           ),
         ),
@@ -314,15 +315,37 @@ class _EditprofileState extends State<Editprofile> {
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
-          child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "mod1212@gmail.com",
-              contentPadding: EdgeInsets.all(20),
-              border: OutlineInputBorder(),
-            ),
-            keyboardType: TextInputType.text,
-            autocorrect: false,
+          child: StreamBuilder<DocumentSnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('Users')
+                .doc(userID)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data!.exists) {
+                final userDocument =
+                    snapshot.data!.data() as Map<String, dynamic>;
+                final email = userDocument['email'] as String?;
+                final useremail = email ?? 'email';
+                return TextFormField(
+                  readOnly: true,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    hintText: useremail,
+                    contentPadding: const EdgeInsets.all(20),
+                    border: const OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.text,
+                  autocorrect: false,
+                  onChanged: (value) {
+                    setState(() {
+                      newUserName = value; // เก็บค่าชื่อใหม่ที่แก้ไข
+                    });
+                  },
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
           ),
         ),
       ],
@@ -342,9 +365,24 @@ class _EditprofileState extends State<Editprofile> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          onPressed: () {
-            _updateUsername();
+          onPressed: () async {
+            if (newUserName.isNotEmpty) {
+              _updateUsername();
+            }
             _editprofilesuccess();
+
+            if (_profileImageUrl != null) {
+              if (userID != null) {
+                await FirebaseFirestore.instance
+                    .collection('Users')
+                    .doc(userID)
+                    .update({
+                  'profileImageUrl': _profileImageUrl,
+                });
+              } else {
+                print('ไม่สามารถอัปเดตข้อมูลได้: userID ไม่ได้ระบุ');
+              }
+            }
           },
           child: Text(
             "ยืนยันการเปลี่ยนแปลง",
@@ -418,6 +456,7 @@ class _EditprofileState extends State<Editprofile> {
                     onPressed: () {
                       Navigator.popUntil(
                           context, ModalRoute.withName('/editprofile'));
+                      Navigator.pushReplacementNamed(context, '/editprofile');
                     },
                     child: Text(
                       'ยืนยัน',

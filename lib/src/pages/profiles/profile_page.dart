@@ -268,10 +268,8 @@ class _ProfilesState extends State<Profiles> {
       final userDocument = profileSnapshot.data!.docs.firstWhereOrNull(
         (doc) => doc["userID"] == userID, // Compare with the user's email
       );
-
       if (userDocument != null) {
         final profileImageUrl = userDocument["profileImageUrl"];
-
         if (profileImageUrl != null && profileImageUrl.isNotEmpty) {
           return Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -281,7 +279,7 @@ class _ProfilesState extends State<Profiles> {
               shape: BoxShape.circle,
               border: Border.all(color: const Color(0xff0c1629)),
               image: DecorationImage(
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 image: NetworkImage(profileImageUrl),
               ),
             ),
@@ -308,7 +306,7 @@ class _ProfilesState extends State<Profiles> {
           );
         }
       } else {
-        return const Text('User not found');
+        return const Text('Photo not found');
       }
     } else if (profileSnapshot.hasError) {
       return Text('Error: ${profileSnapshot.error}');
