@@ -26,3 +26,4 @@ export 'profiles/tablecomp_page.dart';
 export 'organizer/org_mycomp_page.dart';
 export 'organizer/org_allcomp_page.dart';
 
+
