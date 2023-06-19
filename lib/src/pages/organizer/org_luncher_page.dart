@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:utcc_esport/src/pages/competition/allcompetition_page.dart';
-import 'package:utcc_esport/src/pages/news/listnews/contentnews_page.dart';
-import 'package:utcc_esport/src/pages/news/news_page.dart';
-import 'package:utcc_esport/src/pages/organizer/org_home_page.dart';
-import 'package:utcc_esport/src/pages/profiles/profile_page.dart';
+import 'package:utcc_esport/src/pages/pages.dart';
+
 
 class OrgLauncher extends StatefulWidget {
   const OrgLauncher({super.key});
@@ -16,10 +13,9 @@ class _OrgLauncherState extends State<OrgLauncher> {
   int _selectedIndex = 0;
   final List<Widget> _pageWidget = <Widget>[
     const OrgHomePage(),
-    const News(),
-    const Allcompetition(),
+    const Mycomp(),
+    const OrgAllComp(),
     const Profiles(),
-    const Contentnews(),
   ];
 
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[
