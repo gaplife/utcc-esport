@@ -1,8 +1,11 @@
 import 'dart:io';
-import 'dart:math';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:utcc_esport/src/models/profile.dart';
 
 class Editprofile extends StatefulWidget {
   const Editprofile({super.key});
@@ -12,7 +15,29 @@ class Editprofile extends StatefulWidget {
 }
 
 class _EditprofileState extends State<Editprofile> {
+  FirebaseAuth auth = FirebaseAuth.instance;
   DecorationImage? _profileImage;
+  String? userEmail;
+  String? userID;
+  Profile profile = Profile();
+  String newUserName = ""; // เพิ่มตัวแปรสำหรับเก็บชื่อใหม่ที่จะแก้ไข
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  Future<void> getUserData() async {
+    final User? user = auth.currentUser;
+    if (user != null) {
+      setState(() {
+        userID = user.uid;
+        userEmail = user.email;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,20 +65,24 @@ class _EditprofileState extends State<Editprofile> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _editphoto(),
-            _editname(),
-            _editlastname(),
-            _editemail(),
-            _buttonconfirm(),
-          ],
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          height: MediaQuery.of(context).size.height * 0.85,
+          child: Column(
+            children: <Widget>[
+              _editphoto(),
+              _editname(),
+              _editemail(),
+              const Spacer(),
+              _buttonconfirm(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _changeProfileImage() {
+  Future<String?> _changeProfileImage() async {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -94,6 +123,7 @@ class _EditprofileState extends State<Editprofile> {
         );
       },
     );
+    return null;
   }
 
   void _getImage(ImageSource source) async {
@@ -108,48 +138,107 @@ class _EditprofileState extends State<Editprofile> {
           image: FileImage(File(image.path)),
         );
       });
+
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('users_photo')
+          .child(userEmail!) // ใช้ userEmail ในการกำหนดเป็นชื่อไฟล์
+          .child('profile.jpg'); // เลือกชื่อไฟล์ที่ต้องการ
+
+      final task = storageRef.putFile(File(image.path));
+
+      try {
+        final snapshot = await task.whenComplete(() {});
+        final imageUrl = await snapshot.ref.getDownloadURL();
+        print('URL : $imageUrl');
+
+        if (userID != null) {
+          await FirebaseFirestore.instance
+              .collection('Users')
+              .doc(userID)
+              .update({
+            'profileImageUrl': imageUrl,
+          });
+        } else {
+          print('ไม่สามารถอัปเดตข้อมูลได้: userID ไม่ได้ระบุ');
+        }
+      } catch (error) {
+        print('Error: $error');
+      }
     }
   }
 
   Widget _editphoto() {
+    String? currentImageUrl;
+
     return Center(
       child: Container(
         margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: InkWell(
-          onTap: () {
-            // เรียกฟังก์ชันเปลี่ยนรูปภาพ
-            _changeProfileImage();
+          onTap: () async {
+            String? imageUrl = await _changeProfileImage();
+            setState(() {
+              currentImageUrl = imageUrl;
+            });
           },
-          child: Stack(
-            alignment: Alignment.bottomRight,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                width: MediaQuery.of(context).size.width * 0.29,
-                height: MediaQuery.of(context).size.height * 0.18,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xff0c1629)),
-                  image: const DecorationImage(
-                    fit: BoxFit.contain,
-                    image: NetworkImage(
-                        'https://scontent.fbkk22-7.fna.fbcdn.net/v/t1.18169-9/22449595_1515710551829373_1094037456389629918_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGQ1w1Na8tq52BliYudPx4TyC9jHWEQNNvIL2MdYRA028vwwrJQkRH5K9NUtVYsC-YG8LLdoh5lJVJcqi0Cp2q1&_nc_ohc=xyW49OH-h20AX_AeC_b&_nc_ht=scontent.fbkk22-7.fna&oh=00_AfBvLMW4xZmZstp0Zc7gF5NhXbrh_20_0FpY41EmNVHsYA&oe=649D70FC'),
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(5),
-                child: Icon(
-                  Icons.add_a_photo_outlined,
-                  color: Colors.black.withOpacity(1),
-                  size: MediaQuery.of(context).size.height * 0.025,
-                ),
-              ),
-            ],
+          child: StreamBuilder<DocumentSnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('Users')
+                .doc(userID)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data!.exists) {
+                return _getPhoto(snapshot, currentImageUrl);
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
           ),
         ),
       ),
     );
+  }
+
+  Widget _getPhoto(
+      AsyncSnapshot<DocumentSnapshot> snapshot, String? currentImageUrl) {
+    if (snapshot.hasData) {
+      final userDocument = snapshot.data!.data() as Map<String, dynamic>;
+      final profileImage = userDocument['profileImage'] as String?;
+      final imageUrl = currentImageUrl ?? profileImage;
+
+      return Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.29,
+            height: MediaQuery.of(context).size.height * 0.18,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xff0c1629)),
+              image: imageUrl != null
+                  ? DecorationImage(
+                      fit: BoxFit.contain,
+                      image: NetworkImage(profileImage!),
+                    )
+                  : null,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(5),
+            child: Icon(
+              Icons.add_a_photo_outlined,
+              color: Colors.black.withOpacity(1),
+              size: MediaQuery.of(context).size.height * 0.025,
+            ),
+          ),
+        ],
+      );
+    } else {
+      return const CircularProgressIndicator();
+    }
   }
 
   Widget _editname() {
@@ -171,51 +260,40 @@ class _EditprofileState extends State<Editprofile> {
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "Assawin",
-              contentPadding: EdgeInsets.all(20),
-              border: OutlineInputBorder(),
+            obscureText: false,
+            decoration: InputDecoration(
+              hintText: newUserName.isNotEmpty ? newUserName : 'username',
+              contentPadding: const EdgeInsets.all(20),
+              border: const OutlineInputBorder(),
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
+            onChanged: (value) {
+              setState(() {
+                newUserName = value; // เก็บค่าชื่อใหม่ที่แก้ไข
+              });
+            },
           ),
         ),
       ],
     );
   }
 
-  Widget _editlastname() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-          child: Text(
-            "นามสกุล",
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.045,
-              fontFamily: 'Kanit',
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          width: MediaQuery.of(context).size.width * 0.9,
-          child: TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-              hintText: "Namkort",
-              contentPadding: EdgeInsets.all(20),
-              border: OutlineInputBorder(),
-            ),
-            keyboardType: TextInputType.text,
-            autocorrect: false,
-          ),
-        ),
-      ],
-    );
+  void _updateUsername() async {
+    try {
+      if (userID != null) {
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(userID)
+            .update({
+          'username': newUserName,
+        });
+      } else {
+        print('ไม่สามารถอัปเดตข้อมูลได้: userID ไม่ได้ระบุ');
+      }
+    } catch (error) {
+      print('เกิดข้อผิดพลาดในการอัปเดตชื่อ: $error');
+    }
   }
 
   Widget _editemail() {
@@ -265,6 +343,7 @@ class _EditprofileState extends State<Editprofile> {
             ),
           ),
           onPressed: () {
+            _updateUsername();
             _editprofilesuccess();
           },
           child: Text(
@@ -357,5 +436,15 @@ class _EditprofileState extends State<Editprofile> {
         );
       },
     );
+  }
+
+  void checkUserId() {
+    if (auth.currentUser != null) {
+      // ดึง User ID (UID) ของผู้ใช้ปัจจุบัน
+      String uid = auth.currentUser!.uid;
+      print('User ID: $uid');
+    } else {
+      print('ไม่มีผู้ใช้ล็อกอินอยู่');
+    }
   }
 }
