@@ -25,7 +25,6 @@ class _CreateCompState extends State<CreateComp> {
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 24,
-                  fontFamily: 'Kanit',
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -38,7 +37,6 @@ class _CreateCompState extends State<CreateComp> {
       body: Center(
         child: Column(
           children: <Widget>[
-            _nameapp(),
             _contactfacebook(),
             _contactmail(),
             _contacttell(),
@@ -48,35 +46,6 @@ class _CreateCompState extends State<CreateComp> {
     );
   }
 
-  Widget _nameapp() {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            Asset.LOGO_IMAGE,
-            scale: MediaQuery.of(context).size.height * 0.0085,
-            //alignment: Alignment.centerRight,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Text(
-            "E-SPORT",
-            style: TextStyle(
-              color: const Color(0xFFA31E21),
-              fontSize: MediaQuery.of(context).size.height * 0.05,
-              fontFamily: 'Barlow',
-              fontStyle: FontStyle.italic,
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _contactfacebook() {
     return Container(
