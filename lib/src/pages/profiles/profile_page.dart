@@ -308,8 +308,6 @@ class _ProfilesState extends State<Profiles> {
       } else {
         return const Text('Photo not found');
       }
-    } else if (profileSnapshot.hasError) {
-      return Text('Error: ${profileSnapshot.error}');
     } else {
       return const CircularProgressIndicator();
     }

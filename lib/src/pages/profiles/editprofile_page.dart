@@ -193,34 +193,62 @@ class _EditprofileState extends State<Editprofile> {
       final userDocument = snapshot.data!.data() as Map<String, dynamic>;
       final profileImageUrl = userDocument['profileImageUrl'] as String?;
       final imageUrl = profileImageUrl;
-      return Container(
-        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-        width: MediaQuery.of(context).size.width * 0.29,
-        height: MediaQuery.of(context).size.height * 0.18,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: const Color(0xff0c1629)),
-          image: imageUrl != null
-              ? DecorationImage(
-                  fit: BoxFit.contain,
-                  image: NetworkImage(imageUrl),
-                )
-              : null,
-        ),
-        child: Stack(
-          alignment: Alignment.bottomRight,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              child: Icon(
-                Icons.add_a_photo_outlined,
-                color: Colors.black.withOpacity(1),
-                size: MediaQuery.of(context).size.height * 0.025,
-              ),
+      if (imageUrl != null && imageUrl.isNotEmpty) {
+        return Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          width: MediaQuery.of(context).size.width * 0.29,
+          height: MediaQuery.of(context).size.height * 0.18,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: const Color(0xff0c1629)),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(imageUrl),
             ),
-          ],
-        ),
-      );
+          ),
+          child: Stack(
+            alignment: Alignment.bottomRight,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(5),
+                child: Icon(
+                  Icons.add_a_photo_outlined,
+                  color: Colors.black.withOpacity(1),
+                  size: MediaQuery.of(context).size.height * 0.025,
+                ),
+              ),
+            ],
+          ),
+        );
+      } else {
+        return Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          width: MediaQuery.of(context).size.width * 0.29,
+          height: MediaQuery.of(context).size.height * 0.18,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: const Color(0xff0c1629)),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Icon(
+                Icons.person,
+                size: 48,
+                color: Colors.grey,
+              ),
+              Container(
+                alignment: Alignment.bottomRight,
+                child: Icon(
+                  Icons.add_a_photo_outlined,
+                  color: Colors.black.withOpacity(1),
+                  size: MediaQuery.of(context).size.height * 0.03,
+                ),
+              ),
+            ],
+          ),
+        );
+      }
     } else {
       return const CircularProgressIndicator();
     }
