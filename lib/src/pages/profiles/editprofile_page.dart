@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,7 +16,6 @@ class Editprofile extends StatefulWidget {
 
 class _EditprofileState extends State<Editprofile> {
   FirebaseAuth auth = FirebaseAuth.instance;
-  DecorationImage? _profileImage;
   String? userEmail;
   String? userID;
   String? _profileImageUrl;
@@ -65,7 +66,7 @@ class _EditprofileState extends State<Editprofile> {
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          height: MediaQuery.of(context).size.height * 0.85,
+          height: MediaQuery.of(context).size.height * 0.82,
           child: Column(
             children: <Widget>[
               _editphoto(),
@@ -230,7 +231,7 @@ class _EditprofileState extends State<Editprofile> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.person,
                 size: 48,
                 color: Colors.grey,
@@ -364,7 +365,7 @@ class _EditprofileState extends State<Editprofile> {
                   autocorrect: false,
                   onChanged: (value) {
                     setState(() {
-                      newUserName = value; // เก็บค่าชื่อใหม่ที่แก้ไข
+                      newUserName = value;
                     });
                   },
                 );
@@ -503,13 +504,13 @@ class _EditprofileState extends State<Editprofile> {
     );
   }
 
-  void checkUserId() {
-    if (auth.currentUser != null) {
-      // ดึง User ID (UID) ของผู้ใช้ปัจจุบัน
-      String uid = auth.currentUser!.uid;
-      print('User ID: $uid');
-    } else {
-      print('ไม่มีผู้ใช้ล็อกอินอยู่');
-    }
-  }
+  // void checkUserId() {
+  //   if (auth.currentUser != null) {
+  //     // ดึง User ID (UID) ของผู้ใช้ปัจจุบัน
+  //     String uid = auth.currentUser!.uid;
+  //     print('User ID: $uid');
+  //   } else {
+  //     print('ไม่มีผู้ใช้ล็อกอินอยู่');
+  //   }
+  // }
 }

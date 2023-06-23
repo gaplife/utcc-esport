@@ -13,7 +13,7 @@ class _NewsState extends State<News> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 75,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: const Padding(
           padding: EdgeInsets.only(left: 10),
           child: Row(

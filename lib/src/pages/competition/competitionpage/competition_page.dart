@@ -64,7 +64,7 @@ class _CompetitionState extends State<Competition> {
                       ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.0085),
-                      TextField(
+                      const TextField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'ชื่อภายในเกม',
@@ -89,7 +89,7 @@ class _CompetitionState extends State<Competition> {
                     child: Text(
                       'ยืนยัน',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         fontSize: MediaQuery.of(context).size.width * 0.045,
                         fontFamily: 'Kanit',
                         fontWeight: FontWeight.w600,
@@ -168,7 +168,7 @@ class _CompetitionState extends State<Competition> {
                     child: Text(
                       'ยืนยัน',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         fontSize: MediaQuery.of(context).size.width * 0.046,
                         fontFamily: 'Kanit',
                         fontWeight: FontWeight.w600,

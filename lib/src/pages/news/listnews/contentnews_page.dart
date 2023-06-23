@@ -64,7 +64,7 @@ class _ContentnewsState extends State<Contentnews> {
             child: Text(
               'ทีมไทย Vampire Esports คว้าแชมป์โลก PUBG MOBILE รับเงินรางวัล 18 ล้าน!',
               style: TextStyle(
-                color: Color.fromARGB(255, 12, 0, 0),
+                color: const Color.fromARGB(255, 12, 0, 0),
                 fontSize: MediaQuery.of(context).size.width * 0.05,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w600,
@@ -76,7 +76,7 @@ class _ContentnewsState extends State<Contentnews> {
             child: Text(
               'เผยแพร่: 16 ส.ค. 2565 15:11',
               style: TextStyle(
-                color: Color.fromARGB(255, 12, 0, 0),
+                color: const Color.fromARGB(255, 12, 0, 0),
                 fontSize: MediaQuery.of(context).size.width * 0.042,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w500,
@@ -107,7 +107,7 @@ class _ContentnewsState extends State<Contentnews> {
             child: Text(
               '   ทีมไทย Vampire Esports คว้าแชมป์ PUBG MOBILE World Invitational รับเงินรางวัลกว่า 18 ล้านบาท เตรียมลุยต่อในศึก Afterparty Showdown วันที่ 18 - 20 สิงหาคมนี้',
               style: TextStyle(
-                color: Color.fromARGB(255, 12, 0, 0),
+                color: const Color.fromARGB(255, 12, 0, 0),
                 fontSize: MediaQuery.of(context).size.width * 0.042,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w500,
@@ -119,7 +119,7 @@ class _ContentnewsState extends State<Contentnews> {
             child: Text(
               '   การแข่งขัน PMWI จะจัดขึ้นทั้งหมด 2 สัปดาห์ ณ เมือง รียาด ประเทศซาอุดีอาระเบีย โดยในสัปดาห์แรก ตั้งแต่วันที่ 11 - 13 สิงหาคม ทีมเชิญทั้ง 18 ทีมจะได้มาประจันหน้ากันในการแข่งขันหลัก เพื่อชิงเงินรางวัลรวมกว่า 2 ล้านเหรียญดอลล่าห์สหรัฐ โดยในสัปดาห์แรกทีม Vampire Esports จากประเทศไทยก็ได้สร้างชื่อและผลงานบนหน้าประวัติศาสตร์อย่างยิ่งใหญ่อีกครั้ง ด้วยการคว้าอันดับ 1 ด้วยคะแนน 220 รับเงินรางวัล 525,000 เหรียญสหรัฐฯ หรือกว่า 18 ล้านบาท',
               style: TextStyle(
-                color: Color.fromARGB(255, 12, 0, 0),
+                color: const Color.fromARGB(255, 12, 0, 0),
                 fontSize: MediaQuery.of(context).size.width * 0.042,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w500,

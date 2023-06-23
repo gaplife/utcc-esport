@@ -1,9 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import '../../widgets/widgets.dart';
-
-
 
 class OrgHomePage extends StatefulWidget {
   const OrgHomePage({super.key});
@@ -59,7 +56,7 @@ class _OrgHomePageState extends State<OrgHomePage> {
           children: <Widget>[
             _boxsearch(),
             _competition(context),
-            CompetitionWidget(),
+            const CompetitionWidget(),
             _competition1(context),
           ],
         ),
@@ -69,14 +66,13 @@ class _OrgHomePageState extends State<OrgHomePage> {
         onPressed: () {
           Navigator.pushNamed(context, '/createcomp');
         },
-        backgroundColor: Color(0xFFA31E21),
+        backgroundColor: const Color(0xFFA31E21),
         label: Text(
           "สร้างรายการแข่ง",
           style: TextStyle(
-            fontFamily: 'Kanit',
-            fontSize: MediaQuery.of(context).size.width * 0.05,
-            fontWeight: FontWeight.w800
-          ),
+              fontFamily: 'Kanit',
+              fontSize: MediaQuery.of(context).size.width * 0.05,
+              fontWeight: FontWeight.w800),
         ),
         icon: Icon(
           Icons.sports_esports,
@@ -150,7 +146,6 @@ Widget _competition(BuildContext context) {
     ],
   );
 }
-
 
 Widget _competition1(BuildContext context) {
   return InkWell(

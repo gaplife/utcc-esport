@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:utcc_esport/src/constants/asset.dart';
 
 class CreateComp extends StatefulWidget {
   const CreateComp({super.key});
@@ -46,14 +45,13 @@ class _CreateCompState extends State<CreateComp> {
     );
   }
 
-
   Widget _contactfacebook() {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 5, 36),
+          color: const Color.fromARGB(255, 1, 5, 36),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,7 +91,7 @@ class _CreateCompState extends State<CreateComp> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 5, 36),
+          color: const Color.fromARGB(255, 1, 5, 36),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,7 +131,7 @@ class _CreateCompState extends State<CreateComp> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 5, 36),
+          color: const Color.fromARGB(255, 1, 5, 36),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
