@@ -37,13 +37,18 @@ class _EditpasswordState extends State<Editpassword> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _boxoldpass(),
-            _boxnewpass(),
-            _boxconfirmpass(),
-            _buttonconfirm(),
-          ],
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          height: MediaQuery.of(context).size.height * 0.84,
+          child: Column(
+            children: <Widget>[
+              _boxoldpass(),
+              _boxnewpass(),
+              _boxconfirmpass(),
+              const Spacer(),
+              _buttonconfirm(),
+            ],
+          ),
         ),
       ),
     );
@@ -68,7 +73,7 @@ class _EditpasswordState extends State<Editpassword> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
             "รหัสผ่านเดิม",
             style: TextStyle(
@@ -79,14 +84,14 @@ class _EditpasswordState extends State<Editpassword> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: !_passwordVisible,
             decoration: InputDecoration(
               hintText: "รหัสผ่านเดิม",
-              contentPadding: EdgeInsets.all(18),
-              border: OutlineInputBorder(),
+              contentPadding: const EdgeInsets.all(18),
+              border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                   icon: Icon(
                     _passwordVisible ? Icons.visibility : Icons.visibility_off,
@@ -103,7 +108,7 @@ class _EditpasswordState extends State<Editpassword> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
           child: TextButton(
             style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(Colors.transparent)),
@@ -130,7 +135,7 @@ class _EditpasswordState extends State<Editpassword> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: Text(
             "รหัสผ่านใหม่",
             style: TextStyle(
@@ -141,14 +146,14 @@ class _EditpasswordState extends State<Editpassword> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: !_passwordVisible,
             decoration: InputDecoration(
               hintText: "รหัสผ่านใหม่",
-              contentPadding: EdgeInsets.all(18),
-              border: OutlineInputBorder(),
+              contentPadding: const EdgeInsets.all(18),
+              border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                   icon: Icon(
                     _passwordVisible ? Icons.visibility : Icons.visibility_off,
@@ -173,7 +178,7 @@ class _EditpasswordState extends State<Editpassword> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
             "ยืนยันรหัสผ่าน",
             style: TextStyle(
@@ -184,14 +189,14 @@ class _EditpasswordState extends State<Editpassword> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: !_passwordVisible,
             decoration: InputDecoration(
               hintText: "ยืนยันรหัสผ่าน",
-              contentPadding: EdgeInsets.all(18),
-              border: OutlineInputBorder(),
+              contentPadding: const EdgeInsets.all(18),
+              border: const OutlineInputBorder(),
               suffixIcon: IconButton(
                   icon: Icon(
                     _passwordVisible ? Icons.visibility : Icons.visibility_off,

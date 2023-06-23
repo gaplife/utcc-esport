@@ -282,31 +282,29 @@ class _LoginState extends State<Login> {
   }
 
   Widget _buttonloginfacebook() {
-    return Padding(
-      padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.02, left: 20, right: 22),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.07,
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)),
-              backgroundColor: const Color(0xFF325BA9)),
-          onPressed: () {},
-          icon: Icon(
-            Icons.facebook,
-            size: MediaQuery.of(context).size.width * 0.06,
+    return Container(
+      margin: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.02, left: 20, right: 20),
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.07,
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            backgroundColor: const Color(0xFF325BA9)),
+        onPressed: () {},
+        icon: Icon(
+          Icons.facebook,
+          size: MediaQuery.of(context).size.width * 0.06,
+          color: Colors.white,
+        ),
+        label: Text(
+          "เชื่อมต่อกับ Facebook",
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.055,
+            fontFamily: 'Kanit',
+            fontWeight: FontWeight.bold,
             color: Colors.white,
-          ),
-          label: Text(
-            "เชื่อมต่อกับ Facebook",
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.width * 0.055,
-              fontFamily: 'Kanit',
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
           ),
         ),
       ),
@@ -314,32 +312,30 @@ class _LoginState extends State<Login> {
   }
 
   Widget _buttonlogingoogle() {
-    return Padding(
-      padding: EdgeInsets.only(
+    return Container(
+      margin: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.02, left: 20, right: 20),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.07,
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                  side: const BorderSide(color: Colors.black54)),
-              backgroundColor: const Color.fromARGB(255, 255, 255, 255)),
-          onPressed: () {},
-          icon: Image.asset(
-            Asset.GOOGLE_IMAGE,
-            height: MediaQuery.of(context).size.height * 0.025,
-            width: MediaQuery.of(context).size.width * 0.055,
-          ),
-          label: Text(
-            "เชื่อมต่อกับ Google",
-            style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width * 0.055,
-                fontFamily: 'Kanit',
-                fontWeight: FontWeight.bold,
-                color: Colors.black54),
-          ),
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.07,
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+                side: const BorderSide(color: Colors.black54)),
+            backgroundColor: const Color(0xffffffff)),
+        onPressed: () {},
+        icon: Image.asset(
+          Asset.GOOGLE_IMAGE,
+          height: MediaQuery.of(context).size.height * 0.025,
+          width: MediaQuery.of(context).size.width * 0.055,
+        ),
+        label: Text(
+          "เชื่อมต่อกับ Google",
+          style: TextStyle(
+              fontSize: MediaQuery.of(context).size.width * 0.055,
+              fontFamily: 'Kanit',
+              fontWeight: FontWeight.bold,
+              color: Colors.black54),
         ),
       ),
     );

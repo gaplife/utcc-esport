@@ -4,8 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-//import 'package:intl/intl.dart';
 import 'package:utcc_esport/src/models/profile.dart';
+import 'package:utcc_esport/src/widgets/condition.dart';
+import 'package:utcc_esport/src/widgets/privacypolicy.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -100,8 +101,9 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _boxusername() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+    return Container(
+      margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      width: MediaQuery.of(context).size.width * 0.9,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,8 +136,9 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _boxemail() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+    return Container(
+      margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      width: MediaQuery.of(context).size.width * 0.9,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,8 +174,9 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _boxepass() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+    return Container(
+      margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      width: MediaQuery.of(context).size.width * 0.9,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,8 +210,9 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _boxeconfirmpass() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+    return Container(
+      margin: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      width: MediaQuery.of(context).size.width * 0.9,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,80 +249,76 @@ class _RegisterState extends State<Register> {
   }
 
   Widget _buttonconfirm() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
-      child: SizedBox(
-        width: 500,
-        height: 60,
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)),
-              backgroundColor: const Color(0xFFA31E21)),
-          onPressed: () async {
-            if (isChecked) {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
+    return Container(
+      margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.07,
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            backgroundColor: const Color(0xFFA31E21)),
+        onPressed: () async {
+          if (isChecked) {
+            if (formKey.currentState!.validate()) {
+              formKey.currentState!.save();
 
-                try {
-                  await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                    email: profile.email!,
-                    password: profile.password!,
-                  )
-                      .then((userCredential) {
-                    final String userID =
-                        FirebaseAuth.instance.currentUser!.uid;
+              try {
+                await FirebaseAuth.instance
+                    .createUserWithEmailAndPassword(
+                  email: profile.email!,
+                  password: profile.password!,
+                )
+                    .then((userCredential) {
+                  final String userID = FirebaseAuth.instance.currentUser!.uid;
 
-                    userCollection.doc(userID).set({
-                      "userID": userID,
-                      "username": profile.username,
-                      "email": profile.email,
-                      "password": profile.password,
-                      "userType": "Player",
-                      "profileImageUrl": profile.profileImageUrl,
-                    });
-
-                    formKey.currentState!.reset();
-                    _registersuccess();
+                  userCollection.doc(userID).set({
+                    "userID": userID,
+                    "username": profile.username,
+                    "email": profile.email,
+                    "password": profile.password,
+                    "userType": "Player",
+                    "profileImageUrl": profile.profileImageUrl,
                   });
-                } on FirebaseAuthException catch (e) {
-                  String? messageemailerror;
-                  if (e.code == 'email-already-in-use') {
-                    messageemailerror =
-                        "มีอีเมลนี้ในระบบแล้ว โปรดใช้อีเมลอื่นแทน";
-                  } else if (e.code == 'weak-password') {
-                    messageemailerror =
-                        "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
-                  } else {
-                    messageemailerror = e.message;
-                  }
-                  Fluttertoast.showToast(
-                    msg: '$messageemailerror',
-                    gravity: ToastGravity.SNACKBAR,
-                  );
+
+                  formKey.currentState!.reset();
+                  _registersuccess();
+                });
+              } on FirebaseAuthException catch (e) {
+                String? messageemailerror;
+                if (e.code == 'email-already-in-use') {
+                  messageemailerror =
+                      "มีอีเมลนี้ในระบบแล้ว โปรดใช้อีเมลอื่นแทน";
+                } else if (e.code == 'weak-password') {
+                  messageemailerror = "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
+                } else {
+                  messageemailerror = e.message;
                 }
+                Fluttertoast.showToast(
+                  msg: '$messageemailerror',
+                  gravity: ToastGravity.SNACKBAR,
+                );
               }
-            } else {
-              Fluttertoast.showToast(
-                msg: 'กรุณากดยอมรับเงื่อนไข',
-                gravity: ToastGravity.SNACKBAR,
-              );
             }
-          },
-          icon: const Icon(
-            Icons.login,
-            size: 0,
+          } else {
+            Fluttertoast.showToast(
+              msg: 'กรุณากดยอมรับเงื่อนไข',
+              gravity: ToastGravity.SNACKBAR,
+            );
+          }
+        },
+        icon: const Icon(
+          Icons.login,
+          size: 0,
+          color: Colors.white,
+        ),
+        label: const Text(
+          "ลงทะเบียน",
+          style: TextStyle(
+            fontSize: 22,
+            fontFamily: 'Kanit',
+            fontWeight: FontWeight.w800,
             color: Colors.white,
-          ),
-          label: const Text(
-            "ลงทะเบียน",
-            style: TextStyle(
-              fontSize: 22,
-              fontFamily: 'Kanit',
-              fontWeight: FontWeight.w800,
-              color: Colors.white,
-            ),
           ),
         ),
       ),
@@ -360,7 +361,9 @@ class _RegisterState extends State<Register> {
               children: [
                 TextButton(
                   onPressed: () {
-                    // โค้ดสำหรับแสดงหน้าข้อกำหนดการให้บริการ
+                    const ConditionWidget()
+                        .createState()
+                        .showPopupcondition(context);
                   },
                   child: const Text(
                     'ข้อกำหนดในการให้บริการ',
@@ -381,7 +384,9 @@ class _RegisterState extends State<Register> {
                 ),
                 TextButton(
                   onPressed: () {
-                    // โค้ดสำหรับแสดงหน้าข้อกำหนดการให้บริการ
+                    const PrivacyPolicyWidgets()
+                        .createState()
+                        .showPopuppolicy(context);
                   },
                   child: const Text(
                     'นโยบายความเป็นส่วนตัว*',

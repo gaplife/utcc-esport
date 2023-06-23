@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 
 class Allcompetition extends StatefulWidget {
@@ -10,7 +12,7 @@ class Allcompetition extends StatefulWidget {
 
 class _AllcompetitionState extends State<Allcompetition> {
   int currentIndex = 0;
-
+  FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +57,7 @@ class _AllcompetitionState extends State<Allcompetition> {
           child: Column(children: <Widget>[
             _boxsearch(),
             _competition(),
+            _buttonlogout(),
           ]),
         ));
   }
@@ -333,6 +336,42 @@ class _AllcompetitionState extends State<Allcompetition> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buttonlogout() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: MediaQuery.of(context).size.height * 0.065,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xffa31e21),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          onPressed: () {
+            auth.signOut().then((value) {
+              Fluttertoast.showToast(
+                  msg: "ออกจากระบบเรียบร้อย", gravity: ToastGravity.SNACKBAR);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/welcome',
+                (route) => false,
+              );
+            });
+          },
+          child: Text(
+            "ออกจากระบบ",
+            style: TextStyle(
+              fontSize: MediaQuery.of(context).size.height * 0.03,
+              color: const Color.fromARGB(255, 255, 255, 255),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -17,7 +17,7 @@ class _ProfilesState extends State<Profiles> {
   final profilefont = 'Kanit';
   //final usename = FirebaseFirestore.instance;
   String? userID;
-
+  String? userEmail;
   @override
   void initState() {
     super.initState();
@@ -28,7 +28,8 @@ class _ProfilesState extends State<Profiles> {
     final user = auth.currentUser;
     if (user != null) {
       setState(() {
-        userID = user.uid; // ใช้อีเมลของผู้ใช้งานเป็น userId แทน
+        userID = user.uid;
+        userEmail = user.email; // ใช้อีเมลของผู้ใช้งานเป็น userId แทน
       });
     }
   }
@@ -240,7 +241,7 @@ class _ProfilesState extends State<Profiles> {
   Widget _getUsername(AsyncSnapshot<QuerySnapshot> snapshot) {
     if (snapshot.hasData) {
       final userDocument = snapshot.data!.docs.firstWhereOrNull(
-        (doc) => doc['userID'] == userID, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+        (doc) => doc["email"] == userEmail,
       );
 
       if (userDocument != null) {
@@ -256,8 +257,6 @@ class _ProfilesState extends State<Profiles> {
       } else {
         return const Text('User not found');
       }
-    } else if (snapshot.hasError) {
-      return Text('Error: ${snapshot.error}');
     } else {
       return const CircularProgressIndicator();
     }
@@ -266,7 +265,7 @@ class _ProfilesState extends State<Profiles> {
   Widget _getProfileImage(AsyncSnapshot<QuerySnapshot> profileSnapshot) {
     if (profileSnapshot.hasData) {
       final userDocument = profileSnapshot.data!.docs.firstWhereOrNull(
-        (doc) => doc["userID"] == userID, // Compare with the user's email
+        (doc) => doc["email"] == userEmail,
       );
       if (userDocument != null) {
         final profileImageUrl = userDocument["profileImageUrl"];
