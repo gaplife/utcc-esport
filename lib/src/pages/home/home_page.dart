@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    _timer.cancel(); // อย่าลืมยกเลิกการทำงานของ Timer เมื่อไม่ได้ใช้แล้ว
+    _timer.cancel();
     _pageController.dispose();
     super.dispose();
   }
@@ -74,7 +74,9 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/editprofile');
+            },
             icon: const Icon(Icons.notifications),
           )
         ],
@@ -84,12 +86,12 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            _boxsearch(),
+            //_boxsearch(),
             _headnews(),
             _slidenews(),
             //_news(),
             _competition(context),
-            CompetitionWidget(),
+            const CompetitionWidget(),
             _competition1(context),
           ],
         ),
@@ -117,27 +119,27 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _boxsearch() {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-      width: MediaQuery.of(context).size.width * 0.99, // ปรับค่าตามต้องการ
-      height: MediaQuery.of(context).size.height * 0.09,
-      child: TextField(
-        decoration: InputDecoration(
-          suffixIcon: const Icon(Icons.search),
-          hintText: "ค้นหา",
-          contentPadding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-          hintStyle: TextStyle(
-            fontSize: MediaQuery.of(context).size.height * 0.024,
-            fontFamily: 'Kanit',
-          ),
-          border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-        ),
-        onChanged: (value) {},
-      ),
-    );
-  }
+  // Widget _boxsearch() {
+  //   return Container(
+  //     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+  //     width: MediaQuery.of(context).size.width * 0.99, // ปรับค่าตามต้องการ
+  //     height: MediaQuery.of(context).size.height * 0.09,
+  //     child: TextField(
+  //       decoration: InputDecoration(
+  //         suffixIcon: const Icon(Icons.search),
+  //         hintText: "ค้นหา",
+  //         contentPadding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+  //         hintStyle: TextStyle(
+  //           fontSize: MediaQuery.of(context).size.height * 0.024,
+  //           fontFamily: 'Kanit',
+  //         ),
+  //         border: const OutlineInputBorder(
+  //             borderRadius: BorderRadius.all(Radius.circular(10))),
+  //       ),
+  //       onChanged: (value) {},
+  //     ),
+  //   );
+  // }
 
   Widget _headnews() {
     return Row(
