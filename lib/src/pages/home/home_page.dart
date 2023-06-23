@@ -74,9 +74,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/editprofile');
-            },
+            onPressed: () {},
             icon: const Icon(Icons.notifications),
           )
         ],
@@ -342,11 +340,11 @@ Widget _competition(BuildContext context) {
   return Column(
     children: [
       Container(
-        margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: Row(
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Text(
                 'รายการแข่งขัน',
                 style: TextStyle(
@@ -358,7 +356,7 @@ Widget _competition(BuildContext context) {
             ),
             const Spacer(),
             Container(
-              margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: TextButton(
                 onPressed: () {},
                 child: Text(
@@ -383,7 +381,7 @@ Widget _competition1(BuildContext context) {
   return InkWell(
     onTap: () {},
     child: Container(
-      margin: const EdgeInsets.fromLTRB(20, 5, 20, 10),
+      margin: const EdgeInsets.fromLTRB(20, 5, 20, 20),
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.168,
       decoration: BoxDecoration(

@@ -67,7 +67,7 @@ class _TopupState extends State<Topup> {
           Text(
             "E-SPORT",
             style: TextStyle(
-              color: Color(0xFFA31E21),
+              color: const Color(0xFFA31E21),
               fontSize: MediaQuery.of(context).size.height * 0.05,
               fontFamily: 'Barlow',
               fontStyle: FontStyle.italic,
@@ -81,12 +81,12 @@ class _TopupState extends State<Topup> {
 
   Widget _amount() {
     return Container(
-      margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       width: MediaQuery.of(context).size.width * 0.9,
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.15,
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         decoration: BoxDecoration(
             color: const Color(0xffa31e21),
             borderRadius: BorderRadius.circular(10)),
@@ -94,8 +94,8 @@ class _TopupState extends State<Topup> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(20, 15, 0, 10),
-              child: Text(
+              margin: const EdgeInsets.fromLTRB(20, 15, 0, 10),
+              child: const Text(
                 'เหรียญที่มี',
                 style: TextStyle(
                     fontFamily: 'Kanit',
@@ -108,7 +108,7 @@ class _TopupState extends State<Topup> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 0, 15, 0),
+                  margin: const EdgeInsets.fromLTRB(20, 0, 15, 0),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white),
@@ -140,7 +140,7 @@ class _TopupState extends State<Topup> {
 
   Widget _amounttopup() {
     return Container(
-      margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+      margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
       width: MediaQuery.of(context).size.width * 0.9,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +160,7 @@ class _TopupState extends State<Topup> {
                   _topupsuccess();
                 },
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   width: MediaQuery.of(context).size.width * 0.42,
                   child: Container(
                     decoration: BoxDecoration(
@@ -173,7 +173,7 @@ class _TopupState extends State<Topup> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                              margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.white),
@@ -187,7 +187,7 @@ class _TopupState extends State<Topup> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                              margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                               child: Text(
                                 '50',
                                 style: TextStyle(
@@ -211,7 +211,7 @@ class _TopupState extends State<Topup> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
                           child: Text(
                             '35 บาท',
                             style: TextStyle(
@@ -237,7 +237,7 @@ class _TopupState extends State<Topup> {
                   _topupsuccess();
                 },
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                   width: MediaQuery.of(context).size.width * 0.42,
                   child: Container(
                     decoration: BoxDecoration(
@@ -250,7 +250,7 @@ class _TopupState extends State<Topup> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                              margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(color: Colors.white),
@@ -264,7 +264,7 @@ class _TopupState extends State<Topup> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                              margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                               child: Text(
                                 '100',
                                 style: TextStyle(
@@ -288,7 +288,7 @@ class _TopupState extends State<Topup> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
                           child: Text(
                             '60 บาท',
                             style: TextStyle(
@@ -315,7 +315,7 @@ class _TopupState extends State<Topup> {
 
   Widget _amounttopup2() {
     return Container(
-      margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: Row(
         children: [
           InkWell(
@@ -323,7 +323,7 @@ class _TopupState extends State<Topup> {
               _topupsuccess();
             },
             child: Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               width: MediaQuery.of(context).size.width * 0.42,
               child: Container(
                 decoration: BoxDecoration(
@@ -336,7 +336,7 @@ class _TopupState extends State<Topup> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                          margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white),
@@ -349,7 +349,7 @@ class _TopupState extends State<Topup> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                           child: Text(
                             '200',
                             style: TextStyle(
@@ -373,7 +373,7 @@ class _TopupState extends State<Topup> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
                       child: Text(
                         '100 บาท',
                         style: TextStyle(
@@ -398,7 +398,7 @@ class _TopupState extends State<Topup> {
               _topupsuccess();
             },
             child: Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               width: MediaQuery.of(context).size.width * 0.42,
               child: Container(
                 decoration: BoxDecoration(
@@ -411,7 +411,7 @@ class _TopupState extends State<Topup> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                          margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white),
@@ -424,7 +424,7 @@ class _TopupState extends State<Topup> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                           child: Text(
                             '300',
                             style: TextStyle(
@@ -448,7 +448,7 @@ class _TopupState extends State<Topup> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
                       child: Text(
                         '150 บาท',
                         style: TextStyle(
@@ -472,7 +472,7 @@ class _TopupState extends State<Topup> {
 
   Widget _amounttopup3() {
     return Container(
-      margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: Row(
         children: [
           InkWell(
@@ -480,7 +480,7 @@ class _TopupState extends State<Topup> {
               _topupsuccess();
             },
             child: Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               width: MediaQuery.of(context).size.width * 0.42,
               child: Container(
                 decoration: BoxDecoration(
@@ -493,7 +493,7 @@ class _TopupState extends State<Topup> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                          margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white),
@@ -506,7 +506,7 @@ class _TopupState extends State<Topup> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                           child: Text(
                             '500',
                             style: TextStyle(
@@ -530,7 +530,7 @@ class _TopupState extends State<Topup> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
                       child: Text(
                         '240 บาท',
                         style: TextStyle(
@@ -555,7 +555,7 @@ class _TopupState extends State<Topup> {
               _topupsuccess();
             },
             child: Container(
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               width: MediaQuery.of(context).size.width * 0.42,
               child: Container(
                 decoration: BoxDecoration(
@@ -568,7 +568,7 @@ class _TopupState extends State<Topup> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                          margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white),
@@ -581,7 +581,7 @@ class _TopupState extends State<Topup> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                           child: Text(
                             '1,000',
                             style: TextStyle(
@@ -605,7 +605,7 @@ class _TopupState extends State<Topup> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
                       child: Text(
                         '450 บาท',
                         style: TextStyle(

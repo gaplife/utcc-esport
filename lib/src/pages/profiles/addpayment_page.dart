@@ -66,7 +66,7 @@ class _AddpaymentState extends State<Addpayment> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
             "เลขบัญชี",
             style: TextStyle(
@@ -77,7 +77,7 @@ class _AddpaymentState extends State<Addpayment> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: true,
@@ -99,7 +99,7 @@ class _AddpaymentState extends State<Addpayment> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
             "ชื่อบัญชี",
             style: TextStyle(
@@ -110,7 +110,7 @@ class _AddpaymentState extends State<Addpayment> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: true,
@@ -132,7 +132,7 @@ class _AddpaymentState extends State<Addpayment> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(20, 15, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
           child: Text(
             "ธนาคาร",
             style: TextStyle(
@@ -143,7 +143,7 @@ class _AddpaymentState extends State<Addpayment> {
           ),
         ),
         Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: true,
@@ -252,7 +252,7 @@ class _AddpaymentState extends State<Addpayment> {
                     child: Text(
                       'ยืนยัน',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         fontSize: MediaQuery.of(context).size.width * 0.046,
                         fontFamily: 'Kanit',
                         fontWeight: FontWeight.w600,

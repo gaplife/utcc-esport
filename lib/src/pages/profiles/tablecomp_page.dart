@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:tournament_bracket/tournament_bracket.dart';
 
@@ -99,9 +101,9 @@ class _TabelcompState extends State<Tabelcomp> {
             color: Colors.black,
           ),
           stageIndicatorBoxDecroction: BracketStageIndicatorBoxDecroction(
-            borderRadious: Radius.circular(15),
-            primaryColor: Color.fromARGB(15, 247, 123, 123),
-            secondaryColor: Color.fromARGB(15, 194, 236, 147),
+            borderRadious: const Radius.circular(15),
+            primaryColor: const Color.fromARGB(15, 247, 123, 123),
+            secondaryColor: const Color.fromARGB(15, 194, 236, 147),
           ),
           containt: [
             allTeams,

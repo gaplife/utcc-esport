@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:utcc_esport/src/pages/pages.dart';
 
 class Editpassword extends StatefulWidget {
@@ -9,7 +12,30 @@ class Editpassword extends StatefulWidget {
 }
 
 class _EditpasswordState extends State<Editpassword> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  final formKey = GlobalKey<FormState>();
+  bool isDataValidated = false;
   bool _passwordVisible = false;
+  String newPass = "";
+  String? userEmail;
+  String? userID;
+  bool isChecked = false;
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  Future<void> getUserData() async {
+    final User? user = auth.currentUser;
+    if (user != null) {
+      setState(() {
+        userID = user.uid;
+        userEmail = user.email;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,14 +66,17 @@ class _EditpasswordState extends State<Editpassword> {
         child: Container(
           margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
           height: MediaQuery.of(context).size.height * 0.84,
-          child: Column(
-            children: <Widget>[
-              _boxoldpass(),
-              _boxnewpass(),
-              _boxconfirmpass(),
-              const Spacer(),
-              _buttonconfirm(),
-            ],
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: <Widget>[
+                _boxoldpass(),
+                _boxnewpass(),
+                _boxconfirmpass(),
+                const Spacer(),
+                _buttonconfirm(),
+              ],
+            ),
           ),
         ),
       ),
@@ -86,25 +115,42 @@ class _EditpasswordState extends State<Editpassword> {
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
-          child: TextFormField(
-            obscureText: !_passwordVisible,
-            decoration: InputDecoration(
-              hintText: "รหัสผ่านเดิม",
-              contentPadding: const EdgeInsets.all(18),
-              border: const OutlineInputBorder(),
-              suffixIcon: IconButton(
-                  icon: Icon(
-                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
+          child: StreamBuilder<DocumentSnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('Users')
+                .doc(userID)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data!.exists) {
+                //final userDocument =
+                //snapshot.data!.data() as Map<String, dynamic>;
+                //final username = userDocument['username'] as String?;
+                //final name = username ?? 'username';
+                return TextFormField(
+                  obscureText: false,
+                  decoration: const InputDecoration(
+                    hintText: "รหัสผ่านเดิม",
+                    contentPadding: EdgeInsets.all(20),
+                    border: OutlineInputBorder(),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _passwordVisible =
-                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
-                    });
-                  }),
-            ),
-            keyboardType: TextInputType.text,
-            autocorrect: false,
+                  keyboardType: TextInputType.text,
+                  autocorrect: false,
+                  validator: (value) {
+                    if (snapshot.hasData && snapshot.data!.exists) {
+                      final userDocument =
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      final password = userDocument['password'] as String?;
+                      if (value != password) {
+                        return 'รหัสผ่านไม่ถูกต้อง';
+                      }
+                    }
+                    return null;
+                  },
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
           ),
         ),
         Container(
@@ -155,18 +201,24 @@ class _EditpasswordState extends State<Editpassword> {
               contentPadding: const EdgeInsets.all(18),
               border: const OutlineInputBorder(),
               suffixIcon: IconButton(
-                  icon: Icon(
-                    _passwordVisible ? Icons.visibility : Icons.visibility_off,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _passwordVisible =
-                          !_passwordVisible; // เปลี่ยนค่า _passwordVisible เมื่อกดปุ่ม
-                    });
-                  }),
+                icon: Icon(
+                  _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _passwordVisible = !_passwordVisible;
+                  });
+                },
+              ),
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
+            onChanged: (value) {
+              setState(() {
+                newPass = value;
+              });
+            },
+            validator: RequiredValidator(errorText: "กรุณากรอกรหัสผ่าน"),
           ),
         ),
       ],
@@ -210,10 +262,37 @@ class _EditpasswordState extends State<Editpassword> {
             ),
             keyboardType: TextInputType.text,
             autocorrect: false,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'กรุณายืนรหัสผ่าน';
+              } else if (value != newPass) {
+                return 'รหัสผ่านไม่ตรงกัน';
+              }
+              return null;
+            },
           ),
         ),
       ],
     );
+  }
+
+  void _updatePassword() async {
+    try {
+      if (userID != null) {
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(userID)
+            .update({
+          'password': newPass,
+        });
+        if (auth.currentUser != null) {
+          await auth.currentUser!.updatePassword(newPass);
+        }
+      }
+    } catch (error) {
+      // ignore: avoid_print
+      print('เกิดข้อผิดพลาดในการอัปเดตรหัสผ่าน: $error');
+    }
   }
 
   Widget _buttonconfirm() {
@@ -230,7 +309,10 @@ class _EditpasswordState extends State<Editpassword> {
             ),
           ),
           onPressed: () {
-            _editpasswordsuccess();
+            if (formKey.currentState!.validate()) {
+              _updatePassword();
+              _editpasswordsuccess();
+            }
           },
           child: Text(
             "ยืนยันการเปลี่ยนรหัสผ่าน",

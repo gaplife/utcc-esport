@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:utcc_esport/src/constants/asset.dart';
 
 class CreateComp extends StatefulWidget {
   const CreateComp({super.key});
@@ -52,8 +51,7 @@ class _CreateCompState extends State<CreateComp> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color(0xFF0C1629),
-          borderRadius: BorderRadius.circular(10)),
+          color: Color(0xFF0C1629), borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -92,7 +90,7 @@ class _CreateCompState extends State<CreateComp> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 5, 36),
+          color: const Color.fromARGB(255, 1, 5, 36),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,7 +130,7 @@ class _CreateCompState extends State<CreateComp> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 5, 36),
+          color: const Color.fromARGB(255, 1, 5, 36),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

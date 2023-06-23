@@ -282,7 +282,7 @@ class _OganizerLoginState extends State<OganizerLogin> {
               fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: const Color.fromARGB(255, 255, 255, 255),
             ),
           ),
         ),

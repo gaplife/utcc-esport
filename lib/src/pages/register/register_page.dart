@@ -500,7 +500,7 @@ class _RegisterState extends State<Register> {
                     child: Text(
                       'ปิด',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: const Color.fromARGB(255, 255, 255, 255),
                         fontSize: MediaQuery.of(context).size.width * 0.046,
                         fontFamily: 'Kanit',
                         fontWeight: FontWeight.w600,

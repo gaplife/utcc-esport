@@ -60,7 +60,7 @@ class _MycompState extends State<Mycomp> {
         onPressed: () {
           Navigator.pushNamed(context, '/createcomp');
         },
-        backgroundColor: Color(0xFFA31E21),
+        backgroundColor: const Color(0xFFA31E21),
         label: Text(
           "สร้างรายการแข่ง",
           style: TextStyle(
