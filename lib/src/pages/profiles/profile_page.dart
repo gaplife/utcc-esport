@@ -240,7 +240,7 @@ class _ProfilesState extends State<Profiles> {
   Widget _getUsername(AsyncSnapshot<QuerySnapshot> snapshot) {
     if (snapshot.hasData) {
       final userDocument = snapshot.data!.docs.firstWhereOrNull(
-        (doc) => doc["userID"] == userID, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+        (doc) => doc['userID'] == userID, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
       );
 
       if (userDocument != null) {
