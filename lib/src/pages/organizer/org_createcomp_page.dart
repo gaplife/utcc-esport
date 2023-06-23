@@ -22,7 +22,7 @@ class _CreateCompState extends State<CreateComp> {
               Text(
                 "สร้างรายการแข่ง",
                 style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.w800,
                 ),
@@ -37,8 +37,8 @@ class _CreateCompState extends State<CreateComp> {
         child: Column(
           children: <Widget>[
             _contactfacebook(),
-            _contactmail(),
-            _contacttell(),
+            // _contactmail(),
+            // _contacttell(),
           ],
         ),
       ),
@@ -51,8 +51,7 @@ class _CreateCompState extends State<CreateComp> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 1, 5, 36),
-          borderRadius: BorderRadius.circular(10)),
+          color: Color(0xFF0C1629), borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
