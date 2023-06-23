@@ -84,7 +84,7 @@ class _ContactmeState extends State<Contactme> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 5, 36),
+          color: Color(0xff0c1629),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,7 +124,7 @@ class _ContactmeState extends State<Contactme> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 5, 36),
+          color: Color(0xff0c1629),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -164,7 +164,7 @@ class _ContactmeState extends State<Contactme> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.15,
       decoration: BoxDecoration(
-          color: Color.fromARGB(255, 1, 5, 36),
+          color: Color(0xff0c1629),
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
