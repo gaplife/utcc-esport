@@ -46,18 +46,11 @@ class _WelcomeState extends State<Welcome> {
           child: Column(
             children: <Widget>[
               _logo(),
-              const Expanded(
-                child: Spacer(),
-              ),
-              Column(
-                //mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  _textWelcome(),
-                  _buttonlogin(),
-                  _buttonregis(),
-                  _buttonorganizer(),
-                ],
-              ),
+              const Spacer(),
+              _textWelcome(),
+              _buttonlogin(),
+              _buttonregis(),
+              _buttonorganizer(),
             ],
           ),
         ),

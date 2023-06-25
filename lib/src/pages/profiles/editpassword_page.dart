@@ -122,10 +122,6 @@ class _EditpasswordState extends State<Editpassword> {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasData && snapshot.data!.exists) {
-                //final userDocument =
-                //snapshot.data!.data() as Map<String, dynamic>;
-                //final username = userDocument['username'] as String?;
-                //final name = username ?? 'username';
                 return TextFormField(
                   obscureText: false,
                   decoration: const InputDecoration(

@@ -10,6 +10,37 @@ class Competition extends StatefulWidget {
 
 class _CompetitionState extends State<Competition> {
   int currentIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 75,
+        automaticallyImplyLeading: true,
+        title: const Padding(
+          padding: EdgeInsets.only(left: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            // ignore: prefer_const_literals_to_create_immutables
+            children: <Widget>[],
+          ),
+        ),
+        backgroundColor: const Color(0xff0c1629),
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            _photocompetition(),
+            _headcompetition(),
+            _period(),
+            _description(),
+            _buttonconfirm(),
+          ],
+        ),
+      ),
+    );
+  }
+
   void _registercompetition() {
     showDialog(
       context: context,
@@ -181,37 +212,6 @@ class _CompetitionState extends State<Competition> {
           ),
         );
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 75,
-        automaticallyImplyLeading: true,
-        title: const Padding(
-          padding: EdgeInsets.only(left: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            // ignore: prefer_const_literals_to_create_immutables
-            children: <Widget>[],
-          ),
-        ),
-        backgroundColor: const Color(0xff0c1629),
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _photocompetition(),
-            _headcompetition(),
-            _period(),
-            _description(),
-            _buttonconfirm(),
-          ],
-        ),
-      ),
     );
   }
 
