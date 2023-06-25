@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, camel_case_types, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers, deprecated_member_use
-
 import 'package:flutter/material.dart';
 
 class ForgetPass extends StatefulWidget {
