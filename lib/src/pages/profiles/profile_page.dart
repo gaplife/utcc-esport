@@ -97,15 +97,15 @@ class _ProfilesState extends State<Profiles> {
 
   Widget _headprofile() {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-      width: MediaQuery.of(context).size.width * 1,
-      height: MediaQuery.of(context).size.height * 0.16,
+      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: MediaQuery.of(context).size.height * 0.14,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(1, 0, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               width: MediaQuery.of(context).size.width * 0.9,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +120,7 @@ class _ProfilesState extends State<Profiles> {
                     },
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                     width: MediaQuery.of(context).size.width * 0.64,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,13 +153,11 @@ class _ProfilesState extends State<Profiles> {
                         ),
                         Container(
                           margin: const EdgeInsets.fromLTRB(0, 2, 0, 0),
-                          width: MediaQuery.of(context).size.height * 0.5,
+                          width: MediaQuery.of(context).size.height * 0.35,
                           child: Row(
                             children: [
                               Container(
                                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                // width: 10,
-                                // height: 20,
                                 child: Image.asset(
                                   Asset.COIN_IMAGE,
                                   scale:
@@ -186,8 +184,7 @@ class _ProfilesState extends State<Profiles> {
                                 ),
                               ),
                               Container(
-                                margin: const EdgeInsets.fromLTRB(10, 0, 0,
-                                    0), // ปรับระยะห่างด้านซ้ายของปุ่ม "เติมเงิน"
+                                margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 width: MediaQuery.of(context).size.width * 0.2,
                                 height:
                                     MediaQuery.of(context).size.height * 0.035,
@@ -208,7 +205,7 @@ class _ProfilesState extends State<Profiles> {
                                       color: Colors.white,
                                       fontSize:
                                           MediaQuery.of(context).size.height *
-                                              0.018,
+                                              0.019,
                                       fontFamily: profilefont,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -225,11 +222,11 @@ class _ProfilesState extends State<Profiles> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(5, 18, 5, 0),
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
               width: MediaQuery.of(context).size.width * 0.9,
-              height: 2,
+              height: 1,
               decoration: const BoxDecoration(
-                color: Color.fromARGB(153, 0, 0, 0),
+                color: Colors.black,
               ),
             ),
           ],
@@ -292,7 +289,7 @@ class _ProfilesState extends State<Profiles> {
               shape: BoxShape.circle,
               border: Border.all(color: const Color(0xff0c1629)),
             ),
-            child: const Stack(
+            child: Stack(
               alignment: Alignment.center,
               children: [
                 Icon(
@@ -315,7 +312,7 @@ class _ProfilesState extends State<Profiles> {
   Widget _buttonregistercom() {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-      width: MediaQuery.of(context).size.width * 1,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: TextButton(
         onPressed: () {
           Navigator.pushNamed(context, '/registercomp');
@@ -328,7 +325,7 @@ class _ProfilesState extends State<Profiles> {
                 child: Text(
                   'การแข่งขันที่ลงทะเบียน',
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color: Colors.black,
                     fontSize: MediaQuery.of(context).size.height * 0.025,
                     fontFamily: profilefont,
                     fontWeight: FontWeight.w600,
@@ -338,7 +335,7 @@ class _ProfilesState extends State<Profiles> {
             ),
             Icon(
               Icons.arrow_forward_ios,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Colors.black,
               size: MediaQuery.of(context).size.height * 0.025,
             ),
           ],
@@ -350,7 +347,7 @@ class _ProfilesState extends State<Profiles> {
   Widget _buttonsettingprofile() {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-      width: MediaQuery.of(context).size.width * 1,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: TextButton(
         onPressed: () {
           Navigator.pushNamed(context, '/editprofile');
@@ -363,7 +360,7 @@ class _ProfilesState extends State<Profiles> {
                 child: Text(
                   'ตั้งค่าโปรไฟล์',
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color: Colors.black,
                     fontSize: MediaQuery.of(context).size.height * 0.025,
                     fontFamily: profilefont,
                     fontWeight: FontWeight.w600,
@@ -373,7 +370,7 @@ class _ProfilesState extends State<Profiles> {
             ),
             Icon(
               Icons.arrow_forward_ios,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Colors.black,
               size: MediaQuery.of(context).size.height * 0.025,
             ),
           ],
@@ -385,7 +382,7 @@ class _ProfilesState extends State<Profiles> {
   Widget _buttonsetuppayment() {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-      width: MediaQuery.of(context).size.width * 1,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: TextButton(
         onPressed: () {
           Navigator.pushNamed(context, '/setuppayment');
@@ -398,7 +395,7 @@ class _ProfilesState extends State<Profiles> {
                 child: Text(
                   'ตั้งค่าช่องทางการรับเงิน',
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color: Colors.black,
                     fontSize: MediaQuery.of(context).size.height * 0.025,
                     fontFamily: profilefont,
                     fontWeight: FontWeight.w600,
@@ -408,7 +405,7 @@ class _ProfilesState extends State<Profiles> {
             ),
             Icon(
               Icons.arrow_forward_ios,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Colors.black,
               size: MediaQuery.of(context).size.height * 0.025,
             ),
           ],
@@ -420,7 +417,7 @@ class _ProfilesState extends State<Profiles> {
   Widget _buttonsetuppassword() {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-      width: MediaQuery.of(context).size.width * 1,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: TextButton(
         onPressed: () {
           Navigator.pushNamed(context, '/editpassword');
@@ -433,7 +430,7 @@ class _ProfilesState extends State<Profiles> {
                 child: Text(
                   'ตั้งค่ารหัสผ่าน',
                   style: TextStyle(
-                    color: const Color.fromARGB(255, 0, 0, 0),
+                    color: Colors.black,
                     fontSize: MediaQuery.of(context).size.height * 0.025,
                     fontFamily: profilefont,
                     fontWeight: FontWeight.w600,
@@ -443,7 +440,7 @@ class _ProfilesState extends State<Profiles> {
             ),
             Icon(
               Icons.arrow_forward_ios,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: Colors.black,
               size: MediaQuery.of(context).size.height * 0.025,
             ),
           ],
@@ -457,7 +454,7 @@ class _ProfilesState extends State<Profiles> {
       children: [
         Container(
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
-          width: MediaQuery.of(context).size.width * 1,
+          width: MediaQuery.of(context).size.width * 0.9,
           child: TextButton(
             onPressed: () {
               Navigator.pushNamed(context, '/contactme');
@@ -470,7 +467,7 @@ class _ProfilesState extends State<Profiles> {
                     child: Text(
                       'ติดต่อเรา',
                       style: TextStyle(
-                        color: const Color.fromARGB(255, 0, 0, 0),
+                        color: Colors.black,
                         fontSize: MediaQuery.of(context).size.height * 0.025,
                         fontFamily: profilefont,
                         fontWeight: FontWeight.w600,
@@ -480,7 +477,7 @@ class _ProfilesState extends State<Profiles> {
                 ),
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: const Color.fromARGB(255, 0, 0, 0),
+                  color: Colors.black,
                   size: MediaQuery.of(context).size.height * 0.025,
                 ),
               ],
@@ -489,10 +486,10 @@ class _ProfilesState extends State<Profiles> {
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(25, 70, 25, 10),
-          width: MediaQuery.of(context).size.width * 1,
-          height: 2,
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: 1,
           decoration: const BoxDecoration(
-            color: Color.fromARGB(153, 0, 0, 0),
+            color: Colors.black,
           ),
         ),
       ],
