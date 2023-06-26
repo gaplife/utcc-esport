@@ -29,4 +29,6 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/topup': (context) => const Topup(),
   '/afterregis': (context) => const Afterregis(),
   '/tablecomp': (context) => const Tabelcomp(),
+  '/orgprofile': (context) => const OrganizerProfile(),
+  '/orgeditprofile': (context) => const OrganizerEditProfile(),
 };

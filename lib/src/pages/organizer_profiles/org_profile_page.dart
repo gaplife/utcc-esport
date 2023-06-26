@@ -5,23 +5,23 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:collection/collection.dart';
 
-class Profiles extends StatefulWidget {
-  const Profiles({super.key});
+class OrganizerProfile extends StatefulWidget {
+  const OrganizerProfile({super.key});
 
   @override
-  State<Profiles> createState() => _ProfilesState();
+  State<OrganizerProfile> createState() => _OrganizerProfileState();
 }
 
-class _ProfilesState extends State<Profiles> {
+class _OrganizerProfileState extends State<OrganizerProfile> {
   final auth = FirebaseAuth.instance;
   final profilefont = 'Kanit';
-  //final usename = FirebaseFirestore.instance;
   String? userID;
   String? userEmail;
+
   @override
   void initState() {
     super.initState();
-    getUserData(); // เรียกเมธอดเพื่อดึงข้อมูลผู้ใช้งาน
+    getUserData();
   }
 
   Future<void> getUserData() async {
@@ -67,7 +67,7 @@ class _ProfilesState extends State<Profiles> {
             ],
           ),
         ),
-        backgroundColor: const Color(0xff0c1629),
+        backgroundColor: Colors.black,
       ),
       body: SizedBox(
         child: Form(
@@ -79,7 +79,8 @@ class _ProfilesState extends State<Profiles> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _headprofile(),
-                    _buttonregistercom(),
+                    _buttonmycomp(),
+                    _buttonbalance(),
                     _buttonsettingprofile(),
                     _buttonsetuppayment(),
                     _buttonsetuppassword(),
@@ -309,13 +310,13 @@ class _ProfilesState extends State<Profiles> {
     }
   }
 
-  Widget _buttonregistercom() {
+  Widget _buttonmycomp() {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
       width: MediaQuery.of(context).size.width * 0.9,
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/registercomp');
+          Navigator.pushNamed(context, '/mycomp');
         },
         child: Row(
           children: [
@@ -323,7 +324,42 @@ class _ProfilesState extends State<Profiles> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'การแข่งขันที่ลงทะเบียน',
+                  'รายการแข่งที่สร้าง',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: MediaQuery.of(context).size.height * 0.025,
+                    fontFamily: profilefont,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.black,
+              size: MediaQuery.of(context).size.height * 0.025,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buttonbalance() {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+      width: MediaQuery.of(context).size.width * 0.9,
+      child: TextButton(
+        onPressed: () {
+          //Navigator.pushNamed(context, '/setuppayment');
+        },
+        child: Row(
+          children: [
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'ยอดเงินคงเหลือ',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: MediaQuery.of(context).size.height * 0.025,
@@ -350,7 +386,7 @@ class _ProfilesState extends State<Profiles> {
       width: MediaQuery.of(context).size.width * 0.9,
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/editprofile');
+          Navigator.pushNamed(context, '/orgeditprofile');
         },
         child: Row(
           children: [

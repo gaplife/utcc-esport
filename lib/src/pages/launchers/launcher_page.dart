@@ -19,7 +19,6 @@ class _LauncherState extends State<Launcher> {
     const News(),
     const Allcompetition(),
     const Profiles(),
-    const Contentnews(),
   ];
 
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[
