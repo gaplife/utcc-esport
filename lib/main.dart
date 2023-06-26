@@ -8,7 +8,7 @@ Future<Null> main() async {
   await Firebase.initializeApp().then((value) async {
     await FirebaseAuth.instance.authStateChanges().listen((event) {
       if (event != null) {
-        initialRoute = '/launcher';
+        initialRoute = '/orglauncher';
       }
       runApp(const App());
     });
