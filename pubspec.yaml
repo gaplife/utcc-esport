@@ -47,6 +47,7 @@ dependencies:
   tournament_bracket: ^0.0.4
   collection: ^1.15.0
   firebase_storage: ^11.2.3
+  date_time_picker: ^2.1.0
 
 flutter_icons:
   android: true
