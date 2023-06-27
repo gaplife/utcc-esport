@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:utcc_esport/src/constants/asset.dart';
 
 class CreateCompetition extends StatefulWidget {
   const CreateCompetition({super.key});
@@ -142,6 +143,168 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                 fontSize: 18,
               ),
             ),
+            SizedBox(height: _sizeBox),
+            TextFormField(
+              decoration: InputDecoration(
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    Asset.LOGO_IMAGE,
+                    scale: MediaQuery.of(context).size.width * 0.025,
+                  ),
+                ),
+                hintText: "จำนวนเหรียญ",
+                contentPadding: EdgeInsets.all(18),
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+              autocorrect: false,
+              onSaved: (String? fee) {},
+            ),
+            SizedBox(height: _sizeBox),
+            const Text(
+              "ระยะเวลาที่รับสมัคร",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: _sizeBox),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                      );
+                    },
+                    child: Text("เริ่ม")),
+              ],
+            ),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                      );
+                    },
+                    child: Text("สิ้นสุด")),
+              ],
+            ),
+            SizedBox(height: _sizeBox),
+            const Text(
+              "ระยะเวลาการแข่งขัน",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: _sizeBox),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                      );
+                    },
+                    child: Text("เริ่ม")),
+              ],
+            ),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                      );
+                    },
+                    child: Text("สิ้นสุด")),
+              ],
+            ),
+            SizedBox(height: _sizeBox),
+            const Text(
+              "รายละเอียด",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: _sizeBox),
+            TextFormField(
+              maxLength: 200,
+              maxLines: 5,
+              decoration: const InputDecoration(
+                hintText: "รายละเอียด",
+                contentPadding: EdgeInsets.all(18),
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.text,
+              autocorrect: false,
+              onSaved: (String? detail) {},
+            ),
+            SizedBox(height: _sizeBox),
+            const Text(
+              "กฏการแข่งขัน",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: _sizeBox),
+            TextFormField(
+              maxLength: 200,
+              maxLines: 5,
+              decoration: const InputDecoration(
+                hintText: "กฏการแข่งขัน",
+                contentPadding: EdgeInsets.all(18),
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.text,
+              autocorrect: false,
+              onSaved: (String? rule) {},
+            ),
+            SizedBox(height: _sizeBox),
+            const Text(
+              "รางวัล",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: _sizeBox),
+            TextFormField(
+              decoration: const InputDecoration(
+                hintText: "จำนวนเงิน(บาท)",
+                contentPadding: EdgeInsets.all(18),
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+              autocorrect: false,
+              onSaved: (String? prize) {},
+            ),
+            SizedBox(height: _sizeBox),
+            const Text(
+              "อัพโหลดรูปภาพ",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            SizedBox(height: _sizeBox),
           ],
         ),
       ),
