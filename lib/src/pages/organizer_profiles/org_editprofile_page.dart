@@ -5,20 +5,19 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Editprofile extends StatefulWidget {
-  const Editprofile({super.key});
+class OrganizerEditProfile extends StatefulWidget {
+  const OrganizerEditProfile({super.key});
 
   @override
-  State<Editprofile> createState() => _EditprofileState();
+  State<OrganizerEditProfile> createState() => _OrganizerEditProfileState();
 }
 
-class _EditprofileState extends State<Editprofile> {
+class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
   FirebaseAuth auth = FirebaseAuth.instance;
   String? userEmail;
   String? userID;
   String? _profileImageUrl;
-  String newUserName = ""; // เพิ่มตัวแปรสำหรับเก็บชื่อใหม่ที่จะแก้ไข
-
+  String? newUserName;
   @override
   void initState() {
     super.initState();
@@ -58,7 +57,7 @@ class _EditprofileState extends State<Editprofile> {
             ],
           ),
         ),
-        backgroundColor: const Color(0xFF0C1629),
+        backgroundColor: Colors.black,
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -391,7 +390,7 @@ class _EditprofileState extends State<Editprofile> {
             ),
           ),
           onPressed: () async {
-            if (newUserName.isNotEmpty) {
+            if (newUserName!.isNotEmpty) {
               _updateUsername();
             }
             _editprofilesuccess();
@@ -501,14 +500,4 @@ class _EditprofileState extends State<Editprofile> {
       },
     );
   }
-
-  // void checkUserId() {
-  //   if (auth.currentUser != null) {
-  //     // ดึง User ID (UID) ของผู้ใช้ปัจจุบัน
-  //     String uid = auth.currentUser!.uid;
-  //     print('User ID: $uid');
-  //   } else {
-  //     print('ไม่มีผู้ใช้ล็อกอินอยู่');
-  //   }
-  // }
 }

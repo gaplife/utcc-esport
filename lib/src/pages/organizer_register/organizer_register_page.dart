@@ -23,7 +23,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   CollectionReference userCollection =
-  FirebaseFirestore.instance.collection("Users");
+      FirebaseFirestore.instance.collection("Users");
 
   final _passwordController = TextEditingController();
   //final _date = TextEditingController();
@@ -59,7 +59,10 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
               title: const Text(
                 "ลงทะเบียนผู้จัดแข่ง",
                 style: TextStyle(
-                    color: Color(0xFFA31E21), fontSize: 22, fontFamily: 'Kanit',fontWeight: FontWeight.w800),
+                    color: Color(0xFFA31E21),
+                    fontSize: 22,
+                    fontFamily: 'Kanit',
+                    fontWeight: FontWeight.w800),
               ),
               centerTitle: true,
               backgroundColor: const Color.fromARGB(255, 249, 249, 249),
@@ -243,7 +246,6 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
     );
   }
 
-
   Widget _buttonconfirm() {
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
@@ -259,38 +261,35 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
             if (isChecked) {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-                userCollection.add({
-                  "username": profile.username,
-                  "email": profile.email,
-                  "password": profile.password,
-                  "userType" : "Organizer",
-
-                });
                 try {
                   await FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
                     email: profile.email!,
                     password: profile.password!,
                   )
-                      .then((value) {
+                      .then((userCredential) {
+                    final String userID =
+                        FirebaseAuth.instance.currentUser!.uid;
+
+                    userCollection.doc(userID).set({
+                      "userID": userID,
+                      "username": profile.username,
+                      "email": profile.email,
+                      "password": profile.password,
+                      "userType": "Organizer",
+                      "profileImageUrl": profile.profileImageUrl,
+                    });
+                    _registersuccess();
                     formKey.currentState!.reset();
-                    Fluttertoast.showToast(
-                        msg: "ลงทะเบียนสำเร็จ",
-                        gravity: ToastGravity.SNACKBAR);
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      '/organizer_login',
-                          (route) => false,
-                    );
                   });
                 } on FirebaseAuthException catch (e) {
                   String? messageemailerror;
                   if (e.code == 'email-already-in-use') {
                     messageemailerror =
-                    "มีอีเมลนี้ในระบบแล้ว โปรดใช้อีเมลอื่นแทน";
+                        "มีอีเมลนี้ในระบบแล้ว โปรดใช้อีเมลอื่นแทน";
                   } else if (e.code == 'weak-password') {
                     messageemailerror =
-                    "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
+                        "รหัสผ่านต้องมีความยาว 6 ตัวอักษรขึ้นไป";
                   } else {
                     messageemailerror = e.message;
                   }
@@ -411,6 +410,104 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
           ],
         ),
       ),
+    );
+  }
+
+  void _registersuccess() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          insetPadding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width * 0.05,
+              0,
+              MediaQuery.of(context).size.width * 0.05,
+              0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Container(
+            margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.27,
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: MediaQuery.of(context).size.width * 0.15,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ลงทะเบียนสำเร็จ !',
+                      style: TextStyle(
+                        //color: Color.fromARGB(0, 0, 0, 0),
+                        fontSize: MediaQuery.of(context).size.width * 0.052,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'กรุณาตรวจสอบอีเมลเพื่อยืนยัน',
+                      style: TextStyle(
+                        //color: Color.fromARGB(0, 0, 0, 0),
+                        fontSize: MediaQuery.of(context).size.width * 0.052,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 15),
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xffa31e21),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        '/organizer_login',
+                        (route) => false,
+                      );
+                    },
+                    child: Text(
+                      'ปิด',
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        fontSize: MediaQuery.of(context).size.width * 0.046,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

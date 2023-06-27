@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/pages/pages.dart';
 
-
 class OrgLauncher extends StatefulWidget {
   const OrgLauncher({super.key});
 
@@ -15,7 +14,7 @@ class _OrgLauncherState extends State<OrgLauncher> {
     const OrgHomePage(),
     const Mycomp(),
     const OrgAllComp(),
-    const Profiles(),
+    const OrganizerProfile(),
   ];
 
   final List<BottomNavigationBarItem> _menuBar = <BottomNavigationBarItem>[
