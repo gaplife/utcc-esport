@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _OganizerLoginState extends State<OganizerLogin> {
   final formKey = GlobalKey<FormState>();
   Profile profile = Profile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
-
+  BuildContext? buttonContext;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -196,6 +197,7 @@ class _OganizerLoginState extends State<OganizerLogin> {
   }
 
   Widget _buttonconfirm() {
+    buttonContext = context;
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.06, left: 20, right: 20),
@@ -211,24 +213,45 @@ class _OganizerLoginState extends State<OganizerLogin> {
             if (formKey.currentState!.validate()) {
               formKey.currentState!.save();
               try {
-                await FirebaseAuth.instance
-                    .signInWithEmailAndPassword(
-                  email: profile.email!,
-                  password: profile.password!,
-                )
-                    .then((value) {
-                  formKey.currentState!.reset();
-                  Fluttertoast.showToast(
-                      msg: "เข้าสู่ระบบสำเร็จ", gravity: ToastGravity.CENTER);
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/orglauncher',
-                    (route) => false,
-                  );
-                });
+                if (buttonContext != null) {
+                  await FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                    email: profile.email!,
+                    password: profile.password!,
+                  )
+                      .then((value) async {
+                    formKey.currentState!.reset();
+                    String uid = FirebaseAuth.instance.currentUser!.uid;
+                    DocumentSnapshot userSnapshot = await FirebaseFirestore
+                        .instance
+                        .collection('Users')
+                        .doc(uid)
+                        .get();
+
+                    if (userSnapshot.exists) {
+                      String userType = userSnapshot.get('userType');
+                      if (userType == 'Player') {
+                        Fluttertoast.showToast(
+                          msg: 'กรุณาใช้อีเมลสำหรับเข้าสู่ระบบผู้จัดการแข่งขัน',
+                          gravity: ToastGravity.SNACKBAR,
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: 'เข้าสู่ระบบสำเร็จ',
+                          gravity: ToastGravity.CENTER,
+                        );
+                        Navigator.pushNamedAndRemoveUntil(
+                          buttonContext!,
+                          '/orglauncher',
+                          (route) => false,
+                        );
+                      }
+                    }
+                  });
+                }
               } on FirebaseAuthException {
                 Fluttertoast.showToast(
-                  msg: 'อีเมล หรือ รหัสผ่านไม่ถูกต้อง',
+                  msg: 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
                   gravity: ToastGravity.SNACKBAR,
                 );
               }

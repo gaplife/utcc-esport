@@ -132,15 +132,14 @@ class _EditprofileState extends State<Editprofile> {
       final storageRef = FirebaseStorage.instance
           .ref()
           .child('users_photo')
-          .child(userEmail!) // ใช้ userEmail ในการกำหนดเป็นชื่อไฟล์
-          .child('profile.jpg'); // เลือกชื่อไฟล์ที่ต้องการ
+          .child(userEmail!)
+          .child('profile.jpg');
 
       final task = storageRef.putFile(File(image.path));
 
       try {
         final snapshot = await task.whenComplete(() {});
         final imageUrl = await snapshot.ref.getDownloadURL();
-        print('URL : $imageUrl');
 
         setState(() {
           _profileImageUrl = imageUrl; // เก็บ URL รูปภาพลงในตัวแปร

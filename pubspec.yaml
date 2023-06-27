@@ -47,7 +47,11 @@ dependencies:
   tournament_bracket: ^0.0.4
   collection: ^1.15.0
   firebase_storage: ^11.2.3
+<<<<<<< HEAD
+  email_validator: ^2.1.17
+=======
   date_time_picker: ^2.1.0
+>>>>>>> a58d98a9c22f02bacfb55b6e06ef5940dadd19e1
 
 flutter_icons:
   android: true
