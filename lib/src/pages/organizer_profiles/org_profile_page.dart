@@ -456,7 +456,7 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
       width: MediaQuery.of(context).size.width * 0.9,
       child: TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/editpassword');
+          Navigator.pushNamed(context, '/orgeditpassword');
         },
         child: Row(
           children: [

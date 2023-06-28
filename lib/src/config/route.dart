@@ -31,4 +31,5 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/tablecomp': (context) => const Tabelcomp(),
   '/orgprofile': (context) => const OrganizerProfile(),
   '/orgeditprofile': (context) => const OrganizerEditProfile(),
+  '/orgeditpassword': (context) => const OrganizerEditPassword(),
 };

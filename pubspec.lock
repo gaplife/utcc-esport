@@ -137,16 +137,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-<<<<<<< HEAD
-  email_validator:
-    dependency: "direct main"
-    description:
-      name: email_validator
-      sha256: e9a90f27ab2b915a27d7f9c2a7ddda5dd752d6942616ee83529b686fc086221b
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.17"
-=======
   date_time_picker:
     dependency: "direct main"
     description:
@@ -155,7 +145,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
->>>>>>> a58d98a9c22f02bacfb55b6e06ef5940dadd19e1
   fake_async:
     dependency: transitive
     description:
