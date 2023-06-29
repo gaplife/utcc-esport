@@ -16,7 +16,7 @@ class _MycompState extends State<Mycomp> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 75,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: const Padding(
           padding: EdgeInsets.only(left: 10),
           child: Row(
@@ -156,7 +156,7 @@ class _MycompState extends State<Mycomp> {
                                 image: DecorationImage(
                                   fit: BoxFit.contain,
                                   image: NetworkImage(
-                                      'https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.6435-9/42195217_1155168591316184_8245855647996837888_n.png?_nc_cat=105&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGJ0Gu6chQ4tG_lG0FLq-3YAAGwZ_E8HkYAAbBn8TweRgTNNkou7p7Xo5-GL1NGE5eNhKLRvLJUh-Du21dB0msY&_nc_ohc=ZQRStCOETRkAX8ebUrU&_nc_ht=scontent.fbkk22-2.fna&oh=00_AfCt6oonE4TuMBY8l0Ync0n_tendIjIIYnDG6M6lVjxOcw&oe=649D9725'),
+                                      'https://is2-ssl.mzstatic.com/image/thumb/Purple128/v4/af/0b/13/af0b13c2-859a-219e-5a49-6da8c35ee597/source/512x512bb.jpg'),
                                 ),
                               ),
                             ),

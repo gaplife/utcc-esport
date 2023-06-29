@@ -28,3 +28,5 @@ export 'organizer/org_allcomp_page.dart';
 export 'organizer_profiles/org_profile_page.dart';
 export 'organizer_profiles/org_editprofile_page.dart';
 export 'organizer_profiles/org_editpassword_page.dart';
+export 'organizer_profiles/org_balance_page.dart';
+export 'organizer_profiles/org_contacme.dart';

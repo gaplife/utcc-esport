@@ -351,7 +351,7 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
       width: MediaQuery.of(context).size.width * 0.9,
       child: TextButton(
         onPressed: () {
-          //Navigator.pushNamed(context, '/setuppayment');
+          Navigator.pushNamed(context, '/orgbalance');
         },
         child: Row(
           children: [
@@ -493,7 +493,7 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/contactme');
+              Navigator.pushNamed(context, '/orgcontacme');
             },
             child: Row(
               children: [

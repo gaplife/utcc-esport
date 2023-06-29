@@ -32,4 +32,6 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/orgprofile': (context) => const OrganizerProfile(),
   '/orgeditprofile': (context) => const OrganizerEditProfile(),
   '/orgeditpassword': (context) => const OrganizerEditPassword(),
+  '/orgbalance': (context) => const OrganizerBalance(),
+  '/orgcontacme': (context) => const OrganizerContacme(),
 };
