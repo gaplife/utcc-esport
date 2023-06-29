@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/provider/competition_provider.dart';
+import 'package:intl/intl.dart';
 
 class CreateCompetition extends StatefulWidget {
   const CreateCompetition({super.key});
@@ -25,6 +26,12 @@ class _CreateCompetitionState extends State<CreateCompetition> {
     'RPG',
     'BTR',
   ];
+
+  String formatedDate(date) {
+    final outPutDateFormat = DateFormat('dd/MM/yyyy');
+    final outPutDate = outPutDateFormat.format(date);
+    return outPutDate;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +84,11 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                     child: Text(e),
                   );
                 }).toList(),
-                onChanged: (String? value) {}),
+                onChanged: (value) {
+                  setState(() {
+                    _competitionProvider.getFromData(compType: value);
+                  });
+                }),
             SizedBox(height: _sizeBox),
             const Text(
               "จำนวนผู้เข้าแข่งขัน",
@@ -99,7 +110,12 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                     child: Text(e.toString()),
                   );
                 }).toList(),
-                onChanged: (int? value) {}),
+                onChanged: (value) {
+                  setState(() {
+                    _competitionProvider.getFromData(
+                        compAmount: int.parse(value.toString()));
+                  });
+                }),
             SizedBox(height: _sizeBox),
             const Text(
               "ชื่อเกม",
@@ -117,7 +133,9 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               ),
               keyboardType: TextInputType.text,
               autocorrect: false,
-              onSaved: (String? gamename) {},
+              onChanged: (value) {
+                _competitionProvider.getFromData(gameName: value);
+              },
             ),
             SizedBox(height: _sizeBox),
             const Text(
@@ -140,7 +158,11 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                     child: Text(e),
                   );
                 }).toList(),
-                onChanged: (String? value) {}),
+                onChanged: (value) {
+                  setState(() {
+                    _competitionProvider.getFromData(gameType: value);
+                  });
+                }),
             SizedBox(height: _sizeBox),
             const Text(
               "ค่าธรรมเนียม",
@@ -165,7 +187,9 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               ),
               keyboardType: TextInputType.number,
               autocorrect: false,
-              onSaved: (String? fee) {},
+              onChanged: (value) {
+                _competitionProvider.getFromData(fee: int.parse(value));
+              },
             ),
             SizedBox(height: _sizeBox),
             const Text(
@@ -179,15 +203,27 @@ class _CreateCompetitionState extends State<CreateCompetition> {
             Row(
               children: [
                 TextButton(
-                    onPressed: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                      );
-                    },
-                    child: Text("เริ่ม")),
+                  onPressed: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2100),
+                    ).then((value) {
+                      setState(() {
+                        _competitionProvider.getFromData(applyStartDate: value);
+                      });
+                    });
+                  },
+                  child: const Text("เริ่ม"),
+                ),
+                if (_competitionProvider.competitionData['applyStartDate'] !=
+                    null)
+                  Text(
+                    formatedDate(
+                      _competitionProvider.competitionData['applyStartDate'],
+                    ),
+                  ),
               ],
             ),
             Row(
@@ -199,9 +235,20 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now(),
                         lastDate: DateTime(2100),
-                      );
+                      ).then((value) {
+                        setState(() {
+                          _competitionProvider.getFromData(applyEndDate: value);
+                        });
+                      });
                     },
                     child: Text("สิ้นสุด")),
+                if (_competitionProvider.competitionData['applyEndDate'] !=
+                    null)
+                  Text(
+                    formatedDate(
+                      _competitionProvider.competitionData['applyEndDate'],
+                    ),
+                  ),
               ],
             ),
             SizedBox(height: _sizeBox),
@@ -216,15 +263,27 @@ class _CreateCompetitionState extends State<CreateCompetition> {
             Row(
               children: [
                 TextButton(
-                    onPressed: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                      );
-                    },
-                    child: Text("เริ่ม")),
+                  onPressed: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2100),
+                    ).then((value) {
+                      setState(() {
+                        _competitionProvider.getFromData(compStartDate: value);
+                      });
+                    });
+                  },
+                  child: Text("เริ่ม"),
+                ),
+                if (_competitionProvider.competitionData['compStartDate'] !=
+                    null)
+                  Text(
+                    formatedDate(
+                      _competitionProvider.competitionData['compStartDate'],
+                    ),
+                  ),
               ],
             ),
             Row(
@@ -236,9 +295,20 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now(),
                         lastDate: DateTime(2100),
-                      );
+                      ).then((value) {
+                        setState(() {
+                          _competitionProvider.getFromData(compEndDate: value);
+                        });
+                      });
                     },
-                    child: Text("สิ้นสุด")),
+                    child: Text("สิ้นสุด"),),
+                if (_competitionProvider.competitionData['compEndDate'] !=
+                    null)
+                  Text(
+                    formatedDate(
+                      _competitionProvider.competitionData['compEndDate'],
+                    ),
+                  ),
               ],
             ),
             SizedBox(height: _sizeBox),
@@ -260,7 +330,9 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               ),
               keyboardType: TextInputType.text,
               autocorrect: false,
-              onSaved: (String? detail) {},
+              onChanged: (value) {
+                _competitionProvider.getFromData(compDetail: value);
+              },
             ),
             SizedBox(height: _sizeBox),
             const Text(
@@ -281,7 +353,9 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               ),
               keyboardType: TextInputType.text,
               autocorrect: false,
-              onSaved: (String? rule) {},
+              onChanged: (value) {
+                _competitionProvider.getFromData(compRule: value);
+              },
             ),
             SizedBox(height: _sizeBox),
             const Text(
@@ -300,7 +374,9 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               ),
               keyboardType: TextInputType.number,
               autocorrect: false,
-              onSaved: (String? prize) {},
+              onChanged: (value) {
+                _competitionProvider.getFromData(prize: int.parse(value));
+              },
             ),
             SizedBox(height: _sizeBox),
             const Text(
@@ -323,6 +399,14 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                   ),
                   onPressed: () {
                     print(_competitionProvider.competitionData['compName']);
+                    print(_competitionProvider.competitionData['compType']);
+                    print(_competitionProvider.competitionData['compAmount']);
+                    print(_competitionProvider.competitionData['gameName']);
+                    print(_competitionProvider.competitionData['gameType']);
+                    print(_competitionProvider.competitionData['fee']);
+                    print(_competitionProvider.competitionData['compDetail']);
+                    print(_competitionProvider.competitionData['compRule']);
+                    print(_competitionProvider.competitionData['prize']);
                   },
                   child: const Text(
                     "ยืนยันการสร้างรายการแข่งขัน",
