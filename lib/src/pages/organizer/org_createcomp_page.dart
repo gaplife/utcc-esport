@@ -37,11 +37,10 @@ class _CreateCompState extends State<CreateComp> {
       body: const SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            CreateCompetition(),
+            // CreateCompetition(),
           ],
         ),
       ),
-
     );
   }
 }

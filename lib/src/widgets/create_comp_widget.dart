@@ -289,21 +289,21 @@ class _CreateCompetitionState extends State<CreateCompetition> {
             Row(
               children: [
                 TextButton(
-                    onPressed: () {
-                      showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                      ).then((value) {
-                        setState(() {
-                          _competitionProvider.getFromData(compEndDate: value);
-                        });
+                  onPressed: () {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2100),
+                    ).then((value) {
+                      setState(() {
+                        _competitionProvider.getFromData(compEndDate: value);
                       });
-                    },
-                    child: Text("สิ้นสุด"),),
-                if (_competitionProvider.competitionData['compEndDate'] !=
-                    null)
+                    });
+                  },
+                  child: Text("สิ้นสุด"),
+                ),
+                if (_competitionProvider.competitionData['compEndDate'] != null)
                   Text(
                     formatedDate(
                       _competitionProvider.competitionData['compEndDate'],
