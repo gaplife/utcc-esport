@@ -227,7 +227,7 @@ class CompetitionWidget extends StatelessWidget {
                             child: Text(
                               'ดูเพิ่มเติม',
                               style: TextStyle(
-                                color: const Color.fromARGB(255, 248, 0, 0),
+                                color: const Color(0xffa31e21),
                                 fontSize:
                                     MediaQuery.of(context).size.width * 0.032,
                                 fontFamily: 'Kanit',
