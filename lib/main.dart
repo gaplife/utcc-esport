@@ -25,47 +25,39 @@ Future<Null> main() async {
         String? userType = await getUserTypeFromFirestore(user.uid);
         if (userType == 'Player') {
           initialRoute = '/launcher';
-          runApp(MultiProvider(
-              providers: [
-                ChangeNotifierProvider(
-                  create: (_) {
-                    return CompetitionProvider();
-                  },
-                ),
-              ],
-              child: const App()));
+          runApp(MultiProvider(providers: [
+            ChangeNotifierProvider(
+              create: (_) {
+                return CompetitionProvider();
+              },
+            ),
+          ], child: const App()));
         } else if (userType == 'Organizer') {
           initialRoute = '/orglauncher';
-          runApp(MultiProvider(
-            providers: [
-              ChangeNotifierProvider(
-                create: (_) {
-                  return CompetitionProvider();
-                },
-              ),
-            ],
-              child: const App()));
+          runApp(MultiProvider(providers: [
+            ChangeNotifierProvider(
+              create: (_) {
+                return CompetitionProvider();
+              },
+            ),
+          ], child: const App()));
         } else {
-          runApp(MultiProvider(
-              providers: [
-                ChangeNotifierProvider(
-                  create: (_) {
-                    return CompetitionProvider();
-                  },
-                ),
-              ],
-              child: const App()));
+          runApp(MultiProvider(providers: [
+            ChangeNotifierProvider(
+              create: (_) {
+                return CompetitionProvider();
+              },
+            ),
+          ], child: const App()));
         }
       } else {
-        runApp(MultiProvider(
-            providers: [
-              ChangeNotifierProvider(
-                create: (_) {
-                  return CompetitionProvider();
-                },
-              ),
-            ],
-            child: const App()));
+        runApp(MultiProvider(providers: [
+          ChangeNotifierProvider(
+            create: (_) {
+              return CompetitionProvider();
+            },
+          ),
+        ], child: const App()));
       }
     });
   });

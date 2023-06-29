@@ -19,8 +19,8 @@ class CompetitionWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color:
-            const Color.fromARGB(255, 0, 0, 0), // เปลี่ยนสีเส้นรอบกรอบที่นี่
+            color: const Color.fromARGB(
+                255, 0, 0, 0), // เปลี่ยนสีเส้นรอบกรอบที่นี่
             width: 1, // กำหนดความหนาของเส้นรอบกรอบ
           ),
         ),
@@ -81,7 +81,7 @@ class CompetitionWidget extends StatelessWidget {
                             image: DecorationImage(
                               fit: BoxFit.contain,
                               image: NetworkImage(
-                                  'https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.6435-9/42195217_1155168591316184_8245855647996837888_n.png?_nc_cat=105&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGJ0Gu6chQ4tG_lG0FLq-3YAAGwZ_E8HkYAAbBn8TweRgTNNkou7p7Xo5-GL1NGE5eNhKLRvLJUh-Du21dB0msY&_nc_ohc=ZQRStCOETRkAX8ebUrU&_nc_ht=scontent.fbkk22-2.fna&oh=00_AfCt6oonE4TuMBY8l0Ync0n_tendIjIIYnDG6M6lVjxOcw&oe=649D9725'),
+                                  'https://is2-ssl.mzstatic.com/image/thumb/Purple128/v4/af/0b/13/af0b13c2-859a-219e-5a49-6da8c35ee597/source/512x512bb.jpg'),
                             ),
                           ),
                         ),
@@ -92,13 +92,13 @@ class CompetitionWidget extends StatelessWidget {
                               'FIFA Online 4',
                               style: TextStyle(
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.037,
+                                    MediaQuery.of(context).size.width * 0.037,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w600,
                                 height: 1,
                               ),
-                              overflow:
-                              TextOverflow.ellipsis, // เพิ่ม Overflow ที่นี่
+                              overflow: TextOverflow
+                                  .ellipsis, // เพิ่ม Overflow ที่นี่
                               maxLines: 1,
                             ),
                           ),
@@ -115,7 +115,7 @@ class CompetitionWidget extends StatelessWidget {
                               'SPORT',
                               style: TextStyle(
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.035,
+                                    MediaQuery.of(context).size.width * 0.035,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w600,
                                 height: 1.2,
@@ -145,7 +145,8 @@ class CompetitionWidget extends StatelessWidget {
                           child: Text(
                             '110,000 บาท',
                             style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width * 0.037,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.037,
                               fontFamily: 'Kanit',
                               fontWeight: FontWeight.w600,
                               //height: 1,
@@ -176,7 +177,8 @@ class CompetitionWidget extends StatelessWidget {
                           child: Text(
                             'เดี่ยว',
                             style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width * 0.037,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.037,
                               fontFamily: 'Kanit',
                               fontWeight: FontWeight.w600,
                               //height: 1.1,
@@ -203,7 +205,7 @@ class CompetitionWidget extends StatelessWidget {
                               '500',
                               style: TextStyle(
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.037,
+                                    MediaQuery.of(context).size.width * 0.037,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -227,7 +229,7 @@ class CompetitionWidget extends StatelessWidget {
                               style: TextStyle(
                                 color: const Color.fromARGB(255, 248, 0, 0),
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.032,
+                                    MediaQuery.of(context).size.width * 0.032,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w600,
                               ),

@@ -41,7 +41,6 @@ class _CreateCompState extends State<CreateComp> {
           ],
         ),
       ),
-
     );
   }
 }

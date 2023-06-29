@@ -390,7 +390,7 @@ class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
             ),
           ),
           onPressed: () async {
-            if (newUserName!.isNotEmpty) {
+            if (newUserName != null) {
               _updateUsername();
             }
             _editprofilesuccess();
@@ -479,8 +479,9 @@ class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
                     ),
                     onPressed: () {
                       Navigator.popUntil(
-                          context, ModalRoute.withName('/editprofile'));
-                      Navigator.pushReplacementNamed(context, '/editprofile');
+                          context, ModalRoute.withName('/orgeditprofile'));
+                      Navigator.pushReplacementNamed(
+                          context, '/orgeditprofile');
                     },
                     child: Text(
                       'ยืนยัน',
