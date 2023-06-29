@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
+import 'package:utcc_esport/src/provider/competition_provider.dart';
 
 class CreateCompetition extends StatefulWidget {
   const CreateCompetition({super.key});
@@ -26,6 +28,8 @@ class _CreateCompetitionState extends State<CreateCompetition> {
 
   @override
   Widget build(BuildContext context) {
+    final CompetitionProvider _competitionProvider =
+        Provider.of<CompetitionProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: SingleChildScrollView(
@@ -48,7 +52,9 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               ),
               keyboardType: TextInputType.text,
               autocorrect: false,
-              onSaved: (String? compname) {},
+              onChanged: (value) {
+                _competitionProvider.getFromData(compName: value);
+              },
             ),
             SizedBox(height: _sizeBox),
             const Text(
@@ -305,6 +311,29 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               ),
             ),
             SizedBox(height: _sizeBox),
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.07,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    backgroundColor: const Color(0xFFA31E21),
+                  ),
+                  onPressed: () {
+                    print(_competitionProvider.competitionData['compName']);
+                  },
+                  child: const Text(
+                    "ยืนยันการสร้างรายการแข่งขัน",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

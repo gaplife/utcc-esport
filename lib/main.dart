@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:utcc_esport/src/app.dart';
+import 'package:utcc_esport/src/provider/competition_provider.dart';
 
 Future<String?> getUserTypeFromFirestore(String uid) async {
   DocumentSnapshot<Map<String, dynamic>> snapshot =
@@ -23,15 +25,39 @@ Future<Null> main() async {
         String? userType = await getUserTypeFromFirestore(user.uid);
         if (userType == 'Player') {
           initialRoute = '/launcher';
-          runApp(const App());
+          runApp(MultiProvider(providers: [
+            ChangeNotifierProvider(
+              create: (_) {
+                return CompetitionProvider();
+              },
+            ),
+          ], child: const App()));
         } else if (userType == 'Organizer') {
           initialRoute = '/orglauncher';
-          runApp(const App());
+          runApp(MultiProvider(providers: [
+            ChangeNotifierProvider(
+              create: (_) {
+                return CompetitionProvider();
+              },
+            ),
+          ], child: const App()));
         } else {
-          runApp(const App());
+          runApp(MultiProvider(providers: [
+            ChangeNotifierProvider(
+              create: (_) {
+                return CompetitionProvider();
+              },
+            ),
+          ], child: const App()));
         }
       } else {
-        runApp(const App());
+        runApp(MultiProvider(providers: [
+          ChangeNotifierProvider(
+            create: (_) {
+              return CompetitionProvider();
+            },
+          ),
+        ], child: const App()));
       }
     });
   });
