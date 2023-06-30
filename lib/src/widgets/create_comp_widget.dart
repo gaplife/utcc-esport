@@ -391,6 +391,30 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.07,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFA31E21),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      )),
+                  onPressed: () {},
+                  label: const Text(
+                    "เลือกรูปภาพ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Kanit',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ), icon: const Icon(Icons.camera_alt),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.07,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
