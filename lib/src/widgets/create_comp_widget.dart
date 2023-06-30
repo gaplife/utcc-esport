@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/provider/competition_provider.dart';
@@ -26,6 +29,18 @@ class _CreateCompetitionState extends State<CreateCompetition> {
     'RPG',
     'BTR',
   ];
+
+  pickCompImage(ImageSource source) async {
+    final ImagePicker _imagePicker = ImagePicker();
+
+    XFile? _file = await _imagePicker.pickImage(source: source);
+
+    if (_file != null) {
+      return await _file.readAsBytes();
+    } else {
+      print("No Image Selected");
+    }
+  }
 
   String formatedDate(date) {
     final outPutDateFormat = DateFormat('dd/MM/yyyy');
