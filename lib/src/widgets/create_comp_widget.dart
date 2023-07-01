@@ -1,4 +1,10 @@
+import 'dart:typed_data';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/provider/competition_provider.dart';
@@ -12,7 +18,10 @@ class CreateCompetition extends StatefulWidget {
 }
 
 class _CreateCompetitionState extends State<CreateCompetition> {
-  final _sizeBox = 2.0;
+  final _auth = FirebaseAuth.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+  Uint8List? _image;
+  final _sizeBox = 4.0;
   final List<String> _typeList = <String>[
     'เดี่ยว',
   ];
@@ -26,6 +35,29 @@ class _CreateCompetitionState extends State<CreateCompetition> {
     'RPG',
     'BTR',
   ];
+
+  _uploadCompImageToStorage(Uint8List? image) {
+    _storage.ref().child('CompImage').child(_auth.currentUser!.uid);
+  }
+
+  pickCompImage(ImageSource source) async {
+    final ImagePicker _imagePicker = ImagePicker();
+
+    XFile? _file = await _imagePicker.pickImage(source: source);
+
+    if (_file != null) {
+      return await _file.readAsBytes();
+    } else {
+      print("No Image Selected");
+    }
+  }
+
+  selectGalleryImage() async {
+    Uint8List im = await pickCompImage(ImageSource.gallery);
+    setState(() {
+      _image = im;
+    });
+  }
 
   String formatedDate(date) {
     final outPutDateFormat = DateFormat('dd/MM/yyyy');
@@ -165,7 +197,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                 }),
             SizedBox(height: _sizeBox),
             const Text(
-              "ค่าธรรมเนียม",
+              "ค่าสมัคร",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
@@ -386,7 +418,75 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                 fontSize: 18,
               ),
             ),
-            SizedBox(height: _sizeBox),
+            const SizedBox(height: 10),
+            Center(
+              child: _image != null
+                  ? Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: MemoryImage(_image!),
+                        ),
+                      ),
+                    )
+                  : Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "ไม่มีรูปภาพ",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Kanit',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+            ),
+            const SizedBox(height: 20),
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.07,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFA31E21),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      )),
+                  onPressed: () {
+                    selectGalleryImage();
+                  },
+                  label: const Text(
+                    "เลือกรูปภาพ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Kanit',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  icon: const Icon(Icons.camera_alt),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
             Center(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
