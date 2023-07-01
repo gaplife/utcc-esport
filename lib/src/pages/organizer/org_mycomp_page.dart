@@ -82,7 +82,7 @@ class _MycompState extends State<Mycomp> {
       children: [
         InkWell(
           onTap: () {
-            Navigator.pushNamed(context, '/competition');
+            Navigator.pushNamed(context, '/detailcomp');
           },
           child: Container(
             margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
@@ -300,7 +300,7 @@ class _MycompState extends State<Mycomp> {
                                   padding: EdgeInsets.zero,
                                 ),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/competition');
+                                  Navigator.pushNamed(context, '/detailcomp');
                                 },
                                 child: Text(
                                   'ดูเพิ่มเติม',

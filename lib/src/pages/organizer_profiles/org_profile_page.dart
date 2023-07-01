@@ -201,7 +201,7 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
                                     Navigator.pushNamed(context, '/topup');
                                   },
                                   child: Text(
-                                    'เติมเงิน',
+                                    'ถอนเงิน',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize:
@@ -533,8 +533,8 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
   }
 
   Widget _buttonlogout() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+    return Container(
+      margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.065,

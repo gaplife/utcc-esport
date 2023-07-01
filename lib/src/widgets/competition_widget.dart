@@ -10,7 +10,7 @@ class CompetitionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/competition');
+        Navigator.pushNamed(context, '/detailcomp');
       },
       child: Container(
         margin: const EdgeInsets.fromLTRB(20, 5, 20, 10),
@@ -222,7 +222,7 @@ class CompetitionWidget extends StatelessWidget {
                               padding: EdgeInsets.zero,
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, '/competition');
+                              Navigator.pushNamed(context, '/detailcomp');
                             },
                             child: Text(
                               'ดูเพิ่มเติม',

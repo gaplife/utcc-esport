@@ -3,6 +3,8 @@ import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/asset.dart';
+
 class OrganizerBalance extends StatefulWidget {
   const OrganizerBalance({super.key});
 
@@ -30,6 +32,28 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
       });
     }
   }
+
+  List<Map<String, String>> dataList = [
+    {
+      'title': 'Dream League',
+      'reward': '(รางวัลที่ 1)',
+      'amount': '-5000 บาท',
+      'date': '05 มี.ค. - 13.40'
+    },
+    {
+      'title': 'Dream League',
+      'reward': '(รางวัลที่ 2)',
+      'amount': '-3000 บาท',
+      'date': '05 มี.ค. - 13.20'
+    },
+    {
+      'title': 'Dream League',
+      'reward': '(รางวัลที่ 3)',
+      'amount': '-1000 บาท',
+      'date': '05 มี.ค. - 13.00'
+    },
+    // สามารถเพิ่มข้อมูลเพิ่มเติมตามต้องการ
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +84,7 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
         child: Column(
           children: <Widget>[
             _balance(),
+            _table(dataList),
           ],
         ),
       ),
@@ -88,16 +113,16 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
           ),
           Container(
             width: MediaQuery.of(context).size.width * 0.9,
-            //height: MediaQuery.of(context).size.height * 0.25,
-            margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+            height: MediaQuery.of(context).size.height * 0.25,
+            margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
             decoration: BoxDecoration(
-                color: const Color(0xffa31e21),
+                color: const Color(0xff0c1629),
                 borderRadius: BorderRadius.circular(10)),
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: Row(
                     children: [
@@ -115,53 +140,6 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
                       ),
                       Spacer(),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        width: MediaQuery.of(context).size.width * 0.2,
-                        height: MediaQuery.of(context).size.height * 0.035,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
-                        ),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                          ),
-                          onPressed: () {
-                            //Navigator.pushNamed(context, '/topup');
-                          },
-                          child: Text(
-                            'เติมเงิน',
-                            style: TextStyle(
-                              color: const Color(0xffa31e21),
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.020,
-                              fontFamily: 'Kanit',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20, 30, 20, 0),
-                  //height: MediaQuery.of(context).size.height * 0.09,
-                  child: Text(
-                    '50,000 บาท',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: MediaQuery.of(context).size.height * 0.025,
-                      fontFamily: 'Kanit',
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20, 15, 20, 20),
-                  child: Row(
-                    children: [
-                      Container(
                           margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           //width: MediaQuery.of(context).size.width * 0.15,
                           child: StreamBuilder<QuerySnapshot>(
@@ -173,38 +151,243 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
                               return _getProfileImage(profileSnapshot);
                             },
                           )),
-                      Spacer(),
+                    ],
+                  ),
+                ),
+                Container(
+                  //margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  //height: MediaQuery.of(context).size.height * 0.09,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        width: MediaQuery.of(context).size.width * 0.2,
-                        height: MediaQuery.of(context).size.height * 0.035,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
+                        margin: const EdgeInsets.fromLTRB(5, 2, 10, 0),
+                        width: MediaQuery.of(context).size.width * 0.07,
+                        height: MediaQuery.of(context).size.height * 0.04,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xffffffff),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage(Asset.COIN_IMAGE),
+                          ),
                         ),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                          ),
-                          onPressed: () {
-                            //Navigator.pushNamed(context, '/topup');
-                          },
-                          child: Text(
-                            'ถอนเงิน',
-                            style: TextStyle(
-                              color: const Color(0xffa31e21),
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.019,
-                              fontFamily: 'Kanit',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                      ),
+                      Text(
+                        '50,000',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: MediaQuery.of(context).size.height * 0.028,
+                          fontFamily: 'Kanit',
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
                   ),
                 ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.035,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: const Color(0xffa31e21),
+                  ),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                    ),
+                    onPressed: () {
+                      //Navigator.pushNamed(context, '/topup');
+                    },
+                    child: Text(
+                      'ถอนเงิน',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: MediaQuery.of(context).size.height * 0.019,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _table(List<Map<String, String>> dataList) {
+    double tableHeight =
+        (dataList.length * MediaQuery.of(context).size.height * 0.08)
+            .toDouble();
+    return Container(
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+            child: const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'ประวัติการถอนเงิน',
+                style: TextStyle(
+                    fontFamily: 'Kanit',
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Table(
+              columnWidths: {
+                0: FractionColumnWidth(0.6),
+                1: FractionColumnWidth(0.4),
+              },
+              children: [
+                TableRow(
+                  decoration: BoxDecoration(
+                    color: const Color(0xff0c1629),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                  ),
+                  children: [
+                    TableCell(
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(20, 10, 0, 10),
+                        child: Text(
+                          'รายการแข่ง',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.019,
+                            fontFamily: 'Kanit',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    TableCell(
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        child: Text(
+                          'จำนวนเงิน',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.019,
+                            fontFamily: 'Kanit',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: tableHeight, // กำหนดความสูงของตาราง
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200, // สีพื้นหลังสำหรับตาราง
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
+            ),
+            child: Table(
+              columnWidths: {
+                0: FractionColumnWidth(0.6),
+                1: FractionColumnWidth(0.4),
+              },
+              children: dataList.map((data) {
+                return TableRow(
+                  children: [
+                    TableCell(
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(20, 5, 0, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              child: Text(
+                                data['title'] ?? '',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.019,
+                                  fontFamily: 'Kanit',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                              child: Text(
+                                data['reward'] ?? '',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.016,
+                                  fontFamily: 'Kanit',
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    TableCell(
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              child: Text(
+                                data['amount'] ?? '',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.019,
+                                  fontFamily: 'Kanit',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                              child: Text(
+                                data['date'] ?? '',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.height *
+                                      0.016,
+                                  fontFamily: 'Kanit',
+                                  fontWeight: FontWeight.w300,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }).toList(),
             ),
           ),
         ],
