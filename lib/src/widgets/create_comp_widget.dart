@@ -1,7 +1,4 @@
 import 'dart:typed_data';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/provider/competition_provider.dart';
 import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateCompetition extends StatefulWidget {
   const CreateCompetition({super.key});
@@ -18,7 +16,6 @@ class CreateCompetition extends StatefulWidget {
 }
 
 class _CreateCompetitionState extends State<CreateCompetition> {
-  final _auth = FirebaseAuth.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   Uint8List? _image;
   final _sizeBox = 4.0;
@@ -35,10 +32,6 @@ class _CreateCompetitionState extends State<CreateCompetition> {
     'RPG',
     'BTR',
   ];
-
-  _uploadCompImageToStorage(Uint8List? image) {
-    _storage.ref().child('CompImage').child(_auth.currentUser!.uid);
-  }
 
   pickCompImage(ImageSource source) async {
     final ImagePicker _imagePicker = ImagePicker();
@@ -470,8 +463,17 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       )),
-                  onPressed: () {
-                    selectGalleryImage();
+                  onPressed: () async {
+                    await selectGalleryImage().whenComplete(() async{
+                      Reference ref = _storage.ref().child('compImage').child(Uuid().v4());
+                      await ref.putData(_image!).whenComplete(() async {
+                        await ref.getDownloadURL().then((value) {
+                          setState(() {
+                            _competitionProvider.getFromData(compImageURL: value);
+                          });
+                        });
+                      });
+                    });
                   },
                   label: const Text(
                     "เลือกรูปภาพ",
@@ -486,6 +488,36 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                 ),
               ),
             ),
+            // Center(
+            //   child: SizedBox(
+            //     width: MediaQuery.of(context).size.width * 0.9,
+            //     height: MediaQuery.of(context).size.height * 0.07,
+            //     child: ElevatedButton(
+            //       style: ElevatedButton.styleFrom(
+            //         shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(5)),
+            //         backgroundColor: const Color(0xFFA31E21),
+            //       ),
+            //       onPressed: () async {
+            //         Reference ref = _storage.ref().child('compImage').child('asdasdasdad');
+            //         await ref.putData(_image!).whenComplete(() async {
+            //           await ref.getDownloadURL().then((value) {
+            //             setState(() {
+            //               _competitionProvider.getFromData(compImageURL: value);
+            //             });
+            //           });
+            //         });
+            //       },
+            //       child: const Text(
+            //         "อัพโหลด",
+            //         style: TextStyle(
+            //           fontWeight: FontWeight.bold,
+            //           fontSize: 18,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SizedBox(height: 20),
             Center(
               child: SizedBox(
@@ -507,6 +539,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                     print(_competitionProvider.competitionData['compDetail']);
                     print(_competitionProvider.competitionData['compRule']);
                     print(_competitionProvider.competitionData['prize']);
+                    print(_competitionProvider.competitionData['compImageURL']);
                   },
                   child: const Text(
                     "ยืนยันการสร้างรายการแข่งขัน",
