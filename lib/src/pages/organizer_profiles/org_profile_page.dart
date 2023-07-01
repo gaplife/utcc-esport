@@ -198,7 +198,8 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
                                     padding: EdgeInsets.zero,
                                   ),
                                   onPressed: () {
-                                    Navigator.pushNamed(context, '/topup');
+                                    Navigator.pushNamed(
+                                        context, '/orgwithdraw');
                                   },
                                   child: Text(
                                     'ถอนเงิน',
@@ -521,7 +522,7 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(25, 70, 25, 10),
+          margin: const EdgeInsets.fromLTRB(25, 15, 25, 10),
           width: MediaQuery.of(context).size.width * 0.9,
           height: 1,
           decoration: const BoxDecoration(

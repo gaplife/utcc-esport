@@ -32,3 +32,5 @@ export 'organizer_profiles/org_balance_page.dart';
 export 'organizer_profiles/org_contacme.dart';
 export 'organizer/org_listname.dart';
 export 'organizer/org_competition.dart';
+export 'organizer/org_update_comp.dart';
+export 'organizer_profiles/org_withdraw.dart';

@@ -214,7 +214,7 @@ class _ListNameState extends State<ListName> {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/listname');
+            Navigator.pushNamed(context, '/updatecomp');
           },
           child: Text(
             "อัพเดทผลการแข่งขัน",

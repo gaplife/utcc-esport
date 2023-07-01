@@ -198,7 +198,7 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
                       padding: EdgeInsets.zero,
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/topup');
+                      Navigator.pushNamed(context, '/orgwithdraw');
                     },
                     child: Text(
                       'ถอนเงิน',
