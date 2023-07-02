@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,6 +19,8 @@ class CreateCompetition extends StatefulWidget {
 class _CreateCompetitionState extends State<CreateCompetition> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseStorage _storage = FirebaseStorage.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   Uint8List? _image;
   final _sizeBox = 4.0;
   final List<String> _typeList = <String>[
@@ -275,7 +278,8 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         lastDate: DateTime(2100),
                       ).then((value) {
                         setState(() {
-                          _competitionProvider.getFromData(applyStartDate: value);
+                          _competitionProvider.getFromData(
+                              applyStartDate: value);
                         });
                       });
                     },
@@ -301,7 +305,8 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                           lastDate: DateTime(2100),
                         ).then((value) {
                           setState(() {
-                            _competitionProvider.getFromData(applyEndDate: value);
+                            _competitionProvider.getFromData(
+                                applyEndDate: value);
                           });
                         });
                       },
@@ -335,7 +340,8 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         lastDate: DateTime(2100),
                       ).then((value) {
                         setState(() {
-                          _competitionProvider.getFromData(compStartDate: value);
+                          _competitionProvider.getFromData(
+                              compStartDate: value);
                         });
                       });
                     },
@@ -367,7 +373,8 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                     },
                     child: Text("สิ้นสุด"),
                   ),
-                  if (_competitionProvider.competitionData['compEndDate'] != null)
+                  if (_competitionProvider.competitionData['compEndDate'] !=
+                      null)
                     Text(
                       formatedDate(
                         _competitionProvider.competitionData['compEndDate'],
@@ -522,8 +529,10 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         )),
                     onPressed: () async {
                       await selectGalleryImage().whenComplete(() async {
-                        Reference ref =
-                            _storage.ref().child('compImage').child(Uuid().v4());
+                        Reference ref = _storage
+                            .ref()
+                            .child('compImage')
+                            .child(Uuid().v4());
                         await ref.putData(_image!).whenComplete(() async {
                           await ref.getDownloadURL().then((value) {
                             setState(() {
@@ -588,18 +597,42 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                           borderRadius: BorderRadius.circular(5)),
                       backgroundColor: const Color(0xFFA31E21),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        print(_competitionProvider.competitionData['compName']);
-                        print(_competitionProvider.competitionData['compType']);
-                        print(_competitionProvider.competitionData['compAmount']);
-                        print(_competitionProvider.competitionData['gameName']);
-                        print(_competitionProvider.competitionData['gameType']);
-                        print(_competitionProvider.competitionData['fee']);
-                        print(_competitionProvider.competitionData['compDetail']);
-                        print(_competitionProvider.competitionData['compRule']);
-                        print(_competitionProvider.competitionData['prize']);
-                        print(_competitionProvider.competitionData['compImageURL']);
+                        final compID = Uuid().v4();
+                        await _firestore
+                            .collection('Competitions')
+                            .doc(compID)
+                            .set({
+                          'compID': compID,
+                          'compName':
+                              _competitionProvider.competitionData['compName'],
+                          'compType':
+                              _competitionProvider.competitionData['compType'],
+                          'compAmount': _competitionProvider
+                              .competitionData['compAmount'],
+                          'gameName':
+                              _competitionProvider.competitionData['gameName'],
+                          'gameType':
+                              _competitionProvider.competitionData['gameType'],
+                          'fee': _competitionProvider.competitionData['fee'],
+                          'applyStartDate': _competitionProvider
+                              .competitionData['applyStartDate'],
+                          'applyEndDate': _competitionProvider
+                              .competitionData['applyEndDate'],
+                          'compStartDate': _competitionProvider
+                              .competitionData['compStartDate'],
+                          'compEndDate': _competitionProvider
+                              .competitionData['compEndDate'],
+                          'compDetail': _competitionProvider
+                              .competitionData['compDetail'],
+                          'compRule':
+                              _competitionProvider.competitionData['compRule'],
+                          'prize':
+                              _competitionProvider.competitionData['prize'],
+                          'compImageURL': _competitionProvider
+                              .competitionData['compImageURL'],
+                        });
                       }
                     },
                     child: const Text(
