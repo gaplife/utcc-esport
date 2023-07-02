@@ -17,7 +17,7 @@ class CompetitionProvider with ChangeNotifier {
     String? compDetail,
     String? compRule,
     int? prize,
-    String? imageURL,
+    String? compImageURL,
   }) {
     if (compName != null) {
       competitionData['compName'] = compName;
@@ -58,8 +58,8 @@ class CompetitionProvider with ChangeNotifier {
     if (prize != null) {
       competitionData['prize'] = prize;
     }
-    if (imageURL != null) {
-      competitionData['imageURL'] = imageURL;
+    if (compImageURL != null) {
+      competitionData['compImageURL'] = compImageURL;
     }
   }
 }
