@@ -47,26 +47,39 @@ class _CompetitionState extends State<Competition> {
       builder: (BuildContext context) {
         return AlertDialog(
           contentPadding: EdgeInsets.zero,
-          insetPadding: EdgeInsets.fromLTRB(
-              MediaQuery.of(context).size.width * 0.05,
-              0,
-              MediaQuery.of(context).size.width * 0.05,
-              0),
+          // insetPadding: EdgeInsets.fromLTRB(
+          //     MediaQuery.of(context).size.width * 0.05,
+          //     0,
+          //     MediaQuery.of(context).size.width * 0.05,
+          //     0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
           content: Container(
-            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             width: MediaQuery.of(context).size.width * 0.9,
-            height: MediaQuery.of(context).size.height * 0.265,
+            //height: MediaQuery.of(context).size.height * 0.37,
             child: Column(
-              //mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Align(
-                    alignment: Alignment.center,
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      icon: Icon(Icons.close), // ไอคอนของปุ่มปิด
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pop(); // ปิด AlertDialog เมื่อกดปุ่มปิด
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.topCenter,
                     child: Text(
                       'ยืนยันการสมัครแข่ง',
                       style: TextStyle(
@@ -99,6 +112,34 @@ class _CompetitionState extends State<Competition> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'ชื่อภายในเกม',
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'กรุณากรอก ID LINE สำหรับใช้ติดต่อ',
+                        style: TextStyle(
+                          //color: Color.fromARGB(0, 0, 0, 0),
+                          fontSize: MediaQuery.of(context).size.width * 0.042,
+                          fontFamily: 'Kanit',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.0085),
+                      const TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'ID LINE',
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 12),
                         ),
@@ -193,8 +234,7 @@ class _CompetitionState extends State<Competition> {
                       backgroundColor: const Color(0xffa31e21),
                     ),
                     onPressed: () {
-                      Navigator.popUntil(
-                          context, ModalRoute.withName('/competition'));
+                      Navigator.pushNamed(context, '/afterregis');
                     },
                     child: Text(
                       'ยืนยัน',
@@ -262,11 +302,13 @@ class _CompetitionState extends State<Competition> {
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Color(0xffffffff),
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      image: NetworkImage(
-                          'https://is2-ssl.mzstatic.com/image/thumb/Purple128/v4/af/0b/13/af0b13c2-859a-219e-5a49-6da8c35ee597/source/512x512bb.jpg'),
-                    ),
+                  ),
+                  child: Icon(
+                    Icons
+                        .sports_esports_rounded, // สามารถเปลี่ยนเป็น Icon อื่นๆ ได้ตามต้องการ
+                    color: const Color(0xFFA31E21), // สีของ Icon
+                    size: MediaQuery.of(context).size.width *
+                        0.065, // ขนาดของ Icon
                   ),
                 ),
                 Text(

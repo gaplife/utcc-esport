@@ -81,7 +81,7 @@ class _ProfilesState extends State<Profiles> {
                     _headprofile(),
                     _buttonregistercom(),
                     _buttonsettingprofile(),
-                    _buttonsetuppayment(),
+                    // _buttonsetuppayment(),
                     _buttonsetuppassword(),
                     _buttoncontact(),
                     _buttonlogout(),
@@ -485,7 +485,7 @@ class _ProfilesState extends State<Profiles> {
           ),
         ),
         Container(
-          margin: const EdgeInsets.fromLTRB(25, 70, 25, 10),
+          margin: const EdgeInsets.fromLTRB(25, 40, 25, 10),
           width: MediaQuery.of(context).size.width * 0.9,
           height: 1,
           decoration: const BoxDecoration(
@@ -497,8 +497,8 @@ class _ProfilesState extends State<Profiles> {
   }
 
   Widget _buttonlogout() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+    return Container(
+      margin: EdgeInsets.fromLTRB(20, 20, 20, 20),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         height: MediaQuery.of(context).size.height * 0.065,
@@ -533,5 +533,3 @@ class _ProfilesState extends State<Profiles> {
     );
   }
 }
-
-

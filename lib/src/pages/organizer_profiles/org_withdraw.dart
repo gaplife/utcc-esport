@@ -117,14 +117,13 @@ class _OrganizerWithdrawState extends State<OrganizerWithdraw> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
-            readOnly: true,
             obscureText: false,
             decoration: InputDecoration(
               hintText: '-',
               contentPadding: const EdgeInsets.all(15),
               border: const OutlineInputBorder(),
             ),
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.number,
             autocorrect: false,
             onChanged: (value) {},
           ),
@@ -163,14 +162,13 @@ class _OrganizerWithdrawState extends State<OrganizerWithdraw> {
           margin: const EdgeInsets.fromLTRB(20, 5, 20, 0),
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
-            readOnly: true,
             obscureText: false,
             decoration: InputDecoration(
               hintText: '-',
               contentPadding: const EdgeInsets.all(15),
               border: const OutlineInputBorder(),
             ),
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.number,
             autocorrect: false,
             onChanged: (value) {},
           ),
