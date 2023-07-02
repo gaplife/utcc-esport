@@ -161,11 +161,13 @@ class _AllcompetitionState extends State<Allcompetition> {
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color(0xffffffff),
-                                image: DecorationImage(
-                                  fit: BoxFit.contain,
-                                  image: NetworkImage(
-                                      'https://is2-ssl.mzstatic.com/image/thumb/Purple128/v4/af/0b/13/af0b13c2-859a-219e-5a49-6da8c35ee597/source/512x512bb.jpg'),
-                                ),
+                              ),
+                              child: Icon(
+                                Icons
+                                    .sports_esports_rounded, // สามารถเปลี่ยนเป็น Icon อื่นๆ ได้ตามต้องการ
+                                color: const Color(0xFFA31E21), // สีของ Icon
+                                size: MediaQuery.of(context).size.width *
+                                    0.05, // ขนาดของ Icon
                               ),
                             ),
                             Expanded(
@@ -179,7 +181,6 @@ class _AllcompetitionState extends State<Allcompetition> {
                                             0.037,
                                     fontFamily: 'Kanit',
                                     fontWeight: FontWeight.w600,
-                                    height: 1,
                                   ),
                                   overflow: TextOverflow
                                       .ellipsis, // เพิ่ม Overflow ที่นี่
@@ -313,7 +314,7 @@ class _AllcompetitionState extends State<Allcompetition> {
                                 child: Text(
                                   'ดูเพิ่มเติม',
                                   style: TextStyle(
-                                    color: const Color.fromARGB(255, 248, 0, 0),
+                                    color: const Color(0xFFA31E21),
                                     fontSize:
                                         MediaQuery.of(context).size.width *
                                             0.034,

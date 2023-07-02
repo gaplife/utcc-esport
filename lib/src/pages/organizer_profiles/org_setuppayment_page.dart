@@ -31,7 +31,7 @@ class _SetuppaymentState extends State<Setuppayment> {
             ],
           ),
         ),
-        backgroundColor: const Color(0xFF0C1629),
+        backgroundColor: Colors.black,
         elevation: 0,
       ),
       body: Center(

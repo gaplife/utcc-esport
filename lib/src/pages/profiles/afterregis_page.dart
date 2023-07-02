@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
+import '../../widgets/widgets.dart';
 
 class Afterregis extends StatefulWidget {
   const Afterregis({super.key});
@@ -88,11 +89,13 @@ class _AfterregisState extends State<Afterregis> {
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Color(0xffffffff),
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      image: NetworkImage(
-                          'https://scontent.fbkk22-2.fna.fbcdn.net/v/t1.6435-9/42195217_1155168591316184_8245855647996837888_n.png?_nc_cat=105&ccb=1-7&_nc_sid=174925&_nc_eui2=AeGJ0Gu6chQ4tG_lG0FLq-3YAAGwZ_E8HkYAAbBn8TweRgTNNkou7p7Xo5-GL1NGE5eNhKLRvLJUh-Du21dB0msY&_nc_ohc=ZQRStCOETRkAX8ebUrU&_nc_ht=scontent.fbkk22-2.fna&oh=00_AfCt6oonE4TuMBY8l0Ync0n_tendIjIIYnDG6M6lVjxOcw&oe=649D9725'),
-                    ),
+                  ),
+                  child: Icon(
+                    Icons
+                        .sports_esports_rounded, // สามารถเปลี่ยนเป็น Icon อื่นๆ ได้ตามต้องการ
+                    color: const Color(0xFFA31E21), // สีของ Icon
+                    size: MediaQuery.of(context).size.width *
+                        0.065, // ขนาดของ Icon
                   ),
                 ),
                 Text(
@@ -440,10 +443,10 @@ class _AfterregisState extends State<Afterregis> {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/tablecomp');
+            const ResultcompWidget().createState().showPopupcondition(context);
           },
           child: Text(
-            "ดูตารางแข่ง",
+            "ดูผลการแข่งขัน",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.055,
               fontFamily: 'Kanit',

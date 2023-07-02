@@ -216,11 +216,13 @@ Widget _competition1(BuildContext context) {
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Color(0xffffffff),
-                          image: DecorationImage(
-                            fit: BoxFit.contain,
-                            image: NetworkImage(
-                                'https://cdn3.vectorstock.com/i/1000x1000/37/87/valorant-game-logo-icon-eps-10-gaming-streamer-vector-33193787.jpg'),
-                          ),
+                        ),
+                        child: Icon(
+                          Icons
+                              .sports_esports_rounded, // สามารถเปลี่ยนเป็น Icon อื่นๆ ได้ตามต้องการ
+                          color: const Color(0xFFA31E21), // สีของ Icon
+                          size: MediaQuery.of(context).size.width *
+                              0.05, // ขนาดของ Icon
                         ),
                       ),
                       Expanded(
@@ -233,7 +235,7 @@ Widget _competition1(BuildContext context) {
                                   MediaQuery.of(context).size.width * 0.037,
                               fontFamily: 'Kanit',
                               fontWeight: FontWeight.w600,
-                              height: 1,
+                              //height: 1,
                             ),
                             overflow:
                                 TextOverflow.ellipsis, // เพิ่ม Overflow ที่นี่
@@ -286,7 +288,6 @@ Widget _competition1(BuildContext context) {
                             fontSize: MediaQuery.of(context).size.width * 0.037,
                             fontFamily: 'Kanit',
                             fontWeight: FontWeight.w600,
-                            //height: 1,
                           ),
                         ),
                       ),
@@ -361,7 +362,7 @@ Widget _competition1(BuildContext context) {
                           child: Text(
                             'ดูเพิ่มเติม',
                             style: TextStyle(
-                              color: const Color.fromARGB(255, 248, 0, 0),
+                              color: const Color(0xFFA31E21),
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.032,
                               fontFamily: 'Kanit',
