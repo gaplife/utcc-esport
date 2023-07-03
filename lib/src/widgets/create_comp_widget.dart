@@ -38,6 +38,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
     'MMORPG',
     'RPG',
     'BTR',
+    'SPORT',
   ];
 
   pickCompImage(ImageSource source) async {
@@ -638,6 +639,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                               .competitionData['compImageURL'],
                         }).whenComplete(() {
                           _competitionProvider.clearData();
+                          _formKey.currentState!.reset();
                           EasyLoading.dismiss();
                           Navigator.push(
                             context,
