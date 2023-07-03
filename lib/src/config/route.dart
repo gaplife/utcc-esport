@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:utcc_esport/src/pages/login/api.dart';
 import 'package:utcc_esport/src/pages/pages.dart';
 
 final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
@@ -39,5 +38,4 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/detailcomp': (context) => const DetailMyComp(),
   '/updatecomp': (context) => const UpdateMycompetition(),
   '/orgwithdraw': (context) => const OrganizerWithdraw(),
-  '/api': (context) => const Apiwindget(),
 };

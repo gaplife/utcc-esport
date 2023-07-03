@@ -7,7 +7,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/models/profile.dart';
 import 'package:utcc_esport/src/config/theme.dart' as custom_theme;
-import 'package:utcc_esport/src/pages/pages.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -70,9 +69,9 @@ class _LoginState extends State<Login> {
                           _boxemail(),
                           _boxpass(),
                           _buttonconfirm(),
-                          _text(),
-                          _buttonloginfacebook(),
-                          _buttonlogingoogle(),
+                          //_text(),
+                          //_buttonloginfacebook(),
+                          //_buttonlogingoogle(),
                         ],
                       ),
                     ),
@@ -193,26 +192,26 @@ class _LoginState extends State<Login> {
             },
             validator: RequiredValidator(errorText: "กรุณากรอกรหัสผ่าน"),
           ),
-          Container(
-            margin: EdgeInsets.only(
-                top: 0, left: MediaQuery.of(context).size.width * 0.62),
-            child: TextButton(
-              style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.transparent)),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const ForgetPass();
-                }));
-              },
-              child: Text(
-                "ลืมรหัสผ่าน ?",
-                style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: MediaQuery.of(context).size.width * 0.04,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
+          // Container(
+          //   margin: EdgeInsets.only(
+          //       top: 0, left: MediaQuery.of(context).size.width * 0.62),
+          //   child: TextButton(
+          //     style: ButtonStyle(
+          //         overlayColor: MaterialStateProperty.all(Colors.transparent)),
+          //     onPressed: () {
+          //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //         return const ForgetPass();
+          //       }));
+          //     },
+          //     child: Text(
+          //       "ลืมรหัสผ่าน ?",
+          //       style: TextStyle(
+          //           color: Colors.black54,
+          //           fontSize: MediaQuery.of(context).size.width * 0.04,
+          //           fontWeight: FontWeight.bold),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

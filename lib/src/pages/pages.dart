@@ -34,4 +34,3 @@ export 'organizer/org_listname.dart';
 export 'organizer/org_detailcompetition.dart';
 export 'organizer/org_update_comp.dart';
 export 'organizer_profiles/org_withdraw.dart';
-export 'login/api.dart';

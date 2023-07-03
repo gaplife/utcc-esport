@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Contentnews extends StatefulWidget {
-  const Contentnews({super.key});
+import '../../../models/article_model.dart';
 
-  @override
-  State<Contentnews> createState() => _ContentnewsState();
-}
+class Contentnews extends StatelessWidget {
+  const Contentnews({super.key, this.article});
+  final Article? article;
 
-class _ContentnewsState extends State<Contentnews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,32 +25,32 @@ class _ContentnewsState extends State<Contentnews> {
       ),
       body: SingleChildScrollView(
         child: Column(children: <Widget>[
-          _photonews(),
-          _headnews(),
-          _content(),
+          _photonews(context),
+          _headnews(context),
+          _content(context),
         ]),
       ),
     );
   }
 
-  Widget _photonews() {
+  Widget _photonews(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.28,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: const DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(
-            'https://mpics.mgronline.com/pics/Images/565000007949201.JPEG',
-          ),
-        ),
+        image: article?.urlToImage != null
+            ? DecorationImage(
+                image: NetworkImage(article!.urlToImage!),
+                fit: BoxFit.cover,
+              )
+            : null,
+        borderRadius: BorderRadius.circular(12.0),
       ),
     );
   }
 
-  Widget _headnews() {
+  Widget _headnews(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       width: MediaQuery.of(context).size.width * 0.9,
@@ -62,10 +60,10 @@ class _ContentnewsState extends State<Contentnews> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Text(
-              'ทีมไทย Vampire Esports คว้าแชมป์โลก PUBG MOBILE รับเงินรางวัล 18 ล้าน!',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 12, 0, 0),
-                fontSize: MediaQuery.of(context).size.width * 0.05,
+              article?.title ?? '',
+              style: const TextStyle(
+                color: Color.fromARGB(255, 12, 0, 0),
+                fontSize: 19, //MediaQuery.of(context).size.width * 0.05,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w600,
               ),
@@ -74,10 +72,10 @@ class _ContentnewsState extends State<Contentnews> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Text(
-              'เผยแพร่: 16 ส.ค. 2565 15:11',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 12, 0, 0),
-                fontSize: MediaQuery.of(context).size.width * 0.042,
+              article?.publishedAt ?? '',
+              style: const TextStyle(
+                color: Color.fromARGB(255, 12, 0, 0),
+                fontSize: 16, //MediaQuery.of(context).size.width * 0.05,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w500,
               ),
@@ -95,7 +93,7 @@ class _ContentnewsState extends State<Contentnews> {
     );
   }
 
-  Widget _content() {
+  Widget _content(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
       width: MediaQuery.of(context).size.width * 0.9,
@@ -105,10 +103,10 @@ class _ContentnewsState extends State<Contentnews> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Text(
-              '   ทีมไทย Vampire Esports คว้าแชมป์ PUBG MOBILE World Invitational รับเงินรางวัลกว่า 18 ล้านบาท เตรียมลุยต่อในศึก Afterparty Showdown วันที่ 18 - 20 สิงหาคมนี้',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 12, 0, 0),
-                fontSize: MediaQuery.of(context).size.width * 0.042,
+              article?.description ?? '',
+              style: const TextStyle(
+                color: Color.fromARGB(255, 12, 0, 0),
+                fontSize: 18, //MediaQuery.of(context).size.width * 0.05,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w500,
               ),
@@ -117,10 +115,10 @@ class _ContentnewsState extends State<Contentnews> {
           Container(
             margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Text(
-              '   การแข่งขัน PMWI จะจัดขึ้นทั้งหมด 2 สัปดาห์ ณ เมือง รียาด ประเทศซาอุดีอาระเบีย โดยในสัปดาห์แรก ตั้งแต่วันที่ 11 - 13 สิงหาคม ทีมเชิญทั้ง 18 ทีมจะได้มาประจันหน้ากันในการแข่งขันหลัก เพื่อชิงเงินรางวัลรวมกว่า 2 ล้านเหรียญดอลล่าห์สหรัฐ โดยในสัปดาห์แรกทีม Vampire Esports จากประเทศไทยก็ได้สร้างชื่อและผลงานบนหน้าประวัติศาสตร์อย่างยิ่งใหญ่อีกครั้ง ด้วยการคว้าอันดับ 1 ด้วยคะแนน 220 รับเงินรางวัล 525,000 เหรียญสหรัฐฯ หรือกว่า 18 ล้านบาท',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 12, 0, 0),
-                fontSize: MediaQuery.of(context).size.width * 0.042,
+              article?.content ?? '',
+              style: const TextStyle(
+                color: Color.fromARGB(255, 12, 0, 0),
+                fontSize: 18, //MediaQuery.of(context).size.width * 0.05,
                 fontFamily: 'Kanit',
                 fontWeight: FontWeight.w500,
               ),

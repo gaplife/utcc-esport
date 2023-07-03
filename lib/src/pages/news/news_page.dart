@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:utcc_esport/src/models/article_model.dart';
+
+import '../../Components/newstitle.dart';
+import '../../services/api_services.dart';
 
 class News extends StatefulWidget {
-  const News({super.key});
-
+  const News({Key? key, this.articles}) : super(key: key);
+  final List<Article>? articles;
   @override
   State<News> createState() => _NewsState();
 }
 
 class _NewsState extends State<News> {
+  ApiService client = ApiService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +29,7 @@ class _NewsState extends State<News> {
                   icon: Icon(
                     Icons.newspaper_sharp,
                     size: 35,
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: Colors.white,
                   )),
               SizedBox(
                 width: 5,
@@ -32,7 +37,7 @@ class _NewsState extends State<News> {
               Text(
                 "ข่าวสารทั้งหมด",
                 style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: Colors.white,
                   fontSize: 24,
                   fontFamily: 'Barlow',
                   fontWeight: FontWeight.w800,
@@ -49,86 +54,30 @@ class _NewsState extends State<News> {
         elevation: 0,
       ),
       body: Center(
-        child: Column(children: <Widget>[
-          _news(),
-        ]),
+        child: _news(),
       ),
     );
   }
 
   Widget _news() {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 25, 20, 0),
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: MediaQuery.of(context).size.height * 0.28,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            image: const DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                'https://mpics.mgronline.com/pics/Images/565000007949201.JPEG',
-              ),
-            ),
-          ),
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  const Spacer(),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: MediaQuery.of(context).size.height * 0.055,
-                    child: Text(
-                      'ทีมไทย Vampire Esports คว้าแชมป์โลก PUBG MOBILE รับเงินรางวัล 18 ล้าน!',
-                      style: TextStyle(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        fontSize: MediaQuery.of(context).size.height * 0.02,
-                        fontFamily: 'Kanit',
-                        fontWeight: FontWeight.w800,
-                      ),
-                      overflow: TextOverflow.ellipsis, // เพิ่ม Overflow ที่นี่
-                      maxLines: 2,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(20, 10, 0, 20),
-                      width: MediaQuery.of(context).size.width * 0.25,
-                      height: MediaQuery.of(context).size.height * 0.035,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: const Color(0xffa31e21),
-                      ),
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/contentnews');
-                        },
-                        child: Text(
-                          'อ่านเพิ่มเติม',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize:
-                                MediaQuery.of(context).size.height * 0.018,
-                            fontFamily: 'Kanit',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        )
-      ],
+    return FutureBuilder<List<Article>>(
+      future: client.getArticle(),
+      builder: (BuildContext context, AsyncSnapshot<List<Article>> snapshot) {
+        if (snapshot.hasData) {
+          List<Article>? articles = snapshot.data;
+          return ListView.builder(
+            itemCount: articles?.length ?? 0,
+            itemBuilder: (context, index) =>
+                Newtitle(articles![index], context),
+            // ListTile(
+            //   title: Text(articles?[index].title ?? ''),
+            // ),
+          );
+        }
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
