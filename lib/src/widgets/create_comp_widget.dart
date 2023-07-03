@@ -1,12 +1,16 @@
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/provider/competition_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
+
+import '../pages/pages.dart';
 
 class CreateCompetition extends StatefulWidget {
   const CreateCompetition({super.key});
@@ -18,6 +22,8 @@ class CreateCompetition extends StatefulWidget {
 class _CreateCompetitionState extends State<CreateCompetition> {
   final _formKey = GlobalKey<FormState>();
   final FirebaseStorage _storage = FirebaseStorage.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   Uint8List? _image;
   final _sizeBox = 4.0;
   final List<String> _typeList = <String>[
@@ -111,7 +117,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                     contentPadding: EdgeInsets.all(18),
                     border: OutlineInputBorder(),
                   ),
-                  hint: Text("เลือก"),
+                  hint: const Text("เลือก"),
                   items: _typeList.map<DropdownMenuItem<String>>((e) {
                     return DropdownMenuItem<String>(
                       value: e,
@@ -143,7 +149,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                     contentPadding: EdgeInsets.all(18),
                     border: OutlineInputBorder(),
                   ),
-                  hint: Text("เลือก"),
+                  hint: const Text("เลือก"),
                   items: _amountList.map<DropdownMenuItem<int>>((e) {
                     return DropdownMenuItem<int>(
                       value: e,
@@ -203,7 +209,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                     contentPadding: EdgeInsets.all(18),
                     border: OutlineInputBorder(),
                   ),
-                  hint: Text("เลือก"),
+                  hint: const Text("เลือก"),
                   items: _typeGameList.map<DropdownMenuItem<String>>((e) {
                     return DropdownMenuItem<String>(
                       value: e,
@@ -233,15 +239,15 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               TextFormField(
                 decoration: InputDecoration(
                   prefixIcon: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Image.asset(
                       Asset.LOGO_IMAGE,
                       scale: MediaQuery.of(context).size.width * 0.025,
                     ),
                   ),
                   hintText: "จำนวนเหรียญ",
-                  contentPadding: EdgeInsets.all(18),
-                  border: OutlineInputBorder(),
+                  contentPadding: const EdgeInsets.all(18),
+                  border: const OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.number,
                 autocorrect: false,
@@ -275,7 +281,8 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         lastDate: DateTime(2100),
                       ).then((value) {
                         setState(() {
-                          _competitionProvider.getFromData(applyStartDate: value);
+                          _competitionProvider.getFromData(
+                              applyStartDate: value);
                         });
                       });
                     },
@@ -301,11 +308,12 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                           lastDate: DateTime(2100),
                         ).then((value) {
                           setState(() {
-                            _competitionProvider.getFromData(applyEndDate: value);
+                            _competitionProvider.getFromData(
+                                applyEndDate: value);
                           });
                         });
                       },
-                      child: Text("สิ้นสุด")),
+                      child: const Text("สิ้นสุด")),
                   if (_competitionProvider.competitionData['applyEndDate'] !=
                       null)
                     Text(
@@ -335,11 +343,12 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         lastDate: DateTime(2100),
                       ).then((value) {
                         setState(() {
-                          _competitionProvider.getFromData(compStartDate: value);
+                          _competitionProvider.getFromData(
+                              compStartDate: value);
                         });
                       });
                     },
-                    child: Text("เริ่ม"),
+                    child: const Text("เริ่ม"),
                   ),
                   if (_competitionProvider.competitionData['compStartDate'] !=
                       null)
@@ -365,9 +374,10 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         });
                       });
                     },
-                    child: Text("สิ้นสุด"),
+                    child: const Text("สิ้นสุด"),
                   ),
-                  if (_competitionProvider.competitionData['compEndDate'] != null)
+                  if (_competitionProvider.competitionData['compEndDate'] !=
+                      null)
                     Text(
                       formatedDate(
                         _competitionProvider.competitionData['compEndDate'],
@@ -522,8 +532,10 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                         )),
                     onPressed: () async {
                       await selectGalleryImage().whenComplete(() async {
-                        Reference ref =
-                            _storage.ref().child('compImage').child(Uuid().v4());
+                        Reference ref = _storage
+                            .ref()
+                            .child('compImage')
+                            .child(Uuid().v4());
                         await ref.putData(_image!).whenComplete(() async {
                           await ref.getDownloadURL().then((value) {
                             setState(() {
@@ -577,7 +589,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
               //     ),
               //   ),
               // ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Center(
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.9,
@@ -588,18 +600,54 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                           borderRadius: BorderRadius.circular(5)),
                       backgroundColor: const Color(0xFFA31E21),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      EasyLoading.show(status: 'กำลังสร้างรายการ');
                       if (_formKey.currentState!.validate()) {
-                        print(_competitionProvider.competitionData['compName']);
-                        print(_competitionProvider.competitionData['compType']);
-                        print(_competitionProvider.competitionData['compAmount']);
-                        print(_competitionProvider.competitionData['gameName']);
-                        print(_competitionProvider.competitionData['gameType']);
-                        print(_competitionProvider.competitionData['fee']);
-                        print(_competitionProvider.competitionData['compDetail']);
-                        print(_competitionProvider.competitionData['compRule']);
-                        print(_competitionProvider.competitionData['prize']);
-                        print(_competitionProvider.competitionData['compImageURL']);
+                        final compID = Uuid().v4();
+                        await _firestore
+                            .collection('Competitions')
+                            .doc(compID)
+                            .set({
+                          'compID': compID,
+                          'compName':
+                              _competitionProvider.competitionData['compName'],
+                          'compType':
+                              _competitionProvider.competitionData['compType'],
+                          'compAmount': _competitionProvider
+                              .competitionData['compAmount'],
+                          'gameName':
+                              _competitionProvider.competitionData['gameName'],
+                          'gameType':
+                              _competitionProvider.competitionData['gameType'],
+                          'fee': _competitionProvider.competitionData['fee'],
+                          'applyStartDate': _competitionProvider
+                              .competitionData['applyStartDate'],
+                          'applyEndDate': _competitionProvider
+                              .competitionData['applyEndDate'],
+                          'compStartDate': _competitionProvider
+                              .competitionData['compStartDate'],
+                          'compEndDate': _competitionProvider
+                              .competitionData['compEndDate'],
+                          'compDetail': _competitionProvider
+                              .competitionData['compDetail'],
+                          'compRule':
+                              _competitionProvider.competitionData['compRule'],
+                          'prize':
+                              _competitionProvider.competitionData['prize'],
+                          'compImageURL': _competitionProvider
+                              .competitionData['compImageURL'],
+                        }).whenComplete(() {
+                          _competitionProvider.clearData();
+                          EasyLoading.dismiss();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const OrgLauncher();
+                              },
+                            ),
+                          );
+                        });
                       }
                     },
                     child: const Text(

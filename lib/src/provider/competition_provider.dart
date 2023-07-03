@@ -61,5 +61,11 @@ class CompetitionProvider with ChangeNotifier {
     if (compImageURL != null) {
       competitionData['compImageURL'] = compImageURL;
     }
+
+    notifyListeners();
+  }
+  clearData() {
+    competitionData.clear();
+    notifyListeners();
   }
 }
