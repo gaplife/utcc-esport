@@ -55,7 +55,7 @@ class _OrgHomePageState extends State<OrgHomePage> {
         child: Column(
           children: <Widget>[
             _competition(context),
-            const CompetitionWidget(),
+            const OrgCompetitionWidget(),
           ],
         ),
       ),

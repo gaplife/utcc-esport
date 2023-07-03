@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
-import 'package:utcc_esport/src/widgets/competition_widget.dart';
+import 'package:utcc_esport/src/widgets/org_competition_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
             _slidenews(),
             //_news(),
             _competition(context),
-            const CompetitionWidget(),
+            const OrgCompetitionWidget(),
           ],
         ),
       ),

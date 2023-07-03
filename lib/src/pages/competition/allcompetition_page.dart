@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
-import 'package:utcc_esport/src/widgets/competition_widget.dart';
+import 'package:utcc_esport/src/widgets/org_competition_widget.dart';
 
 class Allcompetition extends StatefulWidget {
   const Allcompetition({Key? key}) : super(key: key);
@@ -56,7 +56,7 @@ class _AllcompetitionState extends State<Allcompetition> {
         body: Center(
           child: Column(children: <Widget>[
             //_boxsearch(),
-            CompetitionWidget()
+            OrgCompetitionWidget()
           ]),
         ));
   }

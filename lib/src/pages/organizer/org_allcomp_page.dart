@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:utcc_esport/src/widgets/competition_widget.dart';
+import 'package:utcc_esport/src/widgets/org_competition_widget.dart';
 
 class OrgAllComp extends StatefulWidget {
   const OrgAllComp({Key? key}) : super(key: key);
@@ -51,7 +51,7 @@ class _OrgAllCompState extends State<OrgAllComp> {
           elevation: 0,
         ),
         body: const Center(
-          child: Column(children: <Widget>[CompetitionWidget()]),
+          child: Column(children: <Widget>[OrgCompetitionWidget()]),
         ));
   }
 
