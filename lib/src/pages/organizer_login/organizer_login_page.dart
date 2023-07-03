@@ -224,7 +224,7 @@ class _OganizerLoginState extends State<OganizerLogin> {
                     String uid = FirebaseAuth.instance.currentUser!.uid;
                     DocumentSnapshot userSnapshot = await FirebaseFirestore
                         .instance
-                        .collection('Users')
+                        .collection('Organizers')
                         .doc(uid)
                         .get();
 

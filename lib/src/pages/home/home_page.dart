@@ -158,7 +158,8 @@ class _HomePageState extends State<HomePage> {
           margin: const EdgeInsets.fromLTRB(0, 5, 20, 0),
           child: TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/news');
+              //Navigator.pushNamed(context, '/news');
+              Navigator.pushNamed(context, '/api');
             },
             child: Text(
               'ดูทั้งหมด',

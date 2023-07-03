@@ -117,7 +117,7 @@ class _OrganizerEditPasswordState extends State<OrganizerEditPassword> {
           width: MediaQuery.of(context).size.width * 0.9,
           child: StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
-                .collection('Users')
+                .collection('Organizers')
                 .doc(userID)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -276,7 +276,7 @@ class _OrganizerEditPasswordState extends State<OrganizerEditPassword> {
     try {
       if (userID != null) {
         await FirebaseFirestore.instance
-            .collection('Users')
+            .collection('Organizers')
             .doc(userID)
             .update({
           'password': newPass,

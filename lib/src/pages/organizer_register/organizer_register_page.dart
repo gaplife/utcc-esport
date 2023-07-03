@@ -23,7 +23,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
   CollectionReference userCollection =
-      FirebaseFirestore.instance.collection("Users");
+      FirebaseFirestore.instance.collection("Organizers");
 
   final _passwordController = TextEditingController();
   //final _date = TextEditingController();

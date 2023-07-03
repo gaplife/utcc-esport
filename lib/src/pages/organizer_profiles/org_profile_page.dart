@@ -113,7 +113,7 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
                 children: [
                   StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance
-                        .collection("Users")
+                        .collection("Organizers")
                         .snapshots(),
                     builder: (context,
                         AsyncSnapshot<QuerySnapshot> profileSnapshot) {
@@ -130,7 +130,7 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
                           margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance
-                                .collection("Users")
+                                .collection("Organizers")
                                 .snapshots(),
                             builder: (context,
                                 AsyncSnapshot<QuerySnapshot> snapshot) {
