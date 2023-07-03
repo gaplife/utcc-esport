@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
+import 'package:utcc_esport/src/widgets/competition_widget.dart';
 
 class Mycomp extends StatefulWidget {
   const Mycomp({Key? key}) : super(key: key);
@@ -50,10 +51,12 @@ class _MycompState extends State<Mycomp> {
         backgroundColor: Colors.black,
         elevation: 0,
       ),
-      body: Center(
-        child: Column(children: <Widget>[
-          _competition(),
-        ]),
+      body: const SingleChildScrollView(
+        child: Center(
+          child: Column(children: <Widget>[
+            CompetitionWidget(),
+          ]),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(

@@ -90,7 +90,6 @@ class _HomePageState extends State<HomePage> {
             //_news(),
             _competition(context),
             const CompetitionWidget(),
-            _competition1(context),
           ],
         ),
       ),

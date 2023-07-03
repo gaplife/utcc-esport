@@ -54,7 +54,6 @@ class _OrgHomePageState extends State<OrgHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            //_boxsearch(),
             _competition(context),
             const CompetitionWidget(),
           ],
@@ -82,27 +81,27 @@ class _OrgHomePageState extends State<OrgHomePage> {
     );
   }
 
-  // Widget _boxsearch() {
-  //   return Container(
-  //     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-  //     width: MediaQuery.of(context).size.width * 0.99, // ปรับค่าตามต้องการ
-  //     height: MediaQuery.of(context).size.height * 0.09,
-  //     child: TextField(
-  //       decoration: InputDecoration(
-  //         suffixIcon: const Icon(Icons.search),
-  //         hintText: "ค้นหา",
-  //         contentPadding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-  //         hintStyle: TextStyle(
-  //           fontSize: MediaQuery.of(context).size.height * 0.024,
-  //           fontFamily: 'Kanit',
-  //         ),
-  //         border: const OutlineInputBorder(
-  //             borderRadius: BorderRadius.all(Radius.circular(10))),
-  //       ),
-  //       onChanged: (value) {},
-  //     ),
-  //   );
-  // }
+// Widget _boxsearch() {
+//   return Container(
+//     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+//     width: MediaQuery.of(context).size.width * 0.99, // ปรับค่าตามต้องการ
+//     height: MediaQuery.of(context).size.height * 0.09,
+//     child: TextField(
+//       decoration: InputDecoration(
+//         suffixIcon: const Icon(Icons.search),
+//         hintText: "ค้นหา",
+//         contentPadding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+//         hintStyle: TextStyle(
+//           fontSize: MediaQuery.of(context).size.height * 0.024,
+//           fontFamily: 'Kanit',
+//         ),
+//         border: const OutlineInputBorder(
+//             borderRadius: BorderRadius.all(Radius.circular(10))),
+//       ),
+//       onChanged: (value) {},
+//     ),
+//   );
+// }
 }
 
 Widget _competition(BuildContext context) {
@@ -145,4 +144,3 @@ Widget _competition(BuildContext context) {
     ],
   );
 }
-

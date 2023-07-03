@@ -15,15 +15,15 @@ class CompetitionWidget extends StatelessWidget {
       stream: _competitoionStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text('Something went wrong');
+          return const Text('Something went wrong');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("กำลังโหลดข้อมูล...");
+          return const Text("กำลังโหลดข้อมูล...");
         }
 
         return Container(
-          height: 520,
+          height: MediaQuery.of(context).size.height * 0.7,
           child: ListView.separated(
               itemBuilder: (context, index) {
                 final competitionData = snapshot.data!.docs[index];
