@@ -130,7 +130,7 @@ class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
     if (image != null) {
       final storageRef = FirebaseStorage.instance
           .ref()
-          .child('users_photo')
+          .child('organizer_photo')
           .child(userEmail!) // ใช้ userEmail ในการกำหนดเป็นชื่อไฟล์
           .child('profile.jpg'); // เลือกชื่อไฟล์ที่ต้องการ
 
@@ -164,7 +164,7 @@ class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
           },
           child: StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
-                .collection('Users')
+                .collection("Organizers")
                 .doc(userID)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -270,7 +270,7 @@ class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
           width: MediaQuery.of(context).size.width * 0.9,
           child: StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
-                .collection('Users')
+                .collection('Organizers')
                 .doc(userID)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -308,7 +308,7 @@ class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
     try {
       if (userID != null) {
         await FirebaseFirestore.instance
-            .collection('Users')
+            .collection('Organizers')
             .doc(userID)
             .update({
           'username': newUserName,
@@ -341,7 +341,7 @@ class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
           width: MediaQuery.of(context).size.width * 0.9,
           child: StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
-                .collection('Users')
+                .collection('Organizers')
                 .doc(userID)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -398,7 +398,7 @@ class _OrganizerEditProfileState extends State<OrganizerEditProfile> {
             if (_profileImageUrl != null) {
               if (userID != null) {
                 await FirebaseFirestore.instance
-                    .collection('Users')
+                    .collection('Organizers')
                     .doc(userID)
                     .update({
                   'profileImageUrl': _profileImageUrl,
