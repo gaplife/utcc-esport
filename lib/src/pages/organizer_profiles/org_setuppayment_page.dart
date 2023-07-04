@@ -152,7 +152,7 @@ class _SetuppaymentState extends State<Setuppayment> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: Text(
-                          'ไทยภานิชย์',
+                          'ไทยพานิชย์',
                           style: TextStyle(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               fontFamily: 'Kanit',

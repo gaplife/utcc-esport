@@ -279,6 +279,7 @@ class _RegisterState extends State<Register> {
                     "password": profile.password,
                     "userType": "Player",
                     "profileImageUrl": profile.profileImageUrl,
+                    "coin": 1000,
                   });
 
                   formKey.currentState!.reset();

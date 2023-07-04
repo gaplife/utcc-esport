@@ -30,7 +30,7 @@ export 'organizer_profiles/org_editprofile_page.dart';
 export 'organizer_profiles/org_editpassword_page.dart';
 export 'organizer_profiles/org_balance_page.dart';
 export 'organizer_profiles/org_contacme.dart';
-export 'organizer/org_listname.dart';
+export 'organizer/org_listname_page.dart';
 export 'organizer/org_detailcomp_page.dart';
 export 'organizer/org_updatecomp_page.dart';
 export 'organizer_profiles/org_withdraw.dart';

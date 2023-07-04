@@ -454,7 +454,9 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/listname');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return ListName(competitionData: widget.competitionData,);
+                    }));
                   },
                   child: Text(
                     "ดูรายชื่อผู้สมัครแข่ง",

@@ -46,9 +46,6 @@ class _NewsState extends State<News> {
             ],
           ),
         ),
-        actions: <Widget>[
-          IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
-        ],
         //centerTitle: const EdgeInsets.all(10),
         backgroundColor: const Color(0xFF0C1629),
         elevation: 0,

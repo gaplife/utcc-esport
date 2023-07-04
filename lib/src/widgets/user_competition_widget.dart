@@ -4,9 +4,9 @@ import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/pages/pages.dart';
 
 class UserCompetitionWidget extends StatelessWidget {
-  const UserCompetitionWidget({
-    super.key,
-  });
+  final double hg;
+
+  const UserCompetitionWidget({super.key, required this.hg});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class UserCompetitionWidget extends StatelessWidget {
         }
 
         return Container(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: hg,
           child: ListView.separated(
               itemBuilder: (context, index) {
                 final competitionData = snapshot.data!.docs[index];

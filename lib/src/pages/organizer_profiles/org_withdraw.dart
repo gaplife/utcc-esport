@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/asset.dart';
@@ -10,6 +13,48 @@ class OrganizerWithdraw extends StatefulWidget {
 }
 
 class _OrganizerWithdrawState extends State<OrganizerWithdraw> {
+  final auth = FirebaseAuth.instance;
+  String? userID;
+  String? userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  Future<void> getUserData() async {
+    final user = auth.currentUser;
+    if (user != null) {
+      setState(() {
+        userID = user.uid;
+        userEmail = user.email; // ใช้อีเมลของผู้ใช้งานเป็น userId แทน
+      });
+    }
+  }
+
+  Widget _getCoin(AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      final userDocument = snapshot.data!.docs.firstWhereOrNull(
+            (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+      );
+
+      if (userDocument != null) {
+        final coin = userDocument["coin"];
+        return Text(
+          coin.toString(),
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.045,
+            fontWeight: FontWeight.w600,
+          ),
+        );
+      } else {
+        return const Text('not found');
+      }
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,14 +126,14 @@ class _OrganizerWithdrawState extends State<OrganizerWithdraw> {
                     ),
                   ),
                 ),
-                Text(
-                  '50,000',
-                  style: TextStyle(
-                    //color: Color(0xffffffff),
-                    fontSize: MediaQuery.of(context).size.height * 0.025,
-                    fontFamily: 'Kanit',
-                    fontWeight: FontWeight.w600,
-                  ),
+                StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection("Organizers")
+                      .snapshots(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    return _getCoin(snapshot);
+                  },
                 ),
               ],
             ),
@@ -118,10 +163,10 @@ class _OrganizerWithdrawState extends State<OrganizerWithdraw> {
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: false,
-            decoration: InputDecoration(
-              hintText: '-',
-              contentPadding: const EdgeInsets.all(15),
-              border: const OutlineInputBorder(),
+            decoration: const InputDecoration(
+              hintText: '100',
+              contentPadding: EdgeInsets.all(15),
+              border: OutlineInputBorder(),
             ),
             keyboardType: TextInputType.number,
             autocorrect: false,
@@ -150,7 +195,7 @@ class _OrganizerWithdrawState extends State<OrganizerWithdraw> {
         Container(
           margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
           child: Text(
-            "จำนวนเงิน",
+            "จำนวนเงิน(บาท)",
             style: TextStyle(
               fontSize: MediaQuery.of(context).size.width * 0.045,
               fontFamily: 'Kanit',
@@ -163,10 +208,10 @@ class _OrganizerWithdrawState extends State<OrganizerWithdraw> {
           width: MediaQuery.of(context).size.width * 0.9,
           child: TextFormField(
             obscureText: false,
-            decoration: InputDecoration(
-              hintText: '-',
-              contentPadding: const EdgeInsets.all(15),
-              border: const OutlineInputBorder(),
+            decoration: const InputDecoration(
+              hintText: '50',
+              contentPadding: EdgeInsets.all(15),
+              border: OutlineInputBorder(),
             ),
             keyboardType: TextInputType.number,
             autocorrect: false,

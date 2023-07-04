@@ -50,8 +50,10 @@ class _OrgAllCompState extends State<OrgAllComp> {
           backgroundColor: Colors.black,
           elevation: 0,
         ),
-        body: const Center(
-          child: Column(children: <Widget>[OrgCompetitionWidget()]),
+        body: const SingleChildScrollView(
+          child: Center(
+            child: Column(children: <Widget>[OrgCompetitionWidget()]),
+          ),
         ));
   }
 

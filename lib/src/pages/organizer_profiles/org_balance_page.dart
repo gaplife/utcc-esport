@@ -33,6 +33,30 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
     }
   }
 
+  Widget _getCoin(AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      final userDocument = snapshot.data!.docs.firstWhereOrNull(
+            (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+      );
+
+      if (userDocument != null) {
+        final coin = userDocument["coin"];
+        return Text(
+          coin.toString(),
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.045,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        );
+      } else {
+        return const Text('not found');
+      }
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
+
   List<Map<String, String>> dataList = [
     {
       'title': 'Dream League',
@@ -84,7 +108,7 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
         child: Column(
           children: <Widget>[
             _balance(),
-            _table(dataList),
+            //_table(dataList),
           ],
         ),
       ),
@@ -144,7 +168,7 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
                           //width: MediaQuery.of(context).size.width * 0.15,
                           child: StreamBuilder<QuerySnapshot>(
                             stream: FirebaseFirestore.instance
-                                .collection("Users")
+                                .collection("Organizers")
                                 .snapshots(),
                             builder: (context,
                                 AsyncSnapshot<QuerySnapshot> profileSnapshot) {
@@ -173,14 +197,14 @@ class _OrganizerBalanceState extends State<OrganizerBalance> {
                           ),
                         ),
                       ),
-                      Text(
-                        '50,000',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height * 0.028,
-                          fontFamily: 'Kanit',
-                          fontWeight: FontWeight.w600,
-                        ),
+                      StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection("Organizers")
+                            .snapshots(),
+                        builder: (context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          return _getCoin(snapshot);
+                        },
                       ),
                     ],
                   ),

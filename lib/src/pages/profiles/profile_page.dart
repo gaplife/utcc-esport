@@ -34,6 +34,103 @@ class _ProfilesState extends State<Profiles> {
     }
   }
 
+  Widget _getUsername(AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      final userDocument = snapshot.data!.docs.firstWhereOrNull(
+            (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+      );
+
+      if (userDocument != null) {
+        final username = userDocument["username"];
+        return Text(
+          username,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.05,
+            fontFamily: profilefont,
+            fontWeight: FontWeight.w600,
+          ),
+        );
+      } else {
+        return const Text('User not found');
+      }
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
+
+  Widget _getCoin(AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      final userDocument = snapshot.data!.docs.firstWhereOrNull(
+            (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+      );
+
+      if (userDocument != null) {
+        final coin = userDocument["coin"];
+        return Text(
+          coin.toString(),
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.045,
+            fontWeight: FontWeight.w600,
+          ),
+        );
+      } else {
+        return const Text('not found');
+      }
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
+
+  Widget _getProfileImage(AsyncSnapshot<QuerySnapshot> profileSnapshot) {
+    if (profileSnapshot.hasData) {
+      final userDocument = profileSnapshot.data!.docs.firstWhereOrNull(
+            (doc) => doc["email"] == userEmail,
+      );
+      if (userDocument != null) {
+        final profileImageUrl = userDocument["profileImageUrl"];
+        if (profileImageUrl != null && profileImageUrl.isNotEmpty) {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.2,
+            height: MediaQuery.of(context).size.height * 0.1,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xff0c1629)),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(profileImageUrl),
+              ),
+            ),
+          );
+        } else {
+          return Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.2,
+            height: MediaQuery.of(context).size.height * 0.1,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xff0c1629)),
+            ),
+            child: const Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(
+                  Icons.person,
+                  size: 48,
+                  color: Colors.grey,
+                ),
+              ],
+            ),
+          );
+        }
+      } else {
+        return const Text('Photo not found');
+      }
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,16 +267,14 @@ class _ProfilesState extends State<Profiles> {
                               Expanded(
                                 child: Align(
                                   alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    '999,999',
-                                    style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.height *
-                                              0.022,
-                                      fontFamily: profilefont,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1,
-                                    ),
+                                  child: StreamBuilder<QuerySnapshot>(
+                                    stream: FirebaseFirestore.instance
+                                        .collection("Users")
+                                        .snapshots(),
+                                    builder: (context,
+                                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                                      return _getCoin(snapshot);
+                                    },
                                   ),
                                 ),
                               ),
@@ -235,79 +330,8 @@ class _ProfilesState extends State<Profiles> {
     );
   }
 
-  Widget _getUsername(AsyncSnapshot<QuerySnapshot> snapshot) {
-    if (snapshot.hasData) {
-      final userDocument = snapshot.data!.docs.firstWhereOrNull(
-        (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
-      );
 
-      if (userDocument != null) {
-        final username = userDocument["username"];
-        return Text(
-          username,
-          style: TextStyle(
-            fontSize: MediaQuery.of(context).size.width * 0.05,
-            fontFamily: profilefont,
-            fontWeight: FontWeight.w600,
-          ),
-        );
-      } else {
-        return const Text('User not found');
-      }
-    } else {
-      return const CircularProgressIndicator();
-    }
-  }
 
-  Widget _getProfileImage(AsyncSnapshot<QuerySnapshot> profileSnapshot) {
-    if (profileSnapshot.hasData) {
-      final userDocument = profileSnapshot.data!.docs.firstWhereOrNull(
-        (doc) => doc["email"] == userEmail,
-      );
-      if (userDocument != null) {
-        final profileImageUrl = userDocument["profileImageUrl"];
-        if (profileImageUrl != null && profileImageUrl.isNotEmpty) {
-          return Container(
-            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            width: MediaQuery.of(context).size.width * 0.2,
-            height: MediaQuery.of(context).size.height * 0.1,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xff0c1629)),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(profileImageUrl),
-              ),
-            ),
-          );
-        } else {
-          return Container(
-            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            width: MediaQuery.of(context).size.width * 0.2,
-            height: MediaQuery.of(context).size.height * 0.1,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xff0c1629)),
-            ),
-            child: const Stack(
-              alignment: Alignment.center,
-              children: [
-                Icon(
-                  Icons.person,
-                  size: 48,
-                  color: Colors.grey,
-                ),
-              ],
-            ),
-          );
-        }
-      } else {
-        return const Text('Photo not found');
-      }
-    } else {
-      return const CircularProgressIndicator();
-    }
-  }
 
   Widget _buttonregistercom() {
     return Container(

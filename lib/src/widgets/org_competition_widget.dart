@@ -24,7 +24,7 @@ class OrgCompetitionWidget extends StatelessWidget {
         }
 
         return Container(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.75,
           child: ListView.separated(
               itemBuilder: (context, index) {
                 final competitionData = snapshot.data!.docs[index];

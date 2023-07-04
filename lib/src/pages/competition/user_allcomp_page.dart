@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/widgets/org_competition_widget.dart';
+import 'package:utcc_esport/src/widgets/user_competition_widget.dart';
 
 class Allcompetition extends StatefulWidget {
   const Allcompetition({Key? key}) : super(key: key);
@@ -46,18 +47,16 @@ class _AllcompetitionState extends State<Allcompetition> {
               ],
             ),
           ),
-          actions: <Widget>[
-            IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
-          ],
           //centerTitle: const EdgeInsets.all(10),
           backgroundColor: const Color(0xFF0C1629),
           elevation: 0,
         ),
-        body: Center(
-          child: Column(children: <Widget>[
-            //_boxsearch(),
-            OrgCompetitionWidget()
-          ]),
+        body: const Center(
+          child: SingleChildScrollView(
+            child: Column(children: <Widget>[
+              UserCompetitionWidget(hg: 575),
+            ]),
+          ),
         ));
   }
 

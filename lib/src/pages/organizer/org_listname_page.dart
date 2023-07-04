@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ListName extends StatefulWidget {
-  const ListName({super.key});
+  final dynamic competitionData;
+
+  const ListName({super.key, required this.competitionData});
 
   @override
   State<ListName> createState() => _ListNameState();
@@ -71,27 +73,25 @@ class _ListNameState extends State<ListName> {
   Widget _photocompetition() {
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.fromLTRB(20, 25, 20, 0),
-          width: MediaQuery.of(context).size.width * 0.9,
-          height: MediaQuery.of(context).size.height * 0.25,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image: const DecorationImage(
+        ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(20, 25, 20, 0),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: Image.network(
+              widget.competitionData['compImageURL'],
               fit: BoxFit.cover,
-              image: NetworkImage(
-                'https://mpics.mgronline.com/pics/Images/566000004575901.JPEG',
-              ),
             ),
           ),
         ),
         Container(
           margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-          child: const Align(
+          child: Align(
             alignment: Alignment.center,
             child: Text(
-              'FIFA Champion Club SS1',
-              style: TextStyle(
+              widget.competitionData['compName'],
+              style: const TextStyle(
                   fontFamily: 'Kanit',
                   fontSize: 22,
                   fontWeight: FontWeight.w600),

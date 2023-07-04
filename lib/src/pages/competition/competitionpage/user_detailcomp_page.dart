@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:utcc_esport/src/widgets/apply_comp_widget.dart';
 
 class UserDetailComp extends StatefulWidget {
   final dynamic competitionData;
@@ -25,11 +26,6 @@ class _UserDetailCompState extends State<UserDetailComp> {
       builder: (BuildContext context) {
         return AlertDialog(
           contentPadding: EdgeInsets.zero,
-          // insetPadding: EdgeInsets.fromLTRB(
-          //     MediaQuery.of(context).size.width * 0.05,
-          //     0,
-          //     MediaQuery.of(context).size.width * 0.05,
-          //     0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -80,14 +76,13 @@ class _UserDetailCompState extends State<UserDetailComp> {
                         style: TextStyle(
                           //color: Color.fromARGB(0, 0, 0, 0),
                           fontSize: MediaQuery.of(context).size.width * 0.042,
-                          fontFamily: 'Kanit',
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.0085),
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextFormField(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'ชื่อภายในเกม',
                           contentPadding: EdgeInsets.symmetric(
@@ -108,14 +103,13 @@ class _UserDetailCompState extends State<UserDetailComp> {
                         style: TextStyle(
                           //color: Color.fromARGB(0, 0, 0, 0),
                           fontSize: MediaQuery.of(context).size.width * 0.042,
-                          fontFamily: 'Kanit',
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.0085),
-                      const TextField(
-                        decoration: InputDecoration(
+                      TextFormField(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: 'ID LINE',
                           contentPadding: EdgeInsets.symmetric(
@@ -219,7 +213,6 @@ class _UserDetailCompState extends State<UserDetailComp> {
                       style: TextStyle(
                         color: const Color.fromARGB(255, 255, 255, 255),
                         fontSize: MediaQuery.of(context).size.width * 0.046,
-                        fontFamily: 'Kanit',
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -657,7 +650,11 @@ class _UserDetailCompState extends State<UserDetailComp> {
                     ),
                   ),
                   onPressed: () {
-                    _registercompetition();
+                    showDialog(context: context,
+                        builder: (BuildContext context){
+                          return const ApplyCompetition();
+                        }
+                    );
                   },
                   child: Text(
                     "สมัครแข่งขัน",

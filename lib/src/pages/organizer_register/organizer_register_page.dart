@@ -278,6 +278,7 @@ class _OrganizerRegisterState extends State<OrganizerRegister> {
                       "password": profile.password,
                       "userType": "Organizer",
                       "profileImageUrl": profile.profileImageUrl,
+                      "coin": 0,
                     });
                     _registersuccess();
                     formKey.currentState!.reset();
