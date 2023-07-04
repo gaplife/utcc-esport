@@ -19,7 +19,6 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/mycomp': (context) => const Mycomp(),
   '/orgallcomp': (context) => const OrgAllComp(),
   '/contentnews': (context) => const Contentnews(),
-  '/competition': (context) => const Competition(),
   '/contactme': (context) => const Contactme(),
   '/setuppayment': (context) => const Setuppayment(),
   '/addpayment': (context) => const Addpayment(),
@@ -35,6 +34,5 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/orgbalance': (context) => const OrganizerBalance(),
   '/orgcontacme': (context) => const OrganizerContacme(),
   '/listname': (context) => const ListName(),
-  '/updatecomp': (context) => const UpdateMycompetition(),
   '/orgwithdraw': (context) => const OrganizerWithdraw(),
 };

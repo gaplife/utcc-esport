@@ -42,12 +42,12 @@ class _OrgHomePageState extends State<OrgHomePage> {
             ],
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications),
-          )
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: const Icon(Icons.notifications),
+        //   )
+        // ],
         backgroundColor: Colors.black,
         elevation: 0,
       ),

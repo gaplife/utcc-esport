@@ -2,22 +2,236 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:utcc_esport/src/pages/pages.dart';
 
-class OrgDetailComp extends StatefulWidget {
+class UserDetailComp extends StatefulWidget {
   final dynamic competitionData;
 
-  const OrgDetailComp({super.key, required this.competitionData});
+  const UserDetailComp({super.key, required this.competitionData});
 
   @override
-  State<OrgDetailComp> createState() => _OrgDetailCompState();
+  State<UserDetailComp> createState() => _UserDetailCompState();
 }
 
-class _OrgDetailCompState extends State<OrgDetailComp> {
+class _UserDetailCompState extends State<UserDetailComp> {
   int currentIndex = 0;
 
   String formatedDate(date) {
     final outPutDateFormat = DateFormat('dd/MM/yyyy');
     final outPutDate = outPutDateFormat.format(date);
     return outPutDate;
+  }
+
+  void _registercompetition() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          // insetPadding: EdgeInsets.fromLTRB(
+          //     MediaQuery.of(context).size.width * 0.05,
+          //     0,
+          //     MediaQuery.of(context).size.width * 0.05,
+          //     0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Container(
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.9,
+            //height: MediaQuery.of(context).size.height * 0.37,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      icon: Icon(Icons.close), // ไอคอนของปุ่มปิด
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pop(); // ปิด AlertDialog เมื่อกดปุ่มปิด
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'ยืนยันการสมัครแข่ง',
+                      style: TextStyle(
+                        //color: Color.fromARGB(0, 0, 0, 0),
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'กรุณากรอกชื่อภายในเกม',
+                        style: TextStyle(
+                          //color: Color.fromARGB(0, 0, 0, 0),
+                          fontSize: MediaQuery.of(context).size.width * 0.042,
+                          fontFamily: 'Kanit',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.0085),
+                      const TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'ชื่อภายในเกม',
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'กรุณากรอก ID LINE สำหรับใช้ติดต่อ',
+                        style: TextStyle(
+                          //color: Color.fromARGB(0, 0, 0, 0),
+                          fontSize: MediaQuery.of(context).size.width * 0.042,
+                          fontFamily: 'Kanit',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.0085),
+                      const TextField(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'ID LINE',
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xffa31e21),
+                    ),
+                    onPressed: () {
+                      _registersuccess();
+                      //Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'ยืนยัน',
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        fontSize: MediaQuery.of(context).size.width * 0.045,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void _registersuccess() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.zero,
+          insetPadding: EdgeInsets.fromLTRB(
+              MediaQuery.of(context).size.width * 0.05,
+              0,
+              MediaQuery.of(context).size.width * 0.05,
+              0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          content: Container(
+            margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.25,
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: MediaQuery.of(context).size.width * 0.15,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'ลงสมัครสำเร็จ !',
+                      style: TextStyle(
+                        //color: Color.fromARGB(0, 0, 0, 0),
+                        fontSize: MediaQuery.of(context).size.width * 0.053,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xffa31e21),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/afterregis');
+                    },
+                    child: Text(
+                      'ยืนยัน',
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        fontSize: MediaQuery.of(context).size.width * 0.046,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -34,16 +248,6 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
             children: <Widget>[],
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return UpdateComp(competitionData: widget.competitionData,);
-              }));
-            },
-            icon: const Icon(Icons.settings),iconSize: 30,
-          )
-        ],
         backgroundColor: Colors.black,
         elevation: 0,
       ),
@@ -125,7 +329,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                             widget.competitionData['compType'],
                             style: TextStyle(
                               fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
+                              MediaQuery.of(context).size.width * 0.04,
                               fontWeight: FontWeight.w500,
                               //height: 1.1,
                             ),
@@ -150,7 +354,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                             widget.competitionData['fee'].toString(),
                             style: TextStyle(
                               fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
+                              MediaQuery.of(context).size.width * 0.04,
                               fontFamily: 'Kanit',
                               fontWeight: FontWeight.w500,
                             ),
@@ -211,7 +415,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                                 style: TextStyle(
                                   color: const Color.fromARGB(255, 12, 0, 0),
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.046,
+                                  MediaQuery.of(context).size.width * 0.046,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -228,7 +432,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                                 )}',
                                 style: TextStyle(
                                   fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
+                                  MediaQuery.of(context).size.width * 0.04,
                                   fontFamily: 'Kanit',
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -252,7 +456,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                               'จำนวนผู้สมัคร 2/8',
                               style: TextStyle(
                                 fontSize:
-                                    MediaQuery.of(context).size.width * 0.037,
+                                MediaQuery.of(context).size.width * 0.037,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w800,
                                 color: const Color(0xffffffff),
@@ -311,7 +515,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                                     ? const Color(0xffa31e21)
                                     : Colors.black,
                                 fontSize:
-                                    MediaQuery.of(context).size.width * 0.045,
+                                MediaQuery.of(context).size.width * 0.045,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -348,7 +552,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                                     ? const Color(0xffa31e21)
                                     : Colors.black,
                                 fontSize:
-                                    MediaQuery.of(context).size.width * 0.045,
+                                MediaQuery.of(context).size.width * 0.045,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -386,7 +590,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                                     ? const Color(0xffa31e21)
                                     : Colors.black,
                                 fontSize:
-                                    MediaQuery.of(context).size.width * 0.045,
+                                MediaQuery.of(context).size.width * 0.045,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -442,7 +646,7 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
             // _buttonconfirm(),
             Padding(
               padding:
-                  const EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 20),
+              const EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 20),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.065,
@@ -454,10 +658,10 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/listname');
+                    _registercompetition();
                   },
                   child: Text(
-                    "ดูรายชื่อผู้สมัครแข่ง",
+                    "สมัครแข่งขัน",
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.055,
                       color: const Color.fromARGB(255, 255, 255, 255),

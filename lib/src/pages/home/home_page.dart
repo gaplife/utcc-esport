@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/Components/newstitle.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/widgets/org_competition_widget.dart';
+import 'package:utcc_esport/src/widgets/user_competition_widget.dart';
 
 import '../../models/article_model.dart';
 import '../../services/api_services.dart';
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
             _headnews(),
             _slidenews(),
             _competition(context),
-            const OrgCompetitionWidget(),
+            const UserCompetitionWidget(),
           ],
         ),
       ),

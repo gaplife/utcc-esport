@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 import 'package:utcc_esport/src/pages/pages.dart';
 
-class OrgCompetitionWidget extends StatelessWidget {
-  const OrgCompetitionWidget({
+class UserCompetitionWidget extends StatelessWidget {
+  const UserCompetitionWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _competitoionStream =
-        FirebaseFirestore.instance.collection('Competitions').snapshots();
+    FirebaseFirestore.instance.collection('Competitions').snapshots();
     return StreamBuilder<QuerySnapshot>(
       stream: _competitoionStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -31,7 +31,7 @@ class OrgCompetitionWidget extends StatelessWidget {
                 return GestureDetector(
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return OrgDetailComp(competitionData: competitionData,);
+                      return UserDetailComp(competitionData: competitionData,);
                     }));
                   },
                   child: Container(
@@ -278,8 +278,8 @@ class OrgCompetitionWidget extends StatelessWidget {
                 );
               },
               separatorBuilder: (context, _) => const SizedBox(
-                    height: 5,
-                  ),
+                height: 5,
+              ),
               itemCount: snapshot.data!.docs.length),
         );
       },
