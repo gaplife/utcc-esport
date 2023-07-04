@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:collection/collection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
 
@@ -9,6 +12,49 @@ class Topup extends StatefulWidget {
 }
 
 class _TopupState extends State<Topup> {
+  final auth = FirebaseAuth.instance;
+  String? userID;
+  String? userEmail;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserData();
+  }
+
+  Future<void> getUserData() async {
+    final user = auth.currentUser;
+    if (user != null) {
+      setState(() {
+        userID = user.uid;
+        userEmail = user.email; // ใช้อีเมลของผู้ใช้งานเป็น userId แทน
+      });
+    }
+  }
+
+  Widget _getCoin(AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (snapshot.hasData) {
+      final userDocument = snapshot.data!.docs.firstWhereOrNull(
+            (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+      );
+
+      if (userDocument != null) {
+        final coin = userDocument["coin"];
+        return Text(
+          coin.toString(),
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.065,
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
+          ),
+        );
+      } else {
+        return const Text('not found');
+      }
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,15 +166,14 @@ class _TopupState extends State<Topup> {
                     ),
                   ),
                 ),
-                Text(
-                  '999,999',
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height * 0.035,
-                    fontFamily: 'Kanit',
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    //height: 1,
-                  ),
+                StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection("Users")
+                      .snapshots(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    return _getCoin(snapshot);
+                  },
                 ),
               ],
             ),
