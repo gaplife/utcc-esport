@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-//import 'package:NewsApp/model/article_model.dart';
 import 'package:http/http.dart';
 import 'package:utcc_esport/src/models/article_model.dart';
 

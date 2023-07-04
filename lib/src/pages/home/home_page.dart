@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:utcc_esport/src/Components/newstitle.dart';
 import 'package:utcc_esport/src/constants/asset.dart';
-import 'package:utcc_esport/src/widgets/org_competition_widget.dart';
 import 'package:utcc_esport/src/widgets/user_competition_widget.dart';
 
 import '../../models/article_model.dart';
@@ -104,7 +103,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       width: MediaQuery.of(context).size.width * 0.9,
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.31,
       decoration: BoxDecoration(
         //color: Colors.blue,
         borderRadius: BorderRadius.circular(10),
