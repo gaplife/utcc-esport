@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:utcc_esport/src/pages/pages.dart';
 
 class UserDetailComp extends StatefulWidget {
   final dynamic competitionData;
@@ -329,7 +328,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                             widget.competitionData['compType'],
                             style: TextStyle(
                               fontSize:
-                              MediaQuery.of(context).size.width * 0.04,
+                                  MediaQuery.of(context).size.width * 0.04,
                               fontWeight: FontWeight.w500,
                               //height: 1.1,
                             ),
@@ -354,7 +353,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                             widget.competitionData['fee'].toString(),
                             style: TextStyle(
                               fontSize:
-                              MediaQuery.of(context).size.width * 0.04,
+                                  MediaQuery.of(context).size.width * 0.04,
                               fontFamily: 'Kanit',
                               fontWeight: FontWeight.w500,
                             ),
@@ -415,7 +414,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                                 style: TextStyle(
                                   color: const Color.fromARGB(255, 12, 0, 0),
                                   fontSize:
-                                  MediaQuery.of(context).size.width * 0.046,
+                                      MediaQuery.of(context).size.width * 0.046,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -432,7 +431,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                                 )}',
                                 style: TextStyle(
                                   fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
+                                      MediaQuery.of(context).size.width * 0.04,
                                   fontFamily: 'Kanit',
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -456,7 +455,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                               'จำนวนผู้สมัคร 2/8',
                               style: TextStyle(
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.037,
+                                    MediaQuery.of(context).size.width * 0.037,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w800,
                                 color: const Color(0xffffffff),
@@ -515,7 +514,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                                     ? const Color(0xffa31e21)
                                     : Colors.black,
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.045,
+                                    MediaQuery.of(context).size.width * 0.045,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -552,7 +551,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                                     ? const Color(0xffa31e21)
                                     : Colors.black,
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.045,
+                                    MediaQuery.of(context).size.width * 0.045,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -590,7 +589,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                                     ? const Color(0xffa31e21)
                                     : Colors.black,
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.045,
+                                    MediaQuery.of(context).size.width * 0.045,
                                 fontFamily: 'Kanit',
                                 fontWeight: FontWeight.w600,
                               ),
@@ -646,7 +645,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
             // _buttonconfirm(),
             Padding(
               padding:
-              const EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 20),
+                  const EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 20),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.065,
