@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:utcc_esport/src/widgets/apply_comp_widget.dart';
+import 'package:utcc_esport/src/widgets/widgets.dart';
 
 class UserDetailComp extends StatefulWidget {
   final dynamic competitionData;
@@ -13,6 +14,7 @@ class UserDetailComp extends StatefulWidget {
 
 class _UserDetailCompState extends State<UserDetailComp> {
   int currentIndex = 0;
+  int playerAmount = 0;
 
   String formatedDate(date) {
     final outPutDateFormat = DateFormat('dd/MM/yyyy');
@@ -240,7 +242,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
             children: <Widget>[],
           ),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xFF0C1629),
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -445,7 +447,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                           ),
                           child: Center(
                             child: Text(
-                              'จำนวนผู้สมัคร 2/8',
+                              'จำนวนผู้สมัคร $playerAmount/${widget.competitionData['compAmount']}',
                               style: TextStyle(
                                 fontSize:
                                     MediaQuery.of(context).size.width * 0.037,
@@ -658,6 +660,33 @@ class _UserDetailCompState extends State<UserDetailComp> {
                   },
                   child: Text(
                     "สมัครแข่งขัน",
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.055,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            //resultcomp
+            Padding(
+              padding:
+              const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 20),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.065,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xffa31e21),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: () {
+                    const ResultcompWidget().createState().showPopupcondition(context);
+                  },
+                  child: Text(
+                    "ดูผลการแข่งขัน",
                     style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.055,
                       color: const Color.fromARGB(255, 255, 255, 255),
