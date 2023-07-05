@@ -641,7 +641,8 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                           'organizerID': FirebaseAuth.instance.currentUser!.uid,
                           'playerAmount': 0,
                           'playerList': [],
-                          'lineIDList': [],
+                          'nameList': [],
+                          'winner':"",
                           'poolFee': 0,
                         }).whenComplete(() {
                           _competitionProvider.clearData();

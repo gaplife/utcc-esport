@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:utcc_esport/src/pages/organizer/org_select_winner_page.dart';
 
 class ListName extends StatefulWidget {
   final dynamic competitionData;
@@ -10,29 +11,6 @@ class ListName extends StatefulWidget {
 }
 
 class _ListNameState extends State<ListName> {
-  List<Map<String, String>> dataList = [
-    {
-      'name': 'ManowDenzo',
-      'idline': 'mamanaow12',
-    },
-    {
-      'name': 'TheMasw',
-      'idline': 'themod11',
-    },
-    {
-      'name': 'GGEZ',
-      'idline': 'ezez55',
-    },
-    {
-      'name': 'VaiDemon',
-      'idline': 'demonlo',
-    },
-    {
-      'name': 'Parking',
-      'idline': 'theparking',
-    },
-    // สามารถเพิ่มข้อมูลเพิ่มเติมตามต้องการ
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +40,7 @@ class _ListNameState extends State<ListName> {
         child: Column(
           children: <Widget>[
             _photocompetition(),
-            _table(dataList),
+            _table(widget.competitionData['playerList']),
             _buttonconfirm(),
           ],
         ),
@@ -102,19 +80,19 @@ class _ListNameState extends State<ListName> {
     );
   }
 
-  Widget _table(List<Map<String, String>> dataList) {
+  Widget _table(List<dynamic> playerList) {
     //double tableHeight = (dataList.length * 55).toDouble();
     return Container(
       margin: const EdgeInsets.fromLTRB(20, 20, 20, 20),
       child: Table(
-        columnWidths: {
+        columnWidths: const {
           0: FractionColumnWidth(0.6), // กำหนดความกว้างคอลัมน์แรกเป็น 60%
           1: FractionColumnWidth(0.4), // กำหนดความกว้างคอลัมน์ที่สองเป็น 40%
         },
         children: [
           // สร้างแถวหัวตาราง
           TableRow(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
@@ -155,7 +133,7 @@ class _ListNameState extends State<ListName> {
             ],
           ),
           // สร้างแถวข้อมูลในตารางโดยใช้ ListView.builder()
-          ...dataList.map((data) {
+          ...widget.competitionData['playerList'].map((data) {
             return TableRow(
               decoration: BoxDecoration(
                   color: Colors.grey.shade100,
@@ -163,9 +141,9 @@ class _ListNameState extends State<ListName> {
               children: [
                 TableCell(
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(20, 10, 0, 10),
+                    margin: const EdgeInsets.fromLTRB(20, 10, 0, 10),
                     child: Text(
-                      data['name'] ?? '',
+                      data['inGameName'] ?? '',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         //color: Colors.white,
@@ -178,9 +156,9 @@ class _ListNameState extends State<ListName> {
                 ),
                 TableCell(
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                     child: Text(
-                      data['idline'] ?? '',
+                      data['lineID'] ?? '',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         //color: Colors.white,
@@ -214,7 +192,9 @@ class _ListNameState extends State<ListName> {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/updatecomp');
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return SelectWinner(competitionData: widget.competitionData,);
+            }));
           },
           child: Text(
             "อัพเดทผลการแข่งขัน",

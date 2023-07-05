@@ -16,6 +16,7 @@ class ApplyCompetition extends StatelessWidget {
     CollectionReference users = FirebaseFirestore.instance.collection('Users');
     var inGameName;
     var lineID;
+    List<String> tempList = [];
     return FutureBuilder<DocumentSnapshot>(
       future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
       builder:
@@ -160,6 +161,15 @@ class ApplyCompetition extends StatelessWidget {
                                   competitionData['playerAmount'] + 1,
                               'poolFee': competitionData['poolFee'] +
                                   competitionData['fee'],
+                              'nameList': FieldValue.arrayUnion([inGameName]),
+                              'playerList': FieldValue.arrayUnion(
+                                [
+                                  {
+                                    'inGameName': inGameName,
+                                    'lineID': lineID,
+                                  }
+                                ],
+                              ),
                             },
                           ).whenComplete(() async {
                             await _firestore
@@ -170,31 +180,13 @@ class ApplyCompetition extends StatelessWidget {
                                 'coin':
                                     Userdata['coin'] - competitionData['fee'],
                               },
-                            ).whenComplete(() async {
-                              final applyID = Uuid().v4();
-                              await _firestore
-                                  .collection('Apply')
-                                  .doc(applyID)
-                                  .set(
-                                {
-                                  'applyID': applyID,
-                                  'compID': competitionData['compID'],
-                                  'userID': Userdata['userID'],
-                                  'organizerID': competitionData['organizerID'],
-                                  'compName': competitionData['compName'],
-                                  'compImageURL':
-                                      competitionData['compImageURL'],
-                                  'inGameName': inGameName,
-                                  'lineID': lineID,
-                                },
-                              ).whenComplete(() {
-                                EasyLoading.dismiss();
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return const ApplySuccess();
-                                    });
-                              });
+                            ).whenComplete(() {
+                              EasyLoading.dismiss();
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return const ApplySuccess();
+                                  });
                             });
                           });
                         }

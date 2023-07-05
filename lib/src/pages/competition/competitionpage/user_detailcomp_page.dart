@@ -137,21 +137,22 @@ class _UserDetailCompState extends State<UserDetailComp> {
                             builder: (BuildContext context) {
                               return const ShowLimitPlayer();
                             });
-                      }else{
-                      await _firestore
-                          .collection('Competitions')
-                          .doc(widget.competitionData['compID'])
-                          .update({
-                        'playerAmount':
-                            widget.competitionData['playerAmount'] + 1,
-                      }).whenComplete(() {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const ApplySuccess();
-                            });
-                      });
-                    }},
+                      } else {
+                        await _firestore
+                            .collection('Competitions')
+                            .doc(widget.competitionData['compID'])
+                            .update({
+                          'playerAmount':
+                              widget.competitionData['playerAmount'] + 1,
+                        }).whenComplete(() {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return const ApplySuccess();
+                              });
+                        });
+                      }
+                    },
                     child: Text(
                       'ยืนยัน',
                       style: TextStyle(
@@ -675,7 +676,8 @@ class _UserDetailCompState extends State<UserDetailComp> {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return ApplyCompetition(competitionData: widget.competitionData);
+                          return ApplyCompetition(
+                              competitionData: widget.competitionData);
                         });
                   },
                   child: Text(
@@ -703,9 +705,12 @@ class _UserDetailCompState extends State<UserDetailComp> {
                     ),
                   ),
                   onPressed: () {
-                    const ResultcompWidget()
-                        .createState()
-                        .showPopupcondition(context);
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return  ResultcompWidget(
+                              competitionData: widget.competitionData);
+                        });
                   },
                   child: Text(
                     "ดูผลการแข่งขัน",
