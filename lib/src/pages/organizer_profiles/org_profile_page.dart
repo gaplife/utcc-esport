@@ -176,7 +176,7 @@ class _OrganizerProfileState extends State<OrganizerProfile> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _headprofile(),
-                    _buttonmycomp(),
+                    //_buttonmycomp(),
                     _buttonbalance(),
                     _buttonsettingprofile(),
                     _buttonsetuppayment(),

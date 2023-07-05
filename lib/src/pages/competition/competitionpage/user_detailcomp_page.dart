@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:utcc_esport/src/widgets/apply_comp_widget.dart';
-import 'package:utcc_esport/src/widgets/apply_success_widget.dart';
 import 'package:utcc_esport/src/widgets/widgets.dart';
 
 class UserDetailComp extends StatefulWidget {
@@ -153,7 +151,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                               return const ApplySuccess();
                             });
                       });
-                    };},
+                    }},
                     child: Text(
                       'ยืนยัน',
                       style: TextStyle(
@@ -674,7 +672,11 @@ class _UserDetailCompState extends State<UserDetailComp> {
                     ),
                   ),
                   onPressed: () {
-                    _registercompetition();
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return ApplyCompetition(competitionData: widget.competitionData);
+                        });
                   },
                   child: Text(
                     "สมัครแข่งขัน",
