@@ -13,6 +13,8 @@ class Topup extends StatefulWidget {
 
 class _TopupState extends State<Topup> {
   final auth = FirebaseAuth.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String? userID;
   String? userEmail;
 
@@ -35,7 +37,7 @@ class _TopupState extends State<Topup> {
   Widget _getCoin(AsyncSnapshot<QuerySnapshot> snapshot) {
     if (snapshot.hasData) {
       final userDocument = snapshot.data!.docs.firstWhereOrNull(
-            (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
+        (doc) => doc["email"] == userEmail, // เปรียบเทียบกับอีเมลของผู้ใช้งาน
       );
 
       if (userDocument != null) {
@@ -55,43 +57,616 @@ class _TopupState extends State<Topup> {
       return const CircularProgressIndicator();
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 75,
-        automaticallyImplyLeading: true,
-        title: const Padding(
-          padding: EdgeInsets.only(left: 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "เติมเงิน",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 24,
-                  fontFamily: 'Kanit',
-                  fontWeight: FontWeight.w800,
+    return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+
+        if (snapshot.hasData && !snapshot.data!.exists) {
+          return Text("Document does not exist");
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> Userdata =
+              snapshot.data!.data() as Map<String, dynamic>;
+          return Scaffold(
+            appBar: AppBar(
+              toolbarHeight: 75,
+              automaticallyImplyLeading: true,
+              title: const Padding(
+                padding: EdgeInsets.only(left: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "เติมเงิน",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontSize: 24,
+                        fontFamily: 'Kanit',
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-        backgroundColor: const Color(0xffa31e21),
-        elevation: 0,
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            _nameapp(),
-            _amount(),
-            _amounttopup(),
-            _amounttopup2(),
-            _amounttopup3(),
-          ],
-        ),
-      ),
+              backgroundColor: const Color(0xffa31e21),
+              elevation: 0,
+            ),
+            body: Center(
+              child: Column(
+                children: <Widget>[
+                  _nameapp(),
+                  _amount(),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'เลือกจำนวนที่ต้องการเติมเงิน',
+                          style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.027,
+                            fontFamily: 'Kanit',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                await _firestore
+                                    .collection('Users')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .update({
+                                  'coin': Userdata['coin'] + 50,
+                                }).whenComplete(() {
+                                  _topupsuccess();
+                                });
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                width: MediaQuery.of(context).size.width * 0.42,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffa31e21),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            margin: const EdgeInsets.fromLTRB(
+                                                0, 10, 10, 10),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: Colors.white),
+                                            ),
+                                            child: ClipOval(
+                                              child: Image.asset(
+                                                Asset.COIN_IMAGE,
+                                                scale: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.055,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsets.fromLTRB(
+                                                0, 0, 20, 0),
+                                            child: Text(
+                                              '50',
+                                              style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.025,
+                                                fontFamily: 'Kanit',
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600,
+                                                //height: 1,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.fromLTRB(
+                                            5, 0, 5, 0),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        height: 1,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.fromLTRB(
+                                            0, 5, 0, 10),
+                                        child: Text(
+                                          '35 บาท',
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.025,
+                                            fontFamily: 'Kanit',
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            //height: 1,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.055,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                await _firestore
+                                    .collection('Users')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .update({
+                                  'coin': Userdata['coin'] + 100,
+                                }).whenComplete(() {
+                                  _topupsuccess();
+                                });
+                              },
+                              child: Container(
+                                margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                width: MediaQuery.of(context).size.width * 0.42,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffa31e21),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            margin: const EdgeInsets.fromLTRB(
+                                                0, 10, 10, 10),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  color: Colors.white),
+                                            ),
+                                            child: ClipOval(
+                                              child: Image.asset(
+                                                Asset.COIN_IMAGE,
+                                                scale: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.055,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsets.fromLTRB(
+                                                0, 0, 20, 0),
+                                            child: Text(
+                                              '100',
+                                              style: TextStyle(
+                                                fontSize: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.025,
+                                                fontFamily: 'Kanit',
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600,
+                                                //height: 1,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.fromLTRB(
+                                            5, 0, 5, 0),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.9,
+                                        height: 1,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Container(
+                                        margin: const EdgeInsets.fromLTRB(
+                                            0, 5, 0, 10),
+                                        child: Text(
+                                          '60 บาท',
+                                          style: TextStyle(
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.025,
+                                            fontFamily: 'Kanit',
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            //height: 1,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                Container(
+                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: Row(
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await _firestore
+                              .collection('Users')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            'coin': Userdata['coin'] + 200,
+                          }).whenComplete(() {
+                            _topupsuccess();
+                          });
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          width: MediaQuery.of(context).size.width * 0.42,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xffa31e21),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(color: Colors.white),
+                                      ),
+                                      child: ClipOval(
+                                        child: Image.asset(
+                                          Asset.COIN_IMAGE,
+                                          scale: MediaQuery.of(context).size.width * 0.055,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                      child: Text(
+                                        '200',
+                                        style: TextStyle(
+                                          fontSize:
+                                          MediaQuery.of(context).size.height * 0.025,
+                                          fontFamily: 'Kanit',
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          //height: 1,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                  width: MediaQuery.of(context).size.width * 0.9,
+                                  height: 1,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                                  child: Text(
+                                    '100 บาท',
+                                    style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.height * 0.025,
+                                      fontFamily: 'Kanit',
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      //height: 1,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.055,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          await _firestore
+                              .collection('Users')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .update({
+                            'coin': Userdata['coin'] + 300,
+                          }).whenComplete(() {
+                            _topupsuccess();
+                          });
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          width: MediaQuery.of(context).size.width * 0.42,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: const Color(0xffa31e21),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(color: Colors.white),
+                                      ),
+                                      child: ClipOval(
+                                        child: Image.asset(
+                                          Asset.COIN_IMAGE,
+                                          scale: MediaQuery.of(context).size.width * 0.055,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                      child: Text(
+                                        '300',
+                                        style: TextStyle(
+                                          fontSize:
+                                          MediaQuery.of(context).size.height * 0.025,
+                                          fontFamily: 'Kanit',
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          //height: 1,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                  width: MediaQuery.of(context).size.width * 0.9,
+                                  height: 1,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                                  child: Text(
+                                    '150 บาท',
+                                    style: TextStyle(
+                                      fontSize: MediaQuery.of(context).size.height * 0.025,
+                                      fontFamily: 'Kanit',
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      //height: 1,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () async{
+                        await _firestore
+                            .collection('Users')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .update({
+                          'coin': Userdata['coin'] + 500,
+                        }).whenComplete(() {
+                          _topupsuccess();
+                        });
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        width: MediaQuery.of(context).size.width * 0.42,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffa31e21),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: Colors.white),
+                                    ),
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        Asset.COIN_IMAGE,
+                                        scale: MediaQuery.of(context).size.width * 0.055,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                    child: Text(
+                                      '500',
+                                      style: TextStyle(
+                                        fontSize:
+                                        MediaQuery.of(context).size.height * 0.025,
+                                        fontFamily: 'Kanit',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        //height: 1,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                height: 1,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                                child: Text(
+                                  '240 บาท',
+                                  style: TextStyle(
+                                    fontSize: MediaQuery.of(context).size.height * 0.025,
+                                    fontFamily: 'Kanit',
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    //height: 1,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.055,
+                    ),
+                    InkWell(
+                      onTap: () async{
+                        await _firestore
+                            .collection('Users')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .update({
+                          'coin': Userdata['coin'] + 1000,
+                        }).whenComplete(() {
+                          _topupsuccess();
+                        });
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                        width: MediaQuery.of(context).size.width * 0.42,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xffa31e21),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: Colors.white),
+                                    ),
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        Asset.COIN_IMAGE,
+                                        scale: MediaQuery.of(context).size.width * 0.055,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                    child: Text(
+                                      '1,000',
+                                      style: TextStyle(
+                                        fontSize:
+                                        MediaQuery.of(context).size.height * 0.025,
+                                        fontFamily: 'Kanit',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        //height: 1,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                height: 1,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+                                child: Text(
+                                  '450 บาท',
+                                  style: TextStyle(
+                                    fontSize: MediaQuery.of(context).size.height * 0.025,
+                                    fontFamily: 'Kanit',
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    //height: 1,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+                ],
+              ),
+            ),
+          );
+        }
+
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 
@@ -170,8 +745,7 @@ class _TopupState extends State<Topup> {
                   stream: FirebaseFirestore.instance
                       .collection("Users")
                       .snapshots(),
-                  builder: (context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     return _getCoin(snapshot);
                   },
                 ),
@@ -183,494 +757,6 @@ class _TopupState extends State<Topup> {
     );
   }
 
-  Widget _amounttopup() {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'เลือกจำนวนที่ต้องการเติมเงิน',
-            style: TextStyle(
-              fontSize: MediaQuery.of(context).size.height * 0.027,
-              fontFamily: 'Kanit',
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  _topupsuccess();
-                },
-                child: Container(
-                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  width: MediaQuery.of(context).size.width * 0.42,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: const Color(0xffa31e21),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white),
-                              ),
-                              child: ClipOval(
-                                child: Image.asset(
-                                  Asset.COIN_IMAGE,
-                                  scale:
-                                      MediaQuery.of(context).size.width * 0.055,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                              child: Text(
-                                '50',
-                                style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height *
-                                      0.025,
-                                  fontFamily: 'Kanit',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  //height: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          height: 1,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                          child: Text(
-                            '35 บาท',
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.025,
-                              fontFamily: 'Kanit',
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              //height: 1,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.055,
-              ),
-              InkWell(
-                onTap: () {
-                  _topupsuccess();
-                },
-                child: Container(
-                  margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  width: MediaQuery.of(context).size.width * 0.42,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: const Color(0xffa31e21),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white),
-                              ),
-                              child: ClipOval(
-                                child: Image.asset(
-                                  Asset.COIN_IMAGE,
-                                  scale:
-                                      MediaQuery.of(context).size.width * 0.055,
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                              child: Text(
-                                '100',
-                                style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height *
-                                      0.025,
-                                  fontFamily: 'Kanit',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  //height: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                          width: MediaQuery.of(context).size.width * 0.9,
-                          height: 1,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                          child: Text(
-                            '60 บาท',
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.025,
-                              fontFamily: 'Kanit',
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              //height: 1,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _amounttopup2() {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () {
-              _topupsuccess();
-            },
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              width: MediaQuery.of(context).size.width * 0.42,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xffa31e21),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white),
-                          ),
-                          child: ClipOval(
-                            child: Image.asset(
-                              Asset.COIN_IMAGE,
-                              scale: MediaQuery.of(context).size.width * 0.055,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                          child: Text(
-                            '200',
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.025,
-                              fontFamily: 'Kanit',
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              //height: 1,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: 1,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                      child: Text(
-                        '100 บาท',
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.025,
-                          fontFamily: 'Kanit',
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          //height: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.055,
-          ),
-          InkWell(
-            onTap: () {
-              _topupsuccess();
-            },
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              width: MediaQuery.of(context).size.width * 0.42,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xffa31e21),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white),
-                          ),
-                          child: ClipOval(
-                            child: Image.asset(
-                              Asset.COIN_IMAGE,
-                              scale: MediaQuery.of(context).size.width * 0.055,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                          child: Text(
-                            '300',
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.025,
-                              fontFamily: 'Kanit',
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              //height: 1,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: 1,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                      child: Text(
-                        '150 บาท',
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.025,
-                          fontFamily: 'Kanit',
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          //height: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _amounttopup3() {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () {
-              _topupsuccess();
-            },
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              width: MediaQuery.of(context).size.width * 0.42,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xffa31e21),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white),
-                          ),
-                          child: ClipOval(
-                            child: Image.asset(
-                              Asset.COIN_IMAGE,
-                              scale: MediaQuery.of(context).size.width * 0.055,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                          child: Text(
-                            '500',
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.025,
-                              fontFamily: 'Kanit',
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              //height: 1,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: 1,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                      child: Text(
-                        '240 บาท',
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.025,
-                          fontFamily: 'Kanit',
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          //height: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.055,
-          ),
-          InkWell(
-            onTap: () {
-              _topupsuccess();
-            },
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-              width: MediaQuery.of(context).size.width * 0.42,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xffa31e21),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 10, 10, 10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white),
-                          ),
-                          child: ClipOval(
-                            child: Image.asset(
-                              Asset.COIN_IMAGE,
-                              scale: MediaQuery.of(context).size.width * 0.055,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                          child: Text(
-                            '1,000',
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.025,
-                              fontFamily: 'Kanit',
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              //height: 1,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: 1,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-                      child: Text(
-                        '450 บาท',
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.height * 0.025,
-                          fontFamily: 'Kanit',
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          //height: 1,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   void _topupsuccess() {
     showDialog(

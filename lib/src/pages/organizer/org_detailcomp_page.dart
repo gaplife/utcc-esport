@@ -34,16 +34,16 @@ class _OrgDetailCompState extends State<OrgDetailComp> {
             children: <Widget>[],
           ),
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return UpdateComp(competitionData: widget.competitionData,);
-              }));
-            },
-            icon: const Icon(Icons.settings),iconSize: 30,
-          )
-        ],
+        // actions: <Widget>[
+        //   IconButton(
+        //     onPressed: () {
+        //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //         return UpdateComp(competitionData: widget.competitionData,);
+        //       }));
+        //     },
+        //     icon: const Icon(Icons.settings),iconSize: 30,
+        //   )
+        // ],
         backgroundColor: Colors.black,
         elevation: 0,
       ),

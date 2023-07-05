@@ -176,7 +176,7 @@ class _ProfilesState extends State<Profiles> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _headprofile(),
-                    _buttonregistercom(),
+                    //_buttonregistercom(),
                     _buttonsettingprofile(),
                     // _buttonsetuppayment(),
                     _buttonsetuppassword(),
