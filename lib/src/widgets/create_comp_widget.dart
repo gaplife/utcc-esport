@@ -639,6 +639,7 @@ class _CreateCompetitionState extends State<CreateCompetition> {
                           'compImageURL': _competitionProvider
                               .competitionData['compImageURL'],
                           'organizerID': FirebaseAuth.instance.currentUser!.uid,
+                          'playerAmount': 0,
                         }).whenComplete(() {
                           _competitionProvider.clearData();
                           _formKey.currentState!.reset();

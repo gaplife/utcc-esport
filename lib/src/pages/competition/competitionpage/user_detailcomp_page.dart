@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:utcc_esport/src/widgets/apply_comp_widget.dart';
+import 'package:utcc_esport/src/widgets/apply_success_widget.dart';
 import 'package:utcc_esport/src/widgets/widgets.dart';
 
 class UserDetailComp extends StatefulWidget {
@@ -14,7 +16,8 @@ class UserDetailComp extends StatefulWidget {
 
 class _UserDetailCompState extends State<UserDetailComp> {
   int currentIndex = 0;
-  int playerAmount = 0;
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String formatedDate(date) {
     final outPutDateFormat = DateFormat('dd/MM/yyyy');
@@ -128,10 +131,29 @@ class _UserDetailCompState extends State<UserDetailComp> {
                     style: TextButton.styleFrom(
                       backgroundColor: const Color(0xffa31e21),
                     ),
-                    onPressed: () {
-                      _registersuccess();
-                      //Navigator.of(context).pop();
-                    },
+                    onPressed: () async {
+                      if (widget.competitionData['playerAmount'] >=
+                          widget.competitionData['compAmount']) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const ShowLimitPlayer();
+                            });
+                      }else{
+                      await _firestore
+                          .collection('Competitions')
+                          .doc(widget.competitionData['compID'])
+                          .update({
+                        'playerAmount':
+                            widget.competitionData['playerAmount'] + 1,
+                      }).whenComplete(() {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const ApplySuccess();
+                            });
+                      });
+                    };},
                     child: Text(
                       'ยืนยัน',
                       style: TextStyle(
@@ -447,7 +469,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                           ),
                           child: Center(
                             child: Text(
-                              'จำนวนผู้สมัคร $playerAmount/${widget.competitionData['compAmount']}',
+                              'จำนวนผู้สมัคร ${widget.competitionData['playerAmount']}/${widget.competitionData['compAmount']}',
                               style: TextStyle(
                                 fontSize:
                                     MediaQuery.of(context).size.width * 0.037,
@@ -652,11 +674,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
                     ),
                   ),
                   onPressed: () {
-                    showDialog(context: context,
-                        builder: (BuildContext context){
-                          return const ApplyCompetition();
-                        }
-                    );
+                    _registercompetition();
                   },
                   child: Text(
                     "สมัครแข่งขัน",
@@ -671,7 +689,7 @@ class _UserDetailCompState extends State<UserDetailComp> {
             //resultcomp
             Padding(
               padding:
-              const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 20),
+                  const EdgeInsets.only(top: 0, left: 0, right: 0, bottom: 20),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 height: MediaQuery.of(context).size.height * 0.065,
@@ -683,7 +701,9 @@ class _UserDetailCompState extends State<UserDetailComp> {
                     ),
                   ),
                   onPressed: () {
-                    const ResultcompWidget().createState().showPopupcondition(context);
+                    const ResultcompWidget()
+                        .createState()
+                        .showPopupcondition(context);
                   },
                   child: Text(
                     "ดูผลการแข่งขัน",
